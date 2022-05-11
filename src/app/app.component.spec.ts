@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'module6FE'`, () => {
+  it(`should have as title 'trello-FrontEnd'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('module6FE');
+    expect(app.title).toEqual('trello-FrontEnd');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('module6FE app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('trello-FrontEnd app is running!');
   });
 });

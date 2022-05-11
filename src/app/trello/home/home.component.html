@@ -1,0 +1,140 @@
+<section class="main-content columns is-fullheight" xmlns="http://www.w3.org/1999/html">
+  <app-side-bar [workspaces]="workspaces"></app-side-bar>
+  <div class="container column is-10" #top style="padding: 10px 13px 13px 106px;">
+    <!--    Board-->
+    <div class="title-board">
+      <h1><i class="far fa-clipboard"></i>Bảng của bạn</h1>
+    </div>
+    <div class="section-board">
+      <!--      <div class="card">-->
+      <!--        <div class="img-circle-add-board">-->
+      <!--          <a (click)="displayAddBoardModal()"><i class="fas fa-plus-circle"></i></a>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <div class="card" *ngFor="let board of boards" routerLink="/board/{{board.id}}">
+        <div class="card-header"><p class="card-header-title" routerLink="/board/{{board.id}}">{{board.title}}</p></div>
+        <div class="card-content">
+          <div class="content">
+            <span style="font-size: small"><b>Chủ sở hữu: </b>{{board.owner.username}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="title-board">
+      <h1><i class="far fa-clipboard"></i>Bảng được chia sẻ với bạn</h1>
+    </div>
+    <div class="section-board">
+      <div class="card" *ngFor="let board of sharedBoards" routerLink="/trello/board/{{board.id}}">
+        <div class="card-header"><p class="card-header-title">{{board.title}}</p></div>
+        <div class="card-content">
+          <div class="content">
+            <span style="font-size: small"><b>Chủ sở hữu: </b>{{board.owner}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="title-board" #target>
+      <h1><i class="fas fa-briefcase"></i>Nhóm Công khai</h1>
+    </div>
+    <div class="section-board">
+      <div *ngFor="let localWorkspace of workspacesPublic">
+        <div class="card" routerLink="/workspaces/{{localWorkspace.id}}/home" *ngIf="localWorkspace.privacy == 'Public'">
+          <div class="card-header"><p class="card-header-title">{{localWorkspace.title}}</p></div>
+          <div class="card-content">
+            <span style="font-size: small"><b>Chủ sở hữu: </b>{{localWorkspace.owner.username}}</span><br>
+            <span style="font-size: small"><b>Loại nhóm: </b>{{localWorkspace.type}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="modal" id="create-board">
+  <div class="modal-background" (click)="hideCreateBoard()"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Tạo một bảng</p>
+      <button class="delete" aria-label="close" (click)="hideCreateBoard()"></button>
+    </header>
+    <section class="modal-card-body">
+      <label class="label">Tên bảng</label>
+      <input class="input" type="text" required [(ngModel)]="newBoard.title" #boardTitle="ngModel">
+      <div *ngIf="boardTitle.invalid && boardTitle.touched" class="alert">
+        <div *ngIf="boardTitle.errors?.required" style="color: red;">Tiêu đề cần được nhập.</div>
+      </div>
+      <label class="label">Loại</label>
+      <div class="control">
+        <select class="input" [(ngModel)]="newBoard.type">
+          <option value="Riêng tư">Riêng tư</option>
+          <option value="Công khai">Công khai</option>
+        </select>
+      </div>
+      <br>
+      <div class="control">
+        <label class="label">Người tạo: <span
+          class="is-info user-button is-light">{{loggedInUser.username}}</span></label>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <div class=" is-right">
+        <button [disabled]="boardTitle.invalid" class="button is-dark is-right" (click)="createNewBoard()">Tạo</button>
+      </div>
+      <button class="button is-light is-right" (click)="hideCreateBoard()">Hủy</button>
+    </footer>
+  </div>
+</div>
+
+<div class="modal" id="create-workspace">
+  <div class="modal-background" (click)="hideCreateWorkspaceModal()"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Tạo một nhóm mới</p>
+      <button class="delete" aria-label="close" (click)="hideCreateWorkspaceModal()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="field" style="position: relative">
+        <label class="label">Tên nhóm</label>
+        <div class="control">
+          <input class="input" type="text" required [(ngModel)]="workspace.title" #workspaceTitle="ngModel">
+        </div>
+        <label class="label">Phân loại nhóm:</label>
+        <div class="control">
+          <select class="input" [(ngModel)]="workspace.type" required #workspaceType="ngModel">
+            <option value="IT">IT</option>
+            <option value="Kế toán">Kế toán</option>
+            <option value="HR">Nhân sự</option>
+            <option value="Khác">Khác</option>
+          </select>
+        </div>
+        <label class="label">Quyền hạn</label>
+        <div class="control">
+          <select class="input" [(ngModel)]="workspace.privacy" required #workspacePrivacy="ngModel">
+            <option value="Private">Riêng tư</option>
+            <option value="Public">Công khai</option>
+          </select>
+        </div>
+        <div *ngIf="workspaceTitle.invalid && workspaceTitle.touched" class="alert">
+          <div *ngIf="workspaceTitle.errors?.required" style="color: red">
+            Hãy nhập tiêu đề
+          </div>
+        </div>
+      </div>
+      <div class="control">
+        <label class="label">Người tạo: <span
+          class="is-info user-button is-light">{{loggedInUser.username}}</span></label>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <div class="alert">
+        <button [disabled]="workspaceTitle.invalid || workspaceType.invalid || workspacePrivacy.invalid"
+                class="button is-dark" (click)="createWorkspace()">Tạo
+        </button>
+      </div>
+      <button class="button is-light" (click)="hideCreateWorkspaceModal()">Hủy</button>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,259 @@
+
+<!--board-header-->
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-item">
+      <div class="buttons">
+        <input *ngIf="canEdit" [(ngModel)]="currentBoard.title" class="button is-primary" (change)="updateBoardTitle()">
+        <button *ngIf="!canEdit" class="button is-primary">
+          {{currentBoard.title}}
+        </button>
+        <button class="button is-primary">
+          <img *ngIf="!currentBoard.owner.image"
+               src="https://i.pinimg.com/originals/57/fb/31/57fb3190d0cc1726d782c4e25e8561e9.png"
+               class="img-circle is-48x48"/>
+          <img *ngIf="currentBoard.owner.image" [src]="currentBoard.owner.image" class="img-circle is-48x48"/>
+          {{currentBoard.owner.username}}
+        </button>
+        <button class="button is-primary">
+          <i class="far fa-star"></i>
+        </button>
+        <div>
+          <span *ngFor="let member of members; index as i">
+            <a (click)="showDetail(member)" (mouseover)="showUserPreview(member)"
+               (mouseout)="closeUserPreviews()"
+               class="user-preview" style="position: relative"
+               [ngClass]="{'is-hidden': i >= 5}">
+              <img *ngIf="member.image" [src]="member.image" class="img-circle"/>
+              <img *ngIf="!member.image"
+                   class="img-circle"/>
+              <span id="user-preview-text-{{member.userId}}"
+                    class="user-preview-text is-hidden tag is-info is-light"
+                    style="position: absolute; top: 20px; left:5px; float: top">
+                        User preview text
+              </span>
+            </a>
+          </span>
+          <span *ngIf="members.length > 5">
+            <a>
+              <img src="./assets/img/three-dots.png" (click)="showAllMembers()" class="img-circle"
+                   style="width: 15px; height: 15px;margin-bottom: 20px;"/>
+            </a>
+          </span>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <div style="position: relative">
+            <div id="visibility-dropdown" class="columns has-background-white is-hidden">
+              <div class="column" style="width: max-content">
+                <select class="input" [(ngModel)]="currentBoard.type" required #workspaceType="ngModel" (change)="updateBoardTitle()">
+                  <option value="Công khai">Công khai</option>
+                  <option *ngIf="isInWorkspace" value="Nhóm">Nhóm</option>
+                  <option value="Riêng tư">Riêng tư</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button class="button is-primary" (click)="toggleElement('visibility-dropdown')">
+            <i class="fas fa-eye"></i>
+            {{currentBoard.type}}
+          </button>
+          <div style="position: relative">
+            <div id="filter-btn-dropdown" class="columns has-background-white is-hidden">
+              <div class="column is-one-fifth" style="width: 22%;">
+                <button class="button members-button" (click)="filterBoard()">Tìm</button>
+                <button class="button members-button" (click)="clearFilterBoard()">Xóa</button>
+              </div>
+              <div class="column" style="width: max-content">
+                <ul class="checkbox">
+                  <li *ngFor="let tag of tags">
+                    <input type="checkbox" [value]="tag.id" class="tag-filter-option filter-option">
+                    <span class="tag is-light" [ngClass]="tag.color">{{tag.name}}</span>
+                  </li>
+                </ul>
+              </div>
+              <div style=" padding-left: 10px;">
+                Thành viên
+                <ul class="checkbox">
+                  <li *ngFor="let member of members">
+                    <input class="form-check-label" type="checkbox" [value]="member.userId"
+                           class="member-filter-option filter-option">
+                    <span class="tag is-light">@{{member.username}}</span>
+                  </li>
+                </ul>
+              </div>
+              <div style=" padding-left: 10px;">
+                Nhãn
+                <ul class="checkbox">
+                  <li *ngFor="let tag of this.currentBoard.tags" style="width: 100px">
+                    <input class="form-check-label" type="checkbox" [value]="tag.id"
+                           class="label-filter-option filter-option">
+                    <span class="tag is-light">@{{tag.name}}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <button class="button is-primary" (click)="toggleElement('filter-btn-dropdown')">
+            <i class="fas fa-filter"></i>
+            Tìm Kiếm
+          </button>
+
+          <div class="icon-item" style="margin-right: 10px">
+            <div class="dropdown is-hoverable ">
+              <div class="dropdown-trigger">
+                <button class="button is-primary">
+                  <i class="fas fa-ellipsis-h"></i>
+                  Menu
+                </button>
+              </div>
+              <div class="dropdown-menu" role="menu" style="width: 100px">
+                <div>
+                  <button *ngIf="canEdit" class="button is-danger is-light" (click)="toggleDeleteBoardModal()">Xóa bảng
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button *ngIf="canEdit && isInWorkspace" class="button is-primary"
+                  (click)="toggleUserSearchBar()">
+            <i class="fas fa-user-plus"></i>Mời
+          </button>
+          <div class="icon-item" >
+            <div class="dropdown is-hoverable is-right">
+              <div class="dropdown-trigger">
+                <button class="button is-primary">
+                  <i class="fas fa-list"></i>
+                  Thông báo
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu5" role="menu">
+                <div class="dropdown-content" style="padding: 0">
+                  <div class="header__navbar-item header__navbar-item--has-notify">
+                    <div class="header__notify">
+                      <header class="header__notify-header">
+                        <h3>Thông báo</h3>
+                      </header>
+                      <ul class="header__notify-list">
+                        <li class="header__notify-item" *ngFor="let activity of activityLogService.activities"
+                            [class.mark-read]="activity.status">
+                          <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="activity.card"
+                             (click)="redirectService.showModal(activity.card)">
+                            <img
+                              [src]="activity.user!.image!"
+                              alt=""
+                              class="header__notify-img">
+                            <div class="header__notify-info">
+                              <span class="header__notify-name">{{activity.title}}</span>
+                              <span class="header__notify-description">{{activity.content}}</span>
+                            </div>
+                          </a>
+                          <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="!activity.card">
+                            <img
+                              [src]="activity.user!.image!"
+                              alt=""
+                              class="header__notify-img">
+                            <div class="header__notify-info">
+                              <span class="header__notify-name">{{activity.title}}</span>
+                              <span class="header__notify-description">{{activity.content}}</span>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="search-bar">
+            <div *ngIf="searchBarIsShown" class="search-bar-input">
+              <input class="input" type="text" placeholder="Tìm kiếm thành viên" [(ngModel)]="userSearch"
+                     (keyup)="searchUsers()">
+              <div *ngIf="userResult.length" class="dropdown-content">
+                <a *ngFor="let result of userResult" class="dropdown-item" (click)="addMember(result)">
+                  <img *ngIf="!result.image"
+                       src="https://i.pinimg.com/originals/57/fb/31/57fb3190d0cc1726d782c4e25e8561e9.png"
+                       class="img-circle is-48x48">
+                  <img *ngIf="result.image" [src]="result.image" class="img-circle is-48x48">
+                  @{{result.username}} <span *ngIf="result.nickname">({{result.nickname}})</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<!--User details modal-->
+<div class="modal" id="user-detail-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Thông tin thành viên</p>
+      <button class="delete" aria-label="close" (click)="closeModal()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img *ngIf="!selectedMember.image" src="assets/img/nicki-eliza.jpg" class="img-circle"/>
+                <img *ngIf="selectedMember.image" [src]="selectedMember.image" alt="Placeholder image"
+                     class="is-rounded">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4" *ngIf="selectedMember.nickname">{{selectedMember.nickname}}</p>
+              <p class="title is-4" *ngIf="!selectedMember.nickname">{{selectedMember.username}}</p>
+              <p class="subtitle is-6">@{{selectedMember.username}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-danger is-light"
+              *ngIf="canEdit && (selectedMember.userId ) != authenticateService.getCurrentUserValue().id"
+              (click)="removeSelectedMember()">
+        Xóa thành viên !
+      </button>
+      <button class="button is-light" (click)="closeModal()">Tắt</button>
+    </footer>
+  </div>
+</div>
+
+<div class="modal" id="delete-board-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Thông báo</p>
+      <button class="delete" aria-label="close" (click)="toggleDeleteBoardModal()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="notification is-danger is-light">
+        Bạn có thực sự muốn xóa ?
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-danger is-light" (click)="removeThisBoard()">Xóa bảng</button>
+      <button class="button is-light" (click)="toggleDeleteBoardModal()">Hủy</button>
+    </footer>
+  </div>
+</div>

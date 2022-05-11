@@ -1,0 +1,183 @@
+<!--<div class="container">-->
+<!--  <div class="form-container sign-in-container">-->
+<!--    <form (ngSubmit)="register()" [formGroup]="registerForm" style="width: 400px;">-->
+<!--      <h1 style="padding-bottom: 30px ; font-size: 25px">Đăng Ký</h1>-->
+<!--      <br>-->
+<!--      <div class="form-group" style="width: 300px;">-->
+<!--        <input type="text" formControlName="username" placeholder="Tài Khoản" (click)="existence()"/>-->
+<!--        <div *ngIf="this.userExistence" class="col alert alert-danger">-->
+<!--          <p style="color: crimson">Tài khoản đã tồn tại !</p>-->
+<!--        </div>-->
+<!--        <div class="col alert alert-danger" role="alert"-->
+<!--             *ngIf="this.registerForm.get('username')?.invalid && (this.registerForm.get('username')?.dirty || this.registerForm.get('username')?.touched)">-->
+<!--          <div *ngIf="this.registerForm.get('username')?.errors?.minlength" class="col alert alert-danger">-->
+<!--            <p style="color: crimson">Tài khoản ít nhất 6 ký tự !</p>-->
+<!--          </div>-->
+<!--          <div *ngIf="this.registerForm.get('username')?.errors?.required" class="col alert alert-danger">-->
+<!--            <p style="color: crimson">Tài khoản phải đc nhập !</p>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--      <div class="form-group" style="width: 300px;">-->
+<!--        <input type="password" formControlName="password" placeholder="Mật khẩu">-->
+<!--        <div class="col alert alert-danger" role="alert"-->
+<!--             *ngIf="this.registerForm.get('password')?.invalid && (this.registerForm.get('password')?.dirty || this.registerForm.get('password')?.touched)">-->
+<!--          <div *ngIf="this.registerForm.get('password')?.errors?.required" class="col alert alert-danger">-->
+<!--            <p style="color: crimson">Mật khẩu phải được nhập !</p>-->
+<!--          </div>-->
+<!--          <div *ngIf="this.registerForm.get('password')?.errors?.minlength" class="col alert alert-danger">-->
+<!--            <p style="color: crimson">Mật khẩu phải lớn hơn 5 ký tự!</p>-->
+<!--          </div>-->
+<!--          <div *ngIf="this.registerForm.get('password')?.errors?.pattern" class="col alert alert-danger">-->
+<!--            <p style="color: crimson">Mật khẩu phải lớn hơn 5 ký tự, ít nhất một chữ hoa, một chữ thường và một số!</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="form-group" style="width: 300px;">-->
+<!--        <input type="password" formControlName="confirmPassword" placeholder="Xác nhận Mật khẩu">-->
+<!--        <div class="col alert alert-danger" role="alert"-->
+<!--             *ngIf="this.registerForm.get('confirmPassword')?.invalid && (this.registerForm.get('confirmPassword')?.dirty || this.registerForm.get('confirmPassword')?.touched)">-->
+<!--          <div *ngIf="this.registerForm.get('confirmPassword')?.errors?.required" class="col alert alert-danger">-->
+<!--            <p style="color: crimson">Xác nhận mật khẩu phải được nhập !</p>-->
+<!--          </div>-->
+<!--          <div *ngIf="registerForm.value.password !== registerForm.value.confirmPassword"-->
+<!--               class="col alert alert-danger">-->
+<!--            <p style="color: crimson">Mật khẩu không trùng khớp!</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="form-group" style="width: 300px;">-->
+<!--        <input formControlName="email" placeholder="Email" type="text" (click)="existence()">-->
+<!--        <div *ngIf="this.emailExistence" class="text-danger">-->
+<!--          <p style="color: crimson">Email đã tồn tại !</p>-->
+<!--        </div>-->
+<!--        <div class="col alert alert-danger" role="alert"-->
+<!--             *ngIf="this.registerForm.get('email')?.invalid && (this.registerForm.get('email')?.dirty || this.registerForm.get('email')?.touched)">-->
+<!--          <div *ngIf="this.registerForm.get('email')?.errors?.required" class="col alert alert-danger">-->
+<!--            <p style="color: crimson">Email phải được nhập !!</p>-->
+<!--          </div>-->
+<!--          <div *ngIf="this.registerForm.get('email')?.errors?.pattern" class="col alert alert-danger">-->
+<!--            <p style="color: crimson">Email phải đúng định dạng: "abc@abc.com"</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="form-group" style="width: 300px;">-->
+<!--          <input formControlName="phone" placeholder="Phone Number" type="text"/>-->
+<!--          <div class="col alert alert-danger" role="alert"-->
+<!--               *ngIf="this.registerForm.get('phone')?.invalid && (this.registerForm.get('phone')?.dirty || this.registerForm.get('phone')?.touched)">-->
+<!--            <div *ngIf="this.registerForm.get('phone')?.errors?.required" class="col alert alert-danger">-->
+<!--              <p style="color: crimson">Số điện thoại phải được nhập !!</p>-->
+<!--            </div>-->
+<!--            <div *ngIf="this.registerForm.get('phone')?.errors?.pattern" class="col alert alert-danger">-->
+<!--              <p style="color: crimson">Số điện thoại phải đúng định dạng: "0xxx (xxx : 9 số)"</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <div class="form-group">-->
+<!--          <button class="btn btn-primary" type="submit">-->
+<!--            Đăng ký-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--  <div class="overlay-container">-->
+<!--    <div class="overlay">-->
+<!--      <div class="overlay-panel overlay-right">-->
+<!--        <h1>Đã có tài khoản?</h1>-->
+<!--        <p>Bấm đăng nhập ngay thôi</p>-->
+<!--        <button type="submit" class="ghost" routerLink="/login">Đăng nhập</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Sign Up Form by Colorlib</title>
+
+  <!-- Font Icon -->
+<!--  <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">-->
+
+  <!-- Main css -->
+<!--  <link rel="stylesheet" href="css/style.css">-->
+</head>
+<body>
+
+<div class="main">
+
+  <!-- Sign up form -->
+  <section class="signup">
+    <div class="container">
+      <div class="signup-content">
+        <div class="signup-form">
+          <h2 class="form-title">Sign up</h2>
+          <form (ngSubmit)="register()" [formGroup]="registerForm" class="register-form" id="register-form">
+            <div class="form-group">
+              <label><i class="zmdi zmdi-account material-icons-name"></i></label>
+              <input type="text" formControlName="username" placeholder="Tài Khoản" (click)="existence()">
+              <div *ngIf="this.userExistence" class="col alert alert-danger">
+                <p style="color: crimson">Tài khoản đã tồn tại !</p>
+              </div>
+              <div class="col alert alert-danger" role="alert"
+                   *ngIf="this.registerForm.get('username')?.invalid && (this.registerForm.get('username')?.dirty || this.registerForm.get('username')?.touched)">
+                <div *ngIf="this.registerForm.get('username')?.errors?.minlength" class="col alert alert-danger">
+                  <p style="color: crimson">Tài khoản ít nhất 6 ký tự !</p>
+                </div>
+                <div *ngIf="this.registerForm.get('username')?.errors?.required" class="col alert alert-danger">
+                  <p style="color: crimson">Tài khoản phải đc nhập !</p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label><i class="zmdi zmdi-lock"></i></label>
+              <input type="password" formControlName="password" placeholder="Mật khẩu">
+              <div class="col alert alert-danger" role="alert"
+                   *ngIf="this.registerForm.get('password')?.invalid && (this.registerForm.get('password')?.dirty || this.registerForm.get('password')?.touched)">
+                <div *ngIf="this.registerForm.get('password')?.errors?.required" class="col alert alert-danger">
+                  <p style="color: crimson">Mật khẩu phải được nhập !</p>
+                </div>
+                <div *ngIf="this.registerForm.get('password')?.errors?.minlength" class="col alert alert-danger">
+                  <p style="color: crimson">Mật khẩu phải lớn hơn 5 ký tự!</p>
+                </div>
+                <div *ngIf="this.registerForm.get('password')?.errors?.pattern" class="col alert alert-danger">
+                  <p style="color: crimson">Mật khẩu phải lớn hơn 5 ký tự, ít nhất một chữ hoa, một chữ thường và một số!</p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label><i class="zmdi zmdi-lock-outline"></i></label>
+              <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+            </div>
+            <div class="form-group">
+              <label for="email"><i class="zmdi zmdi-email"></i></label>
+              <input type="email" name="email" id="email" placeholder="Your Email"/>
+            </div>
+            <div class="form-group">
+              <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+              <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+            </div>
+            <div class="form-group form-button">
+              <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+            </div>
+          </form>
+        </div>
+        <div class="signup-image">
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- JS -->
+<script src="../../assets/vendor/jquery/jquery.min.js"></script>
+<script src="../../assets/js2/main.js"></script>
+
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

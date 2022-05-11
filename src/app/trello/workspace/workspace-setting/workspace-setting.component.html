@@ -1,0 +1,135 @@
+<section class="main-content columns is-fullheight">
+  <div class="container column is-10">
+    <div style="justify-content: center;display:flex; color:white;">
+      <h1 style="font-size: xxx-large; font-weight: bold">{{workspace.title}}</h1>
+    </div>
+    <div style="justify-content: center;display:flex">
+      <button *ngIf="isOwner||isAdmin" class="button is-light" (click)="showEditModal()">Thay đổi thông tin nhóm</button>
+    </div>
+    <hr>
+    <div>
+      <div>
+        <p style="color:white;">Quyền truy cập:</p>
+        <br>
+        <div style="justify-content: space-between;display:flex;">
+          <div *ngIf="workspace.privacy == 'Private'">
+            <p style="color:white;font-weight: bold"><i class="fas fa-lock" style="color: red"></i> Riêng tư <span
+              style="font-weight: normal"> - Đây là một nhóm riêng tư</span></p>
+          </div>
+          <div *ngIf="workspace.privacy == 'Public'">
+            <p style="color:white;font-weight: bold"><i class="fas fa-globe" style="color: green"></i> Công khai <span
+              style="font-weight: normal"> - Đây là một nhóm công khai</span></p>
+          </div>
+          <button *ngIf="isOwner||isAdmin" class="button is-light" style="height: 25px;width: 70px" (click)="showEditPrivacyModal()">Thay đổi
+          </button>
+        </div>
+        <hr>
+      </div>
+    </div>
+    <div style="justify-content: space-between;display:flex;">
+      <div style="color: white">
+        <p>Các thông tin khác:</p><br>
+        <p>Loại nhóm: {{workspace.type}}</p>
+      </div>
+    </div>
+    <br>
+    <div id="sidebar" *ngIf="isOwner">
+      <ul class="list-group">
+        <li>
+          <div class="list-group-item">
+            <a style="color:#ff0000; font-weight: bold" (click)="showConfirmDeleteModal()">Xóa nhóm</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="edit-workspace">
+  <div class="modal-background">
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Sửa thông tin nhóm</p>
+        <button class="delete" aria-label="close" (click)="hideEditModal()"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field" style="position: relative">
+          <label class="label">Tên nhóm</label>
+          <div class="control">
+            <input class="input" type="text" required [(ngModel)]="workspace.title" #workspaceTitle="ngModel">
+          </div>
+          <label class="label">Phân loại nhóm:</label>
+          <div class="control">
+            <select class="input" [(ngModel)]="workspace.type" required #workspaceType="ngModel">
+              <option value="IT">IT</option>
+              <option value="Kế toán">Kế toán</option>
+              <option value="HR">Nhân sự</option>
+              <option value="Khác">Khác</option>
+            </select>
+          </div>
+          <div *ngIf="workspaceTitle.invalid && workspaceTitle.touched" class="alert">
+            <div *ngIf="workspaceTitle.errors?.required" style="color: red">
+              Hãy nhập tiêu đề
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <div class=" is-right">
+          <button [disabled]="workspaceTitle.invalid || workspaceType.invalid" class="button is-dark is-right"
+                  (click)="updateWorkspace()">Sửa
+          </button>
+        </div>
+        <button class="button is-light" (click)="hideEditModal()">Hủy</button>
+      </footer>
+    </div>
+  </div>
+</div>
+<div class="modal" id="edit-workspace-privacy">
+  <div class="modal-background">
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Thay đổi quyền truy cập</p>
+        <button class="delete" aria-label="close" (click)="hideEditPrivacyModal()"></button>
+      </header>
+      <section class="modal-card-body">
+        <label class="label">Quyền hạn</label>
+        <div class="control">
+          <select class="input" [(ngModel)]="workspace.privacy" required #workspacePrivacy="ngModel">
+            <option value="Private">Riêng tư</option>
+            <option value="Public">Công khai</option>
+          </select>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <div class=" is-right">
+          <button [disabled]="workspacePrivacy.invalid" class="button is-dark is-right"
+          (click)="updateWorkspace()">Thay đổi
+          </button>
+        </div>
+        <button class="button is-light" (click)="hideEditPrivacyModal()">Hủy</button>
+      </footer>
+    </div>
+  </div>
+</div>
+<div class="modal" id="confirm-delete">
+  <div class="modal-background">
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Xác nhận xóa nhóm</p>
+        <button class="delete" aria-label="close" (click)="hideConfirmDeleteModal()"></button>
+      </header>
+      <section class="modal-card-body">
+        <h1>Bạn có chắc chắn muốn xóa nhóm này không?</h1>
+      </section>
+      <footer class="modal-card-foot">
+        <div class="alert is-right">
+          <button class="button is-danger"
+                  (click)="deleteWorkspace(workspace.id)">Xóa
+          </button>
+        </div>
+        <button class="button is-light" (click)="hideConfirmDeleteModal()">Hủy</button>
+      </footer>
+    </div>
+  </div>
+</div>
