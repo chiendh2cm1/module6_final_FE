@@ -12,22 +12,11 @@ import {ToastService} from "../service/toast/toast.service";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({
-      userName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-z0-9]+$')]),
-      password: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-z0-9]+$')])
+      userName: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
     }
   )
   show: Boolean = false;
-  validation_message = {
-    userName: [
-      {type: 'required', message: 'Trường bắt buộc'},
-      {type: 'pattern', message: 'Chỉ nhập chữ hoặc số'}
-    ],
-    password: [
-      {type: 'required', message: 'Trường bắt buộc'},
-      {type: 'pattern', message: 'Chỉ nhập chữ hoặc số'}
-    ]
-  }
-
   constructor(private authenticationService: AuthenticateService,
               private router: Router,
               private navbarService: NavbarService,
