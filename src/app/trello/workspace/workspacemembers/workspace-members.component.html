@@ -7,15 +7,7 @@
           <button class="button is-primary" *ngIf="isAdmin || isOwner" (click)="showSingleInvite()"
                   style="width: 180px">
             <i class="fas fa-user-plus"></i>
-            Mời một thành viên
-          </button>
-        </div>
-      </div>
-      <div class="navbar-item">
-        <div class="buttons">
-          <button class="button is-primary" *ngIf="isAdmin || isOwner" (click)="showInvite()" style="width: 190px">
-            <i class="fas fa-user-plus"></i>
-            Mời nhiều thành viên
+            Thêm thành viên
           </button>
         </div>
       </div>
@@ -53,7 +45,7 @@
         </div>
         <div class="user-name">
           <h2 class="user-nickname">{{member.user?.nickname}}</h2>
-          <h6 class="user-username">@{{member.user?.username}}</h6>
+          <h6 class="user-username">{{member.user?.username}}</h6>
         </div>
       </div>
       <div>
@@ -73,50 +65,11 @@
       previousLabel="Trước"
                          nextLabel="Sau"
                          [responsive]="true"
-                         (pageChange)="handlePageChange($event)"></pagination-controls>
+                         (pageChange)="handlePageChange($event)">
+
+    </pagination-controls>
   </div>
 </section>
-
-<div class="modal" id="invite">
-  <div class="modal-background">
-    <div class="modal-card" style="margin-top: 300px">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Thêm thành viên vào nhóm</p>
-        <button class="delete" aria-label="close" (click)="hideInvite()"></button>
-      </header>
-      <section class="modal-card-body">
-        <div class="control">
-          <input #searchUser class="input is-link" type="text" placeholder="Nhập tên"
-                 (keyup)="findAllUserByUsername(searchUser.value)">
-        </div>
-        <div class="control">
-          <div *ngFor="let user of userSearchResult" class="dropdown-item" (click)="selectUser(searchUser, user)">
-              <span *ngIf="workspace.owner.id != user.id">
-              @{{user.username}}({{user.nickname}})
-            </span>
-          </div>
-        </div>
-        <p>Danh sách thêm thành viên</p>
-        <div class="control">
-          <div *ngIf="pendingAddMember.length !=0">
-            <span *ngFor="let user of pendingAddMember" class="button is-info is-light"
-                  (click)="removePendingUser(pendingAddMember.indexOf(user))">
-              @{{user.username}}({{user.nickname}})
-            </span>
-          </div>
-        </div>
-      </section>
-      <footer class="modal-card-foot">
-        <div class=" is-right">
-          <button [disabled]="pendingAddMember.length == 0" class="button is-dark is-right"
-                  (click)="addMemberToWorkspace()">Thêm
-          </button>
-        </div>
-        <button class="button is-light is-right" (click)="hideInvite()">Hủy</button>
-      </footer>
-    </div>
-  </div>
-</div>
 <div class="modal" id="create-workspace">
   <div class="modal-background"></div>
   <div class="modal-card" (click)="hideCreateWorkspaceModal()" style="margin-left: 600px">
@@ -169,24 +122,23 @@
 </div>
 <div class="modal" id="single-invite">
   <div class="modal-background">
-    <div class="modal-card" style="margin-top: 300px">
+    <div class="modal-card" style="margin-top: 150px">
       <header class="modal-card-head">
-        <p class="modal-card-title">Thêm thành viên vào nhóm</p>
+        <p class="modal-card-title">Thêm thành viên</p>
         <button class="delete" aria-label="close" (click)="hideSingleInvite()"></button>
       </header>
       <section class="modal-card-body">
         <div class="control">
-          <input #searchUserSingle class="input is-link" type="text" placeholder="Nhập tên"
+          <input #searchUserSingle class="input is-link" type="text" placeholder="Nhập tên thành viên"
                  (keyup)="findAllUserByUsername(searchUserSingle.value)">
         </div>
         <div class="control">
           <div *ngFor="let user of userSearchResult" class="dropdown-item">
               <span *ngIf="workspace.owner.id != user.id" (click)="selectSingleUser(searchUserSingle, user)">
-              @{{user.username}}({{user.nickname}})
+              {{user.username}}
             </span>
           </div>
         </div>
-        <p style="margin-bottom: 10px">Thông tin thành viên mới</p>
         <div class="control">
           <div *ngIf="pendingMember != null">
             <label class="label">Người dùng: {{pendingMember.username}}</label>

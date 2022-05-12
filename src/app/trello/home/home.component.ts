@@ -32,7 +32,14 @@ export class HomeComponent implements OnInit {
   createdBoard?: Board
   workspaces: Workspace[] = [];
   workspacesPublic:Workspace[] = [];
-  workspace: Workspace = {boards: [], id: 0, members: [], owner: undefined, title: "", type: "", privacy: ""};
+  workspace: Workspace = {
+    boards: [],
+    id: 0,
+    members: [],
+    owner: undefined,
+    title: "",
+    type: "",
+    privacy: ""};
 
   constructor(private modalService: ModalService,
               private boardService: BoardService,
@@ -132,7 +139,7 @@ export class HomeComponent implements OnInit {
     this.workspace.owner = this.loggedInUser;
     this.workspaceService.createWorkspace(this.workspace).subscribe(()=>{
       this.getAllWorkspace();
-      this.toastService.showMessage("Nhóm đã được tạo", 'is-success');
+      this.toastService.showMessage("Tạo nhóm thành công", 'is-success');
       this.hideCreateWorkspaceModal();
     })
   }

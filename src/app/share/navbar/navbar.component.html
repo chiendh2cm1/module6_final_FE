@@ -1,11 +1,8 @@
-<div class="nav" style="background: #4e555b">
+<div class="nav" style="background: deepskyblue">
   <span class="icon-item">
       <a routerLink="/trello" class="icon-link"><i class="fas fa-home"></i></a>
   </span>
   <div class="nav-brand-start">
-    <div class="nav-item-start">
-      <h1 style="position: fixed"><i class="fab fa-trello logo-icon"></i>NHÓM 3 Trello</h1>
-    </div>
   </div>
   <div id="search-section" class="" *ngIf="currentUser != null">
     <div style="position: relative" id="search-results">
@@ -81,9 +78,9 @@
   </div>
   <div class="icon-item" *ngIf="currentUser">
     <div class="dropdown is-hoverable is-right">
-<!--      <div class="nav-item-start">-->
-<!--        <p>{{loggedInUser.username}}</p>-->
-<!--      </div>-->
+      <!--      <div class="nav-item-start">-->
+      <!--        <p>{{loggedInUser.username}}</p>-->
+      <!--      </div>-->
       <div class="dropdown-trigger">
         <a class="icon-link" aria-haspopup="true" aria-controls="dropdown-menu4">
           <img [src]="loggedInUser.image" class="img-circle"/>
@@ -92,14 +89,10 @@
       <div class="dropdown-menu" id="dropdown-menu" role="menu">
         <div class="dropdown-content">
           <div href="#" class="dropdown-item">
-            <div class="user">
-              <div class="username">
-                Người dùng: {{loggedInUser.username}}
-              </div>
-            </div>
+            Tên người dùng: {{loggedInUser.username}}
           </div>
           <a class="dropdown-item" (click)="openModalUpdate()">
-            Thay đổi thông tin
+            Thay đổi
           </a>
           <hr class="dropdown-divider">
           <a class="dropdown-item" (click)="logout()">
@@ -130,17 +123,16 @@
                 <input class="file-input" type="file" #preview (change)="showPreview($event)">
                 <span class="file-cta">
                   <span class="file-icon">
-                    <i class="fas fa-upload"></i>
                   </span>
                   <span class="file-label">
-                    Chọn file
+                    Chọn ảnh đại diện
                   </span>
                 </span>
               </label>
             </div>
             <!--            user name-->
             <input type="text" class="input input-user-name" name="nickname" #nickname="ngModel" required
-                   *ngIf="loggedInUser !=null" [(ngModel)]="loggedInUser.nickname" placeholder="Biệt danh">
+                   *ngIf="loggedInUser !=null" [(ngModel)]="loggedInUser.nickname" placeholder="Tên">
           </div>
           <div class="div-update">
             <button class="button is-success is-light button-update">Cập nhập</button>
