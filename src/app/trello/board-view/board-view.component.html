@@ -61,7 +61,7 @@
           <div class="board-column" style="margin-left: 0px">
             <div class="column-title">
               <button class="button button-add-new-card is-light" (click)="showCreateColumnModal()">
-                + Thêm danh sách
+                + Thêm cột
               </button>
             </div>
           </div>
@@ -76,7 +76,7 @@
     <div class="modal-card">
       <form [formGroup]="columnForm" (ngSubmit)="addColumn()">
         <header class="modal-card-head">
-          <p class="modal-card-title">Tạo một danh sách mới</p>
+          <p class="modal-card-title">Tạo cột mới</p>
         </header>
         <section class="modal-card-body">
           <label class="label">Tiêu đề:</label>
@@ -86,9 +86,9 @@
         </section>
         <footer class="modal-card-foot">
           <button style="position: revert" [disabled]="columnForm.invalid" class="button is-info"
-                  type="submit">Thêm danh sách
+                  type="submit">Thêm mới
           </button>
-          <button class="button is-light" (click)="closeCreateColumnModal()">Hủy</button>
+          <button class="button is-light" (click)="closeCreateColumnModal()">Quay lại</button>
         </footer>
       </form>
     </div>
@@ -119,11 +119,7 @@
         <header class="modal-card-head">
           <p class="modal-card-title">
             <input class="input is-light" type="text" style="font-weight: bold; font-size: larger"
-                   formControlName="title" placeholder="Nhập tiêu đề">
-            <span style="font-size: medium; color: red"
-                  *ngIf="(createCardForm.get('title')!.dirty || createCardForm.get('title')!.touched) && createCardForm.get('title')!.invalid">
-            Trường bắt buộc</span> <br>
-            <span style="font-size: medium">Tại danh sách {{selectedColumn.title}}</span>
+                   formControlName="title" placeholder="Tiêu đề">
           </p>
           <br>
         </header>
@@ -140,9 +136,8 @@
           </div>
           <div class="columns columns-card-body">
             <div class="column column-card-body">
-              <label class="label">Nội dung:</label>
               <textarea style="font-size: large" cols="70" rows="10" formControlName="content"
-                        placeholder="Nhập nội dung"></textarea>
+                        placeholder="Nội dung"></textarea>
             </div>
             <div class="column is-one-third">
               <div>

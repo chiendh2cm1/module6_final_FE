@@ -124,27 +124,6 @@ export class WorkspaceMembersComponent implements OnInit {
     this.pendingAddMember.push(user)
     this.userSearchResult = []
   }
-
-  addMemberToWorkspace() {
-    if (this.pendingAddMember.length > 0) {
-      let newMember: MemberWorkspace;
-      for (let user of this.pendingAddMember) {
-        newMember = {
-          user: user,
-          role: "Chỉ xem"
-        }
-        this.workspaceMemberService.addWorkspaceMember(newMember,this.loggedInUser.id!,this.workspace.id).subscribe(data => {
-          this.workspace.members.push(data)
-          this.workspaceService.updateWorkspace(this.workspace.id, this.workspace).subscribe()
-        })
-      }
-      this.createNotificationAddToWorkspace()
-      this.toastService.showMessage("Mời thành công", "is-success");
-      this.pendingAddMember = [];
-      this.hideInvite()
-    }
-  }
-
   removePendingUser(index: any) {
     this.pendingAddMember.splice(index, 1)
   }
@@ -179,15 +158,6 @@ export class WorkspaceMembersComponent implements OnInit {
     member.role = role;
     this.workspaceMemberService.updateWorkspaceMember(member.id, member).subscribe()
   }
-
-  hideInvite() {
-    document.getElementById('invite')!.classList.remove('is-active')
-  }
-
-  showInvite() {
-    document.getElementById('invite')!.classList.add('is-active')
-  }
-
   showCreateWorkspaceModal() {
     document.getElementById('create-workspace')!.classList.add('is-active');
   }
@@ -233,7 +203,7 @@ export class WorkspaceMembersComponent implements OnInit {
         user: this.pendingMember,
         role: role
       }
-      this.workspaceMemberService.addWorkspaceMember(newMember,this.loggedInUser.id!,this.workspace.id).subscribe(data => {
+      this.workspaceMemberService.addWorkspaceMember(newMember).subscribe(data => {
         this.workspace.members.push(data)
         this.workspaceService.updateWorkspace(this.workspace.id, this.workspace).subscribe()
       })

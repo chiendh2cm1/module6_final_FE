@@ -11,7 +11,8 @@
             </div>
           </li>
           <li class="list-group-item">
-            <p class="menu-label" style="color: gainsboro">Nhóm <span (click)="showCreateWorkspaceModal()"><i class="fas fa-plus-circle is-hoverable"></i></span></p>
+            <p class="menu-label" style="color: gainsboro">Nhóm <span (click)="showCreateWorkspaceModal()">
+              <i class="fas fa-plus-circle is-hoverable"></i></span></p>
           </li>
           <li class="list-group-item" *ngFor="let workspace of workspaces, index as i">
             <a (click)="showWorkspaceButton(i)">{{workspace.title}}</a>

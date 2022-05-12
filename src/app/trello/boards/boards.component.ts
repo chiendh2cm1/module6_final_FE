@@ -74,7 +74,7 @@ export class BoardsComponent implements OnInit {
     this.newBoard.owner = this.loggedInUser;
     this.boardService.addBoard(this.newBoard).subscribe(async data => {
       this.createdBoard = data
-      this.toastService.showMessage("Bảng đã được tạo", "is-success");
+      this.toastService.showMessage("Tạo bảng thành công", "is-success");
       this.getBoards();
       this.getPublicBoard();
       this.getPrivateBoard();
