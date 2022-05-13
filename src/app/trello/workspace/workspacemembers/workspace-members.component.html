@@ -23,13 +23,12 @@
           <img class="user-img" src="{{workspaceOwner.image}}">
         </div>
         <div class="user-name">
-          <h2 class="user-nickname">{{workspaceOwner.nickname}}</h2>
-          <h6 class="user-username">@{{workspaceOwner.username}}</h6>
+          <h6 class="user-username">Tên đăng nhập: {{workspaceOwner.username}}</h6>
         </div>
       </div>
       <div>
         <button class="button is-primary">
-          Chủ nhóm
+          Người tạo
         </button>
       </div>
     </div>
@@ -43,13 +42,12 @@
         <div>
           <img class="user-img" src="{{member.user?.image}}">
         </div>
-        <div class="user-name">
-          <h2 class="user-nickname">{{member.user?.nickname}}</h2>
-          <h6 class="user-username">{{member.user?.username}}</h6>
+        <div class="user-name"><h2 class="user-nickname">{{member.user?.nickname}}</h2>
+          <h6 class="user-username">Tên đăng nhập:{{member.user?.username}}</h6>
         </div>
       </div>
       <div>
-        <select style="width: 110px; border: 0px" class="button is-primary" [ngModel]="member.role"
+        <select style="width: 110px; border: 0" class="button is-primary" [ngModel]="member.role"
                 #newRole="ngModel" (change)="updateMember(member,newRole.value)" [disabled]="!(isOwner||isAdmin)">
           <option class="" value="Chỉ xem">Chỉ xem</option>
           <option value="Chỉnh sửa">Chỉnh sửa</option>

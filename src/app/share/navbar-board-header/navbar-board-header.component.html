@@ -17,16 +17,31 @@
           {{currentBoard.title}}
         </button>
         <button class="button is-primary">
-          Người tạo: {{currentBoard.owner.username}}
+          <img *ngIf="!currentBoard.owner.image"
+               src="https://i.pinimg.com/originals/57/fb/31/57fb3190d0cc1726d782c4e25e8561e9.png"
+               class="img-circle is-48x48"/>
+          <img *ngIf="currentBoard.owner.image" [src]="currentBoard.owner.image" class="img-circle is-48x48"/>
+          {{currentBoard.owner.username}}
+        </button>
+        <button class="button is-primary">
+          <i class="far fa-star"></i>
         </button>
         <div>
-          <button class="button is-primary">
           <span *ngFor="let member of members; index as i">
+            <a (click)="showDetail(member)" (mouseover)="showUserPreview(member)"
+               (mouseout)="closeUserPreviews()"
+               class="user-preview" style="position: relative"
+               [ngClass]="{'is-hidden': i >= 5}">
               <img *ngIf="member.image" [src]="member.image" class="img-circle"/>
               <img *ngIf="!member.image"
                    class="img-circle"/>
+              <span id="user-preview-text-{{member.userId}}"
+                    class="user-preview-text is-hidden tag is-info is-light"
+                    style="position: absolute; top: 20px; left:5px; float: top">
+                        User preview text
+              </span>
+            </a>
           </span>
-          </button>
           <span *ngIf="members.length > 5">
             <a>
               <img src="./assets/img/three-dots.png" (click)="showAllMembers()" class="img-circle"
@@ -101,8 +116,16 @@
           <div class="icon-item" style="margin-right: 10px">
             <div class="dropdown is-hoverable ">
               <div class="dropdown-trigger">
-                <button *ngIf="canEdit"  class="button is-primary" (click)="toggleDeleteBoardModal()">Xóa bảng
+                <button class="button is-primary">
+                  <i class="fas fa-ellipsis-h"></i>
+                  Menu
                 </button>
+              </div>
+              <div class="dropdown-menu" role="menu" style="width: 100px">
+                <div>
+                  <button *ngIf="canEdit" class="button is-danger is-light" (click)="toggleDeleteBoardModal()">Xóa bảng
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -164,7 +187,7 @@
               <div *ngIf="userResult.length" class="dropdown-content">
                 <a *ngFor="let result of userResult" class="dropdown-item" (click)="addMember(result)">
                   <img *ngIf="!result.image"
-                       src="https://i.pinimg.com/originals/57/fb/31/57fb3190d0cc1726d782c4e25e8561e9.png"
+                       src="https://static.yeah1.com/uploads/editors/27/2020/03/21/JaZBMzV14fzRI4vBWG8jymplSUGSGgimkqtJakOV.jpeg"
                        class="img-circle is-48x48">
                   <img *ngIf="result.image" [src]="result.image" class="img-circle is-48x48">
                   @{{result.username}} <span *ngIf="result.nickname">({{result.nickname}})</span>

@@ -7,7 +7,7 @@
     <div class="section-board">
       <div class="card" (click)="displayAddBoardModal()" *ngIf="allowEdit">
         <div class="img-circle-add-board">
-          <button (click)="displayAddBoardModal()" style="background: deepskyblue; border-radius: 5px; border:0px solid" *ngIf="allowEdit">Thêm Bảng</button>
+          <a><i class="fas fa-plus-circle"></i></a>
         </div>
       </div>
       <div *ngFor="let board of workspace.boards" routerLink="/board/{{board.id}}">

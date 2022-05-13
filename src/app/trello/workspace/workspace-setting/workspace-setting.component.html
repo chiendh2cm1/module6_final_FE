@@ -14,11 +14,11 @@
         <div style="justify-content: space-between;display:flex;">
           <div *ngIf="workspace.privacy == 'Private'">
             <p style="color:white;font-weight: bold"><i class="fas fa-lock" style="color: red"></i> Riêng tư <span
-              style="font-weight: normal"> - Đây là một nhóm riêng tư</span></p>
+              style="font-weight: normal"> - Nhóm riêng</span></p>
           </div>
           <div *ngIf="workspace.privacy == 'Public'">
             <p style="color:white;font-weight: bold"><i class="fas fa-globe" style="color: green"></i> Công khai <span
-              style="font-weight: normal"> - Đây là một nhóm công khai</span></p>
+              style="font-weight: normal"> - Nhóm công khai</span></p>
           </div>
           <button *ngIf="isOwner||isAdmin" class="button is-light" style="height: 25px;width: 70px" (click)="showEditPrivacyModal()">Thay đổi
           </button>
