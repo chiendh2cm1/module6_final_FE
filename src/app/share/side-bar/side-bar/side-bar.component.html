@@ -1,9 +1,9 @@
 <div class="wrapper">
   <!-- Sidebar  -->
   <nav id="sidebar" style="font-size: 20px">
-    <ul class="list-unstyled components">
-      <li class="active">
-        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+    <ul class="list-unstyled components" >
+      <li class="active" >
+        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color: green ;border: 3px solid #15b234">Home</a>
         <ul class="collapse list-unstyled" id="homeSubmenu">
           <li>
             <div class="list-group-item">
@@ -11,7 +11,7 @@
             </div>
           </li>
           <li class="list-group-item">
-            <p class="menu-label" style="color: gainsboro">Nhóm <span (click)="showCreateWorkspaceModal()">
+            <p class="menu-label" style="color: green ;border: 3px solid #15b234;"  >Nhóm <span (click)="showCreateWorkspaceModal()" style="border: #34ce57 1px">
               <i class="fas fa-plus-circle is-hoverable"></i></span></p>
           </li>
           <li class="list-group-item" *ngFor="let workspace of workspaces, index as i">

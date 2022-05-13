@@ -44,9 +44,14 @@
                 <ul>
                   <li><span *ngFor="let tag of item.tags" class="tag is-light" [ngClass]="tag.color">{{tag.name}}</span>
                   </li>
+                  <div>
+                  <span *ngFor="let tag of this.currentBoard.tags">
+                      <span class="tag is-light" [ngClass]="tag.color">{{tag.name}}</span>
+                  </span>
                   <li><span class="item-title">{{item.title}}</span>
                   <li><span *ngFor="let user of item.users" class="tag is-light">@{{user.username}}</span>
                   </li>
+                  </div>
                 </ul>
               </div>
               <div *ngIf="canEdit">

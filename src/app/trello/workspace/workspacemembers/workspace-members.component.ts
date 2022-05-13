@@ -101,14 +101,14 @@ export class WorkspaceMembersComponent implements OnInit {
         for (let member of this.workspace.members) {
           for (let user of data) {
             if (member.user?.id == user.id) {
-              data.splice(data.indexOf(user), 1)
+              data.splice(data.indexOf(user), 0)
             }
           }
         }
         for (let member of this.pendingAddMember) {
           for (let user of data) {
             if (member.id == user.id) {
-              data.splice(data.indexOf(user), 1)
+              data.splice(data.indexOf(user), 0)
             }
           }
         }
