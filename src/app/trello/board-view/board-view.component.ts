@@ -210,14 +210,14 @@ export class BoardViewComponent implements OnInit {
   }
 
   closeCreateCardModal() {
-    this.switchCreateTagsForm()
-    this.resetCreateCardForm();
-    this.selectedColumnID = -1;
-    this.pendingAttachment = [];
-    this.pendingTag = [];
-    if (this.isTagsIsShown) {
-      this.switchCreateTagsForm()
-    }
+    // this.switchCreateTagsForm()
+    // this.resetCreateCardForm();
+    // this.selectedColumnID = -1;
+    // this.pendingAttachment = [];
+    // this.pendingTag = [];
+    // if (this.isTagsIsShown) {
+    //   this.switchCreateTagsForm()
+    // }
     document.getElementById('createCardModal')!.classList.remove('is-active')
   }
 
@@ -748,8 +748,8 @@ export class BoardViewComponent implements OnInit {
     for (let i = 0; i < this.currentBoard.columns.length; i++) {
       if (this.currentBoard.columns[i].id == this.selectedColumnID) {
         this.selectedIndex = this.currentBoard.columns.indexOf(this.currentBoard.columns[i])
-        this.createNoticeInBoard(`xóa danh sách ${this.currentBoard.columns[i].title}`)
-        this.createNotification(` xóa danh sách ${this.currentBoard.columns[i].title}`)
+        // // this.createNoticeInBoard(`xóa danh sách ${this.currentBoard.columns[i].title}`)
+        // this.createNotification(` xóa danh sách ${this.currentBoard.columns[i].title}`)
         this.currentBoard.columns.splice(this.selectedIndex, 1);
         this.columnService.deleteAColumn(this.selectedColumnID).subscribe(() => {
           this.saveChange()
