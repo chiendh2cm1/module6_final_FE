@@ -114,7 +114,7 @@
 
 <div class="modal" id="createCardModal">
   <div class="modal-background">
-    <div class="modal-card">
+    <div class="modal-card" style="margin-top: 120px">
       <form [formGroup]="createCardForm">
         <header class="modal-card-head">
           <p class="modal-card-title">
@@ -139,82 +139,82 @@
               <textarea style="font-size: large" cols="70" rows="10" formControlName="content"
                         placeholder="Nội dung"></textarea>
             </div>
-            <div class="column is-one-third">
-              <div>
-                <button class="button members-button" (click)="switchCreateTagsForm()">Nhãn</button>
-                <br>
-                <div class="is-hidden" id="createTags">
-                  <label class="label">Các nhãn:</label>
-                  <ul>
-                    <li *ngFor="let tag of this.currentBoard.tags"
-                        (mouseover)="showDeleteTags(tag.id!)"
-                        (mouseout)="hideDeleteTags(tag.id!)">
-                      <span class="tag is-light" [ngClass]="tag.color" (click)="addTagToPending(tag)">
-                        {{tag.name}}
-                      </span>
-                      <a (click)="deleteTag(tag.id!)">
-                        <span style="margin-left: 20px" class="tag is-danger is-hidden"
-                              id="tagsDeleteButton-{{tag.id}}">
-                          <i class="far fa-trash-alt"></i>
-                        </span>
-                      </a>
-                    </li>
-                  </ul>
-                  <form [formGroup]="newTagForm">
-                    <label class="label">Tạo nhãn mới:</label>
-                    <input type="text" class="input is-info is-small" style="margin-bottom: 5px"
-                           formControlName="name"
-                           required placeholder="Tên nhãn">
-                    <div *ngIf="newTagForm.invalid && newTagForm.touched">
-                      <span style="font-size: small;color: red">Nhập tên nhãn</span>
-                    </div>
-                    <label class="label" style="font-size: small">Màu của nhãn</label>
-                    <div class="select is-small" style="margin-bottom: 5px">
-                      <select formControlName="color">
-                        <option value="is-primary"
-                                style="color: lightgreen; background-color: rgb(235, 255, 252)">Xanh
-                          lá
-                          nhạt
-                        </option>
-                        <option value="is-success" style="color: darkgreen; background-color: rgb(239, 250, 245)">
-                          Xanh
-                          lá
-                          đậm
-                        </option>
-                        <option value="is-link" style="color: darkblue; background-color: rgb(239, 241, 250)">Xanh
-                          dương
-                          đậm
-                        </option>
-                        <option value="is-info" style="color: lightblue; background-color: rgb(239, 245, 251)">
-                          Xanh
-                          dương
-                          nhạt
-                        </option>
-                        <option value="is-warning" style="color: yellow; background-color: rgb(255, 250, 235)">
-                          Vàng
-                        </option>
-                        <option value="is-danger" style="color: red; background-color: rgb(254, 236, 240)">Đỏ
-                        </option>
-                      </select>
-                    </div>
-                    <br>
-                    <button [disabled]="newTagForm.invalid" (click)="addNewTag()">Thêm nhãn mới</button>
-                  </form>
-                </div>
-              </div>
-              <div class="content">
-                <div>Đính kèm:</div>
-                <form #uploadFileCard="ngForm" (ngSubmit)="pendingPreview($event)">
-                  <div class="update-info">
-                    <label for="file-upload" class="custom-file-upload">
-                      <i class="fa fa-upload"></i> Thêm tệp đính kèm
-                    </label>
-                    <input id="file-upload" type="file" #preview (change)="pendingPreview($event)"/>
-                    <span class="modal-card-body" (change)="pendingPreview($event)"></span>
-                  </div>
-                </form>
-              </div>
-            </div>
+<!--            <div class="column is-one-third">-->
+<!--              <div>-->
+<!--                <button class="button members-button" (click)="switchCreateTagsForm()">Nhãn</button>-->
+<!--                <br>-->
+<!--                <div class="is-hidden" id="createTags">-->
+<!--                  <label class="label">Các nhãn:</label>-->
+<!--                  <ul>-->
+<!--                    <li *ngFor="let tag of this.currentBoard.tags"-->
+<!--                        (mouseover)="showDeleteTags(tag.id!)"-->
+<!--                        (mouseout)="hideDeleteTags(tag.id!)">-->
+<!--                      <span class="tag is-light" [ngClass]="tag.color" (click)="addTagToPending(tag)">-->
+<!--                        {{tag.name}}-->
+<!--                      </span>-->
+<!--                      <a (click)="deleteTag(tag.id!)">-->
+<!--                        <span style="margin-left: 20px" class="tag is-danger is-hidden"-->
+<!--                              id="tagsDeleteButton-{{tag.id}}">-->
+<!--                          <i class="far fa-trash-alt"></i>-->
+<!--                        </span>-->
+<!--                      </a>-->
+<!--                    </li>-->
+<!--                  </ul>-->
+<!--                  <form [formGroup]="newTagForm">-->
+<!--                    <label class="label">Tạo nhãn mới:</label>-->
+<!--                    <input type="text" class="input is-info is-small" style="margin-bottom: 5px"-->
+<!--                           formControlName="name"-->
+<!--                           required placeholder="Tên nhãn">-->
+<!--                    <div *ngIf="newTagForm.invalid && newTagForm.touched">-->
+<!--                      <span style="font-size: small;color: red">Nhập tên nhãn</span>-->
+<!--                    </div>-->
+<!--                    <label class="label" style="font-size: small">Màu của nhãn</label>-->
+<!--                    <div class="select is-small" style="margin-bottom: 5px">-->
+<!--                      <select formControlName="color">-->
+<!--                        <option value="is-primary"-->
+<!--                                style="color: lightgreen; background-color: rgb(235, 255, 252)">Xanh-->
+<!--                          lá-->
+<!--                          nhạt-->
+<!--                        </option>-->
+<!--                        <option value="is-success" style="color: darkgreen; background-color: rgb(239, 250, 245)">-->
+<!--                          Xanh-->
+<!--                          lá-->
+<!--                          đậm-->
+<!--                        </option>-->
+<!--                        <option value="is-link" style="color: darkblue; background-color: rgb(239, 241, 250)">Xanh-->
+<!--                          dương-->
+<!--                          đậm-->
+<!--                        </option>-->
+<!--                        <option value="is-info" style="color: lightblue; background-color: rgb(239, 245, 251)">-->
+<!--                          Xanh-->
+<!--                          dương-->
+<!--                          nhạt-->
+<!--                        </option>-->
+<!--                        <option value="is-warning" style="color: yellow; background-color: rgb(255, 250, 235)">-->
+<!--                          Vàng-->
+<!--                        </option>-->
+<!--                        <option value="is-danger" style="color: red; background-color: rgb(254, 236, 240)">Đỏ-->
+<!--                        </option>-->
+<!--                      </select>-->
+<!--                    </div>-->
+<!--                    <br>-->
+<!--                    <button [disabled]="newTagForm.invalid" (click)="addNewTag()">Thêm nhãn mới</button>-->
+<!--                  </form>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="content">-->
+<!--                <div>Đính kèm:</div>-->
+<!--                <form #uploadFileCard="ngForm" (ngSubmit)="pendingPreview($event)">-->
+<!--                  <div class="update-info">-->
+<!--                    <label for="file-upload" class="custom-file-upload">-->
+<!--                      <i class="fa fa-upload"></i> Thêm tệp đính kèm-->
+<!--                    </label>-->
+<!--                    <input id="file-upload" type="file" #preview (change)="pendingPreview($event)"/>-->
+<!--                    <span class="modal-card-body" (change)="pendingPreview($event)"></span>-->
+<!--                  </div>-->
+<!--                </form>-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
           <div id="pendingAttachment" class="media-attachment-body" style="margin-left: 40px"
                *ngFor="let attachment of pendingAttachment, index as i">
@@ -437,9 +437,9 @@
                 </div>
               </section>
               <footer class="modal-card-foot">
-                <button class="button is-info add-new-card" (click)="editCard()">Sửa</button>
-                <button class="button is-light" (click)="closeEditCardModal()">Hủy</button>
-                <button class="button is-danger" (click)="showDeleteCardModal()">Xóa</button>
+                <button  *ngIf="canEdit" class="button is-info add-new-card" (click)="editCard()">Sửa</button>
+                <button class="button is-danger" (click)="closeEditCardModal()">Đóng</button>
+                <button *ngIf="canEdit" class="button is-danger" (click)="showDeleteCardModal()">Xóa</button>
               </footer>
             </form>
           </div>

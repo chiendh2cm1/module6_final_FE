@@ -210,14 +210,14 @@ export class BoardViewComponent implements OnInit {
   }
 
   closeCreateCardModal() {
-    this.switchCreateTagsForm()
-    this.resetCreateCardForm();
-    this.selectedColumnID = -1;
-    this.pendingAttachment = [];
-    this.pendingTag = [];
-    if (this.isTagsIsShown) {
-      this.switchCreateTagsForm()
-    }
+    // this.switchCreateTagsForm()
+    // this.resetCreateCardForm();
+    // this.selectedColumnID = -1;
+    // this.pendingAttachment = [];
+    // this.pendingTag = [];
+    // if (this.isTagsIsShown) {
+    //   this.switchCreateTagsForm()
+    // }
     document.getElementById('createCardModal')!.classList.remove('is-active')
   }
 

@@ -18,14 +18,14 @@
         </button>
         <button class="button is-primary">
           <img *ngIf="!currentBoard.owner.image"
-               src="https://i.pinimg.com/originals/57/fb/31/57fb3190d0cc1726d782c4e25e8561e9.png"
+               src="https://vnn-imgs-a1.vgcloud.vn/image1.ictnews.vn/_Files/2020/03/17/trend-avatar-1.jpg"
                class="img-circle is-48x48"/>
           <img *ngIf="currentBoard.owner.image" [src]="currentBoard.owner.image" class="img-circle is-48x48"/>
           {{currentBoard.owner.username}}
         </button>
-        <button class="button is-primary">
-          <i class="far fa-star"></i>
-        </button>
+<!--        <button class="button is-primary">-->
+<!--          <i class="far fa-star"></i>-->
+<!--        </button>-->
         <div>
           <span *ngFor="let member of members; index as i">
             <a (click)="showDetail(member)" (mouseover)="showUserPreview(member)"
@@ -62,14 +62,13 @@
               <div class="column" style="width: max-content">
                 <select class="input" [(ngModel)]="currentBoard.type" required #workspaceType="ngModel" (change)="updateBoardTitle()">
                   <option value="Công khai">Công khai</option>
-                  <option *ngIf="isInWorkspace" value="Nhóm">Nhóm</option>
+<!--                  <option *ngIf="isInWorkspace" value="Nhóm">Nhóm</option>-->
                   <option value="Riêng tư">Riêng tư</option>
                 </select>
               </div>
             </div>
           </div>
-          <button class="button is-primary" (click)="toggleElement('visibility-dropdown')">
-            <i class="fas fa-eye"></i>
+          <button *ngIf="canEdit" class="button is-primary" (click)="toggleElement('visibility-dropdown')">
             {{currentBoard.type}}
           </button>
           <div style="position: relative">
@@ -116,16 +115,8 @@
           <div class="icon-item" style="margin-right: 10px">
             <div class="dropdown is-hoverable ">
               <div class="dropdown-trigger">
-                <button class="button is-primary">
-                  <i class="fas fa-ellipsis-h"></i>
-                  Menu
+                <button *ngIf="canEdit" class="button is-primary" (click)="toggleDeleteBoardModal()">Xóa bảng
                 </button>
-              </div>
-              <div class="dropdown-menu" role="menu" style="width: 100px">
-                <div>
-                  <button *ngIf="canEdit" class="button is-danger is-light" (click)="toggleDeleteBoardModal()">Xóa bảng
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -136,48 +127,48 @@
           <div class="icon-item" >
             <div class="dropdown is-hoverable is-right">
               <div class="dropdown-trigger">
-                <button class="button is-primary">
-                  <i class="fas fa-list"></i>
-                  Thông báo
-                </button>
+<!--                <button class="button is-primary">-->
+<!--                  <i class="fas fa-list"></i>-->
+<!--                  Thông báo-->
+<!--                </button>-->
               </div>
-              <div class="dropdown-menu" id="dropdown-menu5" role="menu">
-                <div class="dropdown-content" style="padding: 0">
-                  <div class="header__navbar-item header__navbar-item--has-notify">
-                    <div class="header__notify">
-                      <header class="header__notify-header">
-                        <h3>Thông báo</h3>
-                      </header>
-                      <ul class="header__notify-list">
-                        <li class="header__notify-item" *ngFor="let activity of activityLogService.activities"
-                            [class.mark-read]="activity.status">
-                          <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="activity.card"
-                             (click)="redirectService.showModal(activity.card)">
-                            <img
-                              [src]="activity.user!.image!"
-                              alt=""
-                              class="header__notify-img">
-                            <div class="header__notify-info">
-                              <span class="header__notify-name">{{activity.title}}</span>
-                              <span class="header__notify-description">{{activity.content}}</span>
-                            </div>
-                          </a>
-                          <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="!activity.card">
-                            <img
-                              [src]="activity.user!.image!"
-                              alt=""
-                              class="header__notify-img">
-                            <div class="header__notify-info">
-                              <span class="header__notify-name">{{activity.title}}</span>
-                              <span class="header__notify-description">{{activity.content}}</span>
-                            </div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
+<!--              <div class="dropdown-menu" id="dropdown-menu5" role="menu">-->
+<!--                <div class="dropdown-content" style="padding: 0">-->
+<!--                  <div class="header__navbar-item header__navbar-item&#45;&#45;has-notify">-->
+<!--                    <div class="header__notify">-->
+<!--                      <header class="header__notify-header">-->
+<!--                        <h3>Thông báo</h3>-->
+<!--                      </header>-->
+<!--                      <ul class="header__notify-list">-->
+<!--                        <li class="header__notify-item" *ngFor="let activity of activityLogService.activities"-->
+<!--                            [class.mark-read]="activity.status">-->
+<!--                          <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="activity.card"-->
+<!--                             (click)="redirectService.showModal(activity.card)">-->
+<!--                            <img-->
+<!--                              [src]="activity.user!.image!"-->
+<!--                              alt=""-->
+<!--                              class="header__notify-img">-->
+<!--                            <div class="header__notify-info">-->
+<!--                              <span class="header__notify-name">{{activity.title}}</span>-->
+<!--                              <span class="header__notify-description">{{activity.content}}</span>-->
+<!--                            </div>-->
+<!--                          </a>-->
+<!--                          <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="!activity.card">-->
+<!--                            <img-->
+<!--                              [src]="activity.user!.image!"-->
+<!--                              alt=""-->
+<!--                              class="header__notify-img">-->
+<!--                            <div class="header__notify-info">-->
+<!--                              <span class="header__notify-name">{{activity.title}}</span>-->
+<!--                              <span class="header__notify-description">{{activity.content}}</span>-->
+<!--                            </div>-->
+<!--                          </a>-->
+<!--                        </li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
             </div>
           </div>
           <div class="search-bar">

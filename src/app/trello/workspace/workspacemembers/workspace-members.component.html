@@ -128,7 +128,7 @@
       <section class="modal-card-body">
         <div class="control">
           <input #searchUserSingle class="input is-link" type="text" placeholder="Nhập tên thành viên"
-                 (keyup)="findAllUserByUsername(searchUserSingle.value)">
+                 (keyup)="findAllUserByUsername(searchUserSingle.value)" required>
         </div>
         <div class="control">
           <div *ngFor="let user of userSearchResult" class="dropdown-item">
@@ -139,12 +139,13 @@
         </div>
         <div class="control">
           <div *ngIf="pendingMember != null">
-            <label class="label">Người dùng: {{pendingMember.username}}</label>
-            <label class="label">Email: {{pendingMember.email}}</label>
+            <label >Người dùng: {{pendingMember.username}}</label>
+            <br>
+            <label >Email: {{pendingMember.email}}</label>
           </div>
         </div>
         <div class="control" style="margin-top: 10px">
-          <label class="label">Quyền hạn:</label>
+          <label>Quyền hạn:</label>
           <select class="input" [(ngModel)]="pendingMemberRole" required #pendingRole="ngModel">
             <option value="Quản trị">Quản trị</option>
             <option value="Chỉnh sửa">Chỉnh sửa</option>
@@ -155,7 +156,7 @@
       <footer class="modal-card-foot">
         <div class=" is-right">
           <button [disabled]="pendingRole.invalid" class="button is-dark is-right"
-                  (click)="addSingleMember(pendingRole.value)">Thêm
+                  (click)="addSingleMember(pendingRole.value)" style="background: deepskyblue">Thêm
           </button>
         </div>
         <button class="button is-light " (click)="hideSingleInvite()">Hủy</button>

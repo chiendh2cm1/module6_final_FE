@@ -90,7 +90,7 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Thay đổi quyền truy cập</p>
-        <button class="delete" aria-label="close" (click)="hideEditPrivacyModal()"></button>
+        <button class="delete" aria-label="close" (click)="hideEditPrivacyModal()" ></button>
       </header>
       <section class="modal-card-body">
         <label class="label">Quyền hạn</label>
@@ -104,7 +104,7 @@
       <footer class="modal-card-foot">
         <div class=" is-right">
           <button [disabled]="workspacePrivacy.invalid" class="button is-dark is-right"
-          (click)="updateWorkspace()">Thay đổi
+          (click)="updateWorkspace()" style="background: deepskyblue">Thay đổi
           </button>
         </div>
         <button class="button is-light" (click)="hideEditPrivacyModal()">Hủy</button>
@@ -116,7 +116,7 @@
   <div class="modal-background">
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Xác nhận xóa nhóm</p>
+        <p class="modal-card-title">Xóa nhóm</p>
         <button class="delete" aria-label="close" (click)="hideConfirmDeleteModal()"></button>
       </header>
       <section class="modal-card-body">
