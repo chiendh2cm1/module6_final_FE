@@ -262,7 +262,7 @@ export class NavbarComponent implements OnInit {
     this.page = event;
   }
 
-  private createPreview(content: string, searchString: string): string[] {
+  createPreview(content: string, searchString: string): string[] {
     let index = content.toLowerCase().indexOf(searchString.toLowerCase());
     let beforeKeyword: string = content.substring(0, index);
     let keyword: string = content.substring(index, index + searchString.length);

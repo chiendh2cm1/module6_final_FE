@@ -172,28 +172,26 @@
 <!--                    <div class="select is-small" style="margin-bottom: 5px">-->
 <!--                      <select formControlName="color">-->
 <!--                        <option value="is-primary"-->
-<!--                                style="color: lightgreen; background-color: rgb(235, 255, 252)">Xanh-->
-<!--                          lá-->
-<!--                          nhạt-->
+<!--                                style="color: black; background-color: rgb(235, 255, 252)">-->
+<!--                          <button>màu 1</button>-->
 <!--                        </option>-->
-<!--                        <option value="is-success" style="color: darkgreen; background-color: rgb(239, 250, 245)">-->
-<!--                          Xanh-->
-<!--                          lá-->
-<!--                          đậm-->
+<!--                        <option value="is-success"-->
+<!--                                style="color: black; background-color: rgb(239, 250, 245)">-->
+<!--                          <button>màu 2</button>-->
 <!--                        </option>-->
-<!--                        <option value="is-link" style="color: darkblue; background-color: rgb(239, 241, 250)">Xanh-->
-<!--                          dương-->
-<!--                          đậm-->
+<!--                        <option value="is-link" style="color: black; background-color: rgb(239, 241, 250)">-->
+<!--                          <button>màu 3</button>-->
 <!--                        </option>-->
-<!--                        <option value="is-info" style="color: lightblue; background-color: rgb(239, 245, 251)">-->
-<!--                          Xanh-->
-<!--                          dương-->
-<!--                          nhạt-->
+<!--                        <option value="is-info"-->
+<!--                                style="color: black; background-color: rgb(239, 245, 251)">-->
+<!--                          <button>màu 4</button>-->
 <!--                        </option>-->
-<!--                        <option value="is-warning" style="color: yellow; background-color: rgb(255, 250, 235)">-->
-<!--                          Vàng-->
+<!--                        <option value="is-warning"-->
+<!--                                style="color: black; background-color: rgb(255, 250, 235)">-->
+<!--                          <button>màu 5</button>-->
 <!--                        </option>-->
-<!--                        <option value="is-danger" style="color: red; background-color: rgb(254, 236, 240)">Đỏ-->
+<!--                        <option value="is-danger" style="color: black; background-color: rgb(254, 236, 240)">-->
+<!--                          <button>màu 6</button>-->
 <!--                        </option>-->
 <!--                      </select>-->
 <!--                    </div>-->
@@ -252,8 +250,8 @@
                          formControlName="title" placeholder="Nhập tiêu đề">
                   <span style="font-size: medium; color: red"
                         *ngIf="(createCardForm.get('title')!.dirty || createCardForm.get('title')!.touched) && createCardForm.get('title')!.invalid">
-            Trường bắt buộc</span> <br>
-                  <span style="font-size: medium">Tại danh sách {{selectedColumn.title}}</span>
+            Bạn chưa nhập tiêu đề</span> <br>
+                  <span style="font-size: medium">Cột: {{selectedColumn.title}}</span>
                 </p>
                 <br>
               </header>
@@ -330,17 +328,17 @@
                           </div>
                         </div>
                         <hr>
-                        <p style="font-weight: bold">Các file đính kèm:</p>
-                        <div style="margin-left: 30px" id="attachments" class="media-attachment-body"
-                             *ngFor="let attachment of selectedCardAttachment, index as i">
-            <span class="media link-file">
-              <a target="_blank" href="{{attachment.source}}">{{attachment.name}}</a>
-               <a *ngIf="canEdit" (click)="showDeleteAttachment(attachment.id)">
-              <span class="tag is-danger" style="margin-left: 20px">
-                <i class="far fa-trash-alt"></i></span>
-            </a>
-            </span>
-                        </div>
+<!--                        <p style="font-weight: bold">Các file đính kèm:</p>-->
+<!--                        <div style="margin-left: 30px" id="attachments" class="media-attachment-body"-->
+<!--                             *ngFor="let attachment of selectedCardAttachment, index as i">-->
+<!--            <span class="media link-file">-->
+<!--              <a target="_blank" href="{{attachment.source}}">{{attachment.name}}</a>-->
+<!--               <a *ngIf="canEdit" (click)="showDeleteAttachment(attachment.id)">-->
+<!--              <span class="tag is-danger" style="margin-left: 20px">-->
+<!--                <i class="far fa-trash-alt"></i></span>-->
+<!--            </a>-->
+<!--            </span>-->
+<!--                        </div>-->
                       </div>
                       <div class="column is-one-third" *ngIf="canEdit">
                         <div class="member-section">
@@ -350,7 +348,7 @@
                             <ul>
                               <li *ngFor="let member of this.members">
                   <span class="tag" (click)="addUserToCard(member)">
-                    <span style="font-size: small">@{{member.username}}</span>
+                    <span style="font-size: small">{{member.username}}</span>
                     <span style="font-size: small" *ngIf="member.nickname">({{member.nickname}})</span>
                   </span>
                               </li>
@@ -384,35 +382,30 @@
                               <div *ngIf="newTagForm.invalid && newTagForm.touched">
                                 <span style="font-size: small;color: red">Nhập tên nhãn</span>
                               </div>
-                              <label class="label" style="font-size: small">Màu của nhãn</label>
+                              <label class="label" style="font-size: small">Màu:</label>
                               <div class="select is-small" style="margin-bottom: 5px">
                                 <select formControlName="color">
                                   <option value="is-primary"
-                                          style="color: lightgreen; background-color: rgb(235, 255, 252)">
-                                    Xanh
-                                    lá
-                                    nhạt
+                                          style="color: black; background-color: rgb(235, 255, 252)">
+                                   <button>màu 1</button>
                                   </option>
                                   <option value="is-success"
-                                          style="color: darkgreen; background-color: rgb(239, 250, 245)">
-                                    Xanh
-                                    lá
-                                    đậm
+                                          style="color: black; background-color: rgb(239, 250, 245)">
+                                    <button>màu 2</button>
                                   </option>
-                                  <option value="is-link" style="color: darkblue; background-color: rgb(239, 241, 250)">
-                                    Xanh
-                                    dương
-                                    đậm
+                                  <option value="is-link" style="color: black; background-color: rgb(239, 241, 250)">
+                                    <button>màu 3</button>
                                   </option>
                                   <option value="is-info"
-                                          style="color: lightblue; background-color: rgb(239, 245, 251)">Xanh
-                                    dương
-                                    nhạt
+                                          style="color: black; background-color: rgb(239, 245, 251)">
+                                    <button>màu 4</button>
                                   </option>
                                   <option value="is-warning"
-                                          style="color: yellow; background-color: rgb(255, 250, 235)">Vàng
+                                          style="color: black; background-color: rgb(255, 250, 235)">
+                                    <button>màu 5</button>
                                   </option>
-                                  <option value="is-danger" style="color: red; background-color: rgb(254, 236, 240)">Đỏ
+                                  <option value="is-danger" style="color: black; background-color: rgb(254, 236, 240)">
+                                    <button>màu 6</button>
                                   </option>
                                 </select>
                               </div>
@@ -421,16 +414,16 @@
                             </form>
                           </div>
                         </div>
-                        <div class="content">
-                          <form #uploadFileCard="ngForm" (ngSubmit)="showPreview($event)">
-                            <div class="update-info">
-                              <label for="file-upload2" class="custom-file-upload">
-                                <i class="fa fa-upload"></i> Thêm tệp đính kèm
-                              </label>
-                              <input id="file-upload2" type="file" #preview (change)="showPreview($event)"/>
-                            </div>
-                          </form>
-                        </div>
+<!--                        <div class="content">-->
+<!--                          <form #uploadFileCard="ngForm" (ngSubmit)="showPreview($event)">-->
+<!--                            <div class="update-info">-->
+<!--                              <label for="file-upload2" class="custom-file-upload">-->
+<!--                                <i class="fa fa-upload"></i> Thêm tệp đính kèm-->
+<!--                              </label>-->
+<!--                              <input id="file-upload2" type="file" #preview (change)="showPreview($event)"/>-->
+<!--                            </div>-->
+<!--                          </form>-->
+<!--                        </div>-->
                       </div>
                     </div>
                   </div>
