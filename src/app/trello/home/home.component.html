@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="title-board">
-          <h1><i class="fas fa-users"></i> Bảng của bạn</h1>
+          <h1><i class="fas fa-user"></i> Bảng của bạn</h1>
         </div>
         <div class="section-board">
           <!--      <div class="card">-->
@@ -25,7 +25,7 @@
       </div>
       <div class="col-md-4">
         <div class="title-board">
-          <h1><i class="fas fa-users"></i> Bảng mà bạn là thành viên</h1>
+          <h1><i class="fas fa-user"></i> Bảng mà bạn là thành viên</h1>
         </div>
         <div class="section-board">
           <div class="card" *ngFor="let board of sharedBoards" routerLink="/trello/board/{{board.id}}">
@@ -99,7 +99,7 @@
   <div class="modal-background" (click)="hideCreateWorkspaceModal()"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Tạo nhóm:</p>
+      <p class="modal-card-title">Tạo nhóm mới:</p>
       <button class="delete" aria-label="close" (click)="hideCreateWorkspaceModal()"></button>
     </header>
     <section class="modal-card-body">
@@ -108,15 +108,16 @@
         <div class="control">
           <input class="input" type="text" required [(ngModel)]="workspace.title" #workspaceTitle="ngModel">
         </div>
-        <label class="label">Phân loại nhóm:</label>
+        <label class="label">Thể loại:</label>
         <div class="control">
           <select class="input" [(ngModel)]="workspace.type" required #workspaceType="ngModel">
-            <option value="IT">Học tập</option>
-            <option value="Kế toán">Công việc</option>
+            <option value="IT">IT</option>
+            <option value="Kế toán">Kế toán</option>
+            <option value="HR">Nhân sự</option>
             <option value="Khác">Khác</option>
           </select>
         </div>
-        <label class="label">Kiểu nhóm:</label>
+        <label class="label">Kiểu :</label>
         <div class="control">
           <select class="input" [(ngModel)]="workspace.privacy" required #workspacePrivacy="ngModel">
             <option value="Private">Riêng tư</option>

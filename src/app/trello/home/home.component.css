@@ -426,3 +426,6 @@ h1.app-name {
   padding: 20px;
   position: relative;
 }
+h1{
+  color: white;
+}

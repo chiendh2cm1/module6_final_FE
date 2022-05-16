@@ -87,7 +87,7 @@ export class NavbarComponent implements OnInit {
       this.userService.getUserById(this.id).subscribe(user => {
         this.loggedInUser = user;
         if (this.loggedInUser.image == null) {
-          this.loggedInUser.image = "https://firebasestorage.googleapis.com/v0/b/trello-h3k.appspot.com/o/h3k.png?alt=media&token=2f7182c6-69b5-47a5-a9ab-5e6ad9e7bd91";
+          this.loggedInUser.image = "https://vnn-imgs-a1.vgcloud.vn/image1.ictnews.vn/_Files/2020/03/17/trend-avatar-1.jpg";
         }
         this.imgSrc = this.navbarService.loggedInUser.image;
         this.connect()
@@ -262,7 +262,7 @@ export class NavbarComponent implements OnInit {
     this.page = event;
   }
 
-  private createPreview(content: string, searchString: string): string[] {
+  createPreview(content: string, searchString: string): string[] {
     let index = content.toLowerCase().indexOf(searchString.toLowerCase());
     let beforeKeyword: string = content.substring(0, index);
     let keyword: string = content.substring(index, index + searchString.length);

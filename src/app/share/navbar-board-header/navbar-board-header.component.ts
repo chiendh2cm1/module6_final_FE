@@ -59,7 +59,7 @@ export class NavbarBoardHeaderComponent implements OnInit {
   addMember(result: User) {
     let member: Member = {
       board: this.currentBoard,
-      canEdit: false,
+      canEdit: true,
       user: result
     }
     this.memberService.addNewMember(member).subscribe(() => {

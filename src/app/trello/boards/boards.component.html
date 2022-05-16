@@ -7,8 +7,8 @@
     </div>
     <div class="section-board">
       <div class="card">
-        <div class="img-circle-add-board">
-         <button (click)="displayAddBoardModal()" style="background: deepskyblue; border-radius: 5px; border:0px solid">Thêm Bảng</button>
+        <div class="img-circle-add-board" (click)="displayAddBoardModal()">
+          <a (click)="displayAddBoardModal()"><i class="fas fa-plus-circle"></i></a>
         </div>
       </div>
       <div class="card" *ngFor="let board of boards" routerLink="/board/{{board.id}}">

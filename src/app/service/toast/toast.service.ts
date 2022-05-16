@@ -13,7 +13,8 @@ export class ToastService {
     toast({
       message: message,
       type: type,
-      position: 'top-right',
+      duration: 1000,
+      position: "top-right",
       closeOnClick: true,
       pauseOnHover: true,
       opacity: 0.8,
