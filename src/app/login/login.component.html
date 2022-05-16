@@ -1,41 +1,12 @@
-<!--<div class="container">-->
-<!--  <div class="form-container sign-in-container">-->
-<!--    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">-->
-<!--      <h1 style="padding-bottom: 30px ; font-size: 25px">Đăng Nhập</h1>-->
-<!--      <div class="form-group" style="width: 300px;">-->
-<!--        <input formControlName="userName" placeholder="Tên đăng nhập" type="text">-->
-<!--      </div>-->
-<!--      <div class="form-group" style="width: 300px;">-->
-<!--        <input [type]="show ? 'text':'password'" formControlName="password" placeholder="Mật khẩu">-->
-<!--        <div class="text-danger">-->
-<!--          <label><input style="width: auto; margin-right: 5px" type="checkbox" (click)="showPassword()">Hiện mật khẩu</label>-->
-<!--        </div>-->
-<!--        <br>-->
-<!--        <div class="form-group">-->
-<!--          <button class="btn btn-primary" type="submit">-->
-<!--            Đăng nhập-->
-<!--          </button>-->
-<!--        </div>-->
-<!--        <br>-->
-<!--        <a routerLink="/recoverpassword" >Quên mật khẩu ?</a>-->
-<!--      </div>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--  <div class="overlay-container">-->
-<!--    <div class="overlay">-->
-<!--      <div class="overlay-panel overlay-right">-->
-<!--        <p style="font-size: 20px">Chưa có tài khoản?</p>-->
-<!--        <p>Bấm đăng ký ngay thôi</p>-->
-<!--        <button type="submit" class="ghost" routerLink="/register">Đăng ký</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<div class="container">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6 text-center mb-5">
     </div>
@@ -45,15 +16,15 @@
       <div class="wrap d-md-flex">
         <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
           <div class="text w-100">
-            <h2>Welcome to login</h2>
-            <p>Don't have an account?</p>
-            <a routerLink="/register" class="btn btn-white btn-outline-white">Sign Up</a>
+            <h2>Chào mừng đến với Trello</h2>
+            <p>Bạn chưa có tài khoản?</p>
+            <a routerLink="/register" class="btn btn-white btn-outline-white">Đăng ký</a>
           </div>
         </div>
         <div class="login-wrap p-4 p-lg-5">
           <div class="d-flex">
             <div class="w-100">
-              <h3 class="mb-4">Sign In</h3>
+              <h3 class="mb-4">Đăng nhập</h3>
             </div>
             <div class="w-100">
               <p class="social-media d-flex justify-content-end">
@@ -66,22 +37,22 @@
           </div>
           <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
             <div class="form-group mb-3">
-              <label class="label">Username</label>
-              <input type="text" class="form-control" placeholder="Username" formControlName="userName" required>
+              <label class="label">Tên đăng nhâp: </label>
+              <input type="text" class="form-control" placeholder="Điền tên đăng nhập:" formControlName="userName" required>
             </div>
             <div class="form-group mb-3">
-              <label class="label">Password</label>
-              <input type="password" class="form-control" placeholder="Password" formControlName="password" required>
+              <label class="label">Mật khẩu: </label>
+              <input type="password" class="form-control" placeholder="Điền mặt khẩu" formControlName="password" required>
             </div>
             <div class="form-group">
-              <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+              <button type="submit" class="form-control btn btn-primary submit px-3">Đăng nhập</button>
             </div>
             <div class="form-group d-md-flex">
               <div class="w-50 text-left">
-                <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-                  <input type="checkbox" checked>
-                  <span class="checkmark"></span>
-                </label>
+<!--                <label class="checkbox-wrap checkbox-primary mb-0">Remember Me-->
+<!--                  <input type="checkbox" checked>-->
+<!--                  <span class="checkmark"></span>-->
+<!--                </label>-->
               </div>
               <div class="w-50 text-md-right">
 <!--                <a routerLink="/recoverpassword">Forgot Password</a>-->

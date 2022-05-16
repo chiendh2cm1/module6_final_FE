@@ -30,10 +30,10 @@ export class WorkspaceHomeComponent implements OnInit {
       id: -1,
     },
     columns: [],
-    type: '',
+    type: 'Riêng tư',
   };
   currentUser!:User;
-  newWorkspace: Workspace = {boards: [], id: 0, members: [], owner: undefined, title: "", type: "", privacy: ""};
+  newWorkspace: Workspace = {boards: [], id: 0, members: [], owner: undefined, title: "", type: "Công nghệ", privacy: "Riêng tư"};
 
   constructor(private workspaceService: WorkspaceService,
               private userService: UserService,

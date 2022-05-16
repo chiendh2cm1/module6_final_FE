@@ -46,4 +46,8 @@ export class UserService {
   findByKeywordAndWorkspace(string:string, workspaceId:any):Observable<User[]>{
     return this.http.get<User[]>(`${API_URL}users/search/${string}/${workspaceId}`);
   }
+
+  changePassword(formData: any): Observable<User> {
+    return this.http.post<User>(API_URL + 'users/set-password', formData);
+  }
 }

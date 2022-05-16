@@ -26,11 +26,11 @@ export class BoardsComponent implements OnInit {
       id: -1,
     },
     columns: [],
-    type: '',
+    type: 'Riêng tư',
   };
   createdBoard?: Board
   workspaces: Workspace[] = [];
-  workspace: Workspace = {boards: [], id: 0, members: [], owner: undefined, title: "", type: "", privacy: ""};
+  workspace: Workspace = {boards: [], id: 0, members: [], owner: undefined, title: "", type: "Công nghệ", privacy: "Riêng tư"};
 
   constructor(private modalService: ModalService,
               private boardService: BoardService,
