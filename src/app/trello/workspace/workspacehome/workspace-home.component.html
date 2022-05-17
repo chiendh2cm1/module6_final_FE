@@ -10,7 +10,7 @@
           <a><i class="fas fa-plus-circle"></i></a>
         </div>
       </div>
-      <div *ngFor="let board of workspace.boards" routerLink="/board/{{board.id}}">
+      <div *ngFor="let board of workspace?.boards" routerLink="/board/{{board.id}}">
         <div class="card" *ngIf="board.type != 'Private' || currentUser.id == board.owner.id">
           <div class="card-header"><p class="card-header-title">{{board.title}}</p></div>
           <div class="card-content">
@@ -36,9 +36,9 @@
       <div *ngIf="boardTitle.invalid && boardTitle.touched" class="alert">
         <div *ngIf="boardTitle.errors?.required" style="color: red;">Tiêu đề cần được nhập.</div>
       </div>
-      <label class="label">Loại</label>
       <div class="control">
-        <select class="input" [(ngModel)]="newBoard.type">
+        <label class="label">Loại</label>
+        <select class="input" [(ngModel)]="newBoard.type" required #boardType="ngModel" [value]="newBoard.type">
           <option value="Riêng tư">Riêng tư</option>
           <option value="Nhóm">Nhóm</option>
           <option value="Công khai">Công khai</option>
@@ -52,7 +52,7 @@
     </section>
     <footer class="modal-card-foot">
       <div class=" is-right">
-        <button [disabled]="boardTitle.invalid" class="button is-dark is-right" (click)="createNewBoard()">Tạo</button>
+        <button [disabled]="boardTitle.invalid && boardType.invalid" class="button is-dark is-right" (click)="createNewBoard()">Tạo</button>
       </div>
       <button class="button is-light is-right" (click)="hideCreateBoard()">Hủy</button>
     </footer>
@@ -74,17 +74,17 @@
         <label class="label">Phân loại nhóm:</label>
         <div class="control">
           <select class="input" [(ngModel)]="newWorkspace.type" required #workspaceType="ngModel">
-            <option value="IT">IT</option>
-            <option value="Kế toán">Kế toán</option>
-            <option value="HR">Nhân sự</option>
-            <option value="Khác">Khác</option>
+            <option value="Công nghệ">Công nghệ</option>
+            <option value="Kinh doanh">Kinh doanh</option>
+            <option value="Học tập">Học tập</option>
+            <option value="Đời sống">Đời sống</option>
           </select>
         </div>
         <label class="label">Quyền hạn</label>
         <div class="control">
           <select class="input" [(ngModel)]="newWorkspace.privacy" required #workspacePrivacy="ngModel">
-            <option value="Private">Riêng tư</option>
-            <option value="Public">Công khai</option>
+            <option value="Riêng tư">Riêng tư</option>
+            <option value="Công khai">Công khai</option>
           </select>
         </div>
         <div *ngIf="workspaceTitle.invalid && workspaceTitle.touched" class="alert">

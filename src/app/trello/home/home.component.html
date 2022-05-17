@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="title-board">
-          <h1><i class="fas fa-user"></i> Bảng của bạn</h1>
+          <h1><i class="fa fa-table"></i> Bảng của bạn</h1>
         </div>
         <div class="section-board">
           <!--      <div class="card">-->
@@ -25,7 +25,7 @@
       </div>
       <div class="col-md-4">
         <div class="title-board">
-          <h1><i class="fas fa-user"></i> Bảng mà bạn là thành viên</h1>
+          <h1><i class="fa fa-table"></i> Bảng mà bạn là thành viên</h1>
         </div>
         <div class="section-board">
           <div class="card" *ngFor="let board of sharedBoards" routerLink="/trello/board/{{board.id}}">
@@ -40,12 +40,12 @@
       </div>
       <div class="col-md-4">
         <div class="title-board" #target>
-          <h1><i class="fas fa-users"></i> Nhóm Công khai</h1>
+          <h1><i class="fas fa-object-group"></i> Nhóm Công khai</h1>
         </div>
         <div class="section-board">
           <div *ngFor="let localWorkspace of workspacesPublic">
             <div class="card" routerLink="/workspaces/{{localWorkspace.id}}/home"
-                 *ngIf="localWorkspace.privacy == 'Public'">
+                 *ngIf="localWorkspace.privacy == 'Công khai'">
               <div class="card-header"><p class="card-header-title">{{localWorkspace.title}}</p></div>
               <div class="card-content">
                 <span style="font-size: small"><b>Chủ sở hữu: </b>{{localWorkspace.owner.username}}</span><br>
@@ -111,17 +111,17 @@
         <label class="label">Thể loại:</label>
         <div class="control">
           <select class="input" [(ngModel)]="workspace.type" required #workspaceType="ngModel">
-            <option value="IT">IT</option>
-            <option value="Kế toán">Kế toán</option>
-            <option value="HR">Nhân sự</option>
-            <option value="Khác">Khác</option>
+            <option value="Công nghệ">Công nghệ</option>
+            <option value="Kinh doanh">Kinh doanh</option>
+            <option value="Học tập">Học tập</option>
+            <option value="Đời sống">Đời sống</option>
           </select>
         </div>
-        <label class="label">Kiểu :</label>
         <div class="control">
+          <label class="label">Kiểu :</label>
           <select class="input" [(ngModel)]="workspace.privacy" required #workspacePrivacy="ngModel">
-            <option value="Private">Riêng tư</option>
-            <option value="Public">Công khai</option>
+            <option value="Riêng tư">Riêng tư</option>
+            <option value="Công khai">Công khai</option>
           </select>
         </div>
         <div *ngIf="workspaceTitle.invalid && workspaceTitle.touched" class="alert">

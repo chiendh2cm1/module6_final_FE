@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: SignUpComponent
-  },
+  }
   // {
   //   path: 'recoverpassword',
   //   component: RecoverPasswordComponent

@@ -1,4 +1,3 @@
-
 <!--board-header-->
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
@@ -23,9 +22,9 @@
           <img *ngIf="currentBoard.owner.image" [src]="currentBoard.owner.image" class="img-circle is-48x48"/>
           {{currentBoard.owner.username}}
         </button>
-<!--        <button class="button is-primary">-->
-<!--          <i class="far fa-star"></i>-->
-<!--        </button>-->
+        <!--        <button class="button is-primary">-->
+        <!--          <i class="far fa-star"></i>-->
+        <!--        </button>-->
         <div>
           <span *ngFor="let member of members; index as i">
             <a (click)="showDetail(member)" (mouseover)="showUserPreview(member)"
@@ -60,9 +59,10 @@
           <div style="position: relative">
             <div id="visibility-dropdown" class="columns has-background-white is-hidden">
               <div class="column" style="width: max-content">
-                <select class="input" [(ngModel)]="currentBoard.type" required #workspaceType="ngModel" (change)="updateBoardTitle()">
+                <select *ngIf="canEdit" class="input" [(ngModel)]="currentBoard.type" required #workspaceType="ngModel"
+                        (change)="updateBoardTitle()">
                   <option value="Công khai">Công khai</option>
-<!--                  <option *ngIf="isInWorkspace" value="Nhóm">Nhóm</option>-->
+                  <option *ngIf="isInWorkspace" value="Nhóm">Nhóm</option>
                   <option value="Riêng tư">Riêng tư</option>
                 </select>
               </div>
@@ -107,10 +107,10 @@
               </div>
             </div>
           </div>
-<!--          <button class="button is-primary" (click)="toggleElement('filter-btn-dropdown')">-->
-<!--            <i class="fas fa-filter"></i>-->
-<!--            Tìm Kiếm-->
-<!--          </button>-->
+          <!--          <button class="button is-primary" (click)="toggleElement('filter-btn-dropdown')">-->
+          <!--            <i class="fas fa-filter"></i>-->
+          <!--            Tìm Kiếm-->
+          <!--          </button>-->
 
           <div class="icon-item" style="margin-right: 10px">
             <div class="dropdown is-hoverable ">
@@ -124,51 +124,51 @@
                   (click)="toggleUserSearchBar()">
             <i class="fas fa-user-plus"></i>Mời
           </button>
-          <div class="icon-item" >
+          <div class="icon-item">
             <div class="dropdown is-hoverable is-right">
               <div class="dropdown-trigger">
-<!--                <button class="button is-primary">-->
-<!--                  <i class="fas fa-list"></i>-->
-<!--                  Thông báo-->
-<!--                </button>-->
+                <!--                <button class="button is-primary">-->
+                <!--                  <i class="fas fa-list"></i>-->
+                <!--                  Thông báo-->
+                <!--                </button>-->
               </div>
-<!--              <div class="dropdown-menu" id="dropdown-menu5" role="menu">-->
-<!--                <div class="dropdown-content" style="padding: 0">-->
-<!--                  <div class="header__navbar-item header__navbar-item&#45;&#45;has-notify">-->
-<!--                    <div class="header__notify">-->
-<!--                      <header class="header__notify-header">-->
-<!--                        <h3>Thông báo</h3>-->
-<!--                      </header>-->
-<!--                      <ul class="header__notify-list">-->
-<!--                        <li class="header__notify-item" *ngFor="let activity of activityLogService.activities"-->
-<!--                            [class.mark-read]="activity.status">-->
-<!--                          <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="activity.card"-->
-<!--                             (click)="redirectService.showModal(activity.card)">-->
-<!--                            <img-->
-<!--                              [src]="activity.user!.image!"-->
-<!--                              alt=""-->
-<!--                              class="header__notify-img">-->
-<!--                            <div class="header__notify-info">-->
-<!--                              <span class="header__notify-name">{{activity.title}}</span>-->
-<!--                              <span class="header__notify-description">{{activity.content}}</span>-->
-<!--                            </div>-->
-<!--                          </a>-->
-<!--                          <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="!activity.card">-->
-<!--                            <img-->
-<!--                              [src]="activity.user!.image!"-->
-<!--                              alt=""-->
-<!--                              class="header__notify-img">-->
-<!--                            <div class="header__notify-info">-->
-<!--                              <span class="header__notify-name">{{activity.title}}</span>-->
-<!--                              <span class="header__notify-description">{{activity.content}}</span>-->
-<!--                            </div>-->
-<!--                          </a>-->
-<!--                        </li>-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
+              <!--              <div class="dropdown-menu" id="dropdown-menu5" role="menu">-->
+              <!--                <div class="dropdown-content" style="padding: 0">-->
+              <!--                  <div class="header__navbar-item header__navbar-item&#45;&#45;has-notify">-->
+              <!--                    <div class="header__notify">-->
+              <!--                      <header class="header__notify-header">-->
+              <!--                        <h3>Thông báo</h3>-->
+              <!--                      </header>-->
+              <!--                      <ul class="header__notify-list">-->
+              <!--                        <li class="header__notify-item" *ngFor="let activity of activityLogService.activities"-->
+              <!--                            [class.mark-read]="activity.status">-->
+              <!--                          <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="activity.card"-->
+              <!--                             (click)="redirectService.showModal(activity.card)">-->
+              <!--                            <img-->
+              <!--                              [src]="activity.user!.image!"-->
+              <!--                              alt=""-->
+              <!--                              class="header__notify-img">-->
+              <!--                            <div class="header__notify-info">-->
+              <!--                              <span class="header__notify-name">{{activity.title}}</span>-->
+              <!--                              <span class="header__notify-description">{{activity.content}}</span>-->
+              <!--                            </div>-->
+              <!--                          </a>-->
+              <!--                          <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="!activity.card">-->
+              <!--                            <img-->
+              <!--                              [src]="activity.user!.image!"-->
+              <!--                              alt=""-->
+              <!--                              class="header__notify-img">-->
+              <!--                            <div class="header__notify-info">-->
+              <!--                              <span class="header__notify-name">{{activity.title}}</span>-->
+              <!--                              <span class="header__notify-description">{{activity.content}}</span>-->
+              <!--                            </div>-->
+              <!--                          </a>-->
+              <!--                        </li>-->
+              <!--                      </ul>-->
+              <!--                    </div>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--              </div>-->
             </div>
           </div>
           <div class="search-bar">
@@ -238,13 +238,17 @@
       <button class="delete" aria-label="close" (click)="toggleDeleteBoardModal()"></button>
     </header>
     <section class="modal-card-body">
-      <div class="notification is-danger is-light" style="background: lightskyblue">
+      <div>
         Bạn muốn xóa bảng?
       </div>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-danger is-light" (click)="removeThisBoard()" style="background: pink">Xóa bảng</button>
-      <button class="button is-light" (click)="toggleDeleteBoardModal()" style="background: lightskyblue">Quay lại</button>
+      <button class="button is-danger is-light" (click)="removeThisBoard()" style="background: pink; color: black">Xóa
+        bảng
+      </button>
+      <button class="button is-light" (click)="toggleDeleteBoardModal()" style="background: lightskyblue; color: black">
+        Quay lại
+      </button>
     </footer>
   </div>
 </div>

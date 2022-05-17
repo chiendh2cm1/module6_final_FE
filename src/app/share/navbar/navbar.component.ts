@@ -13,8 +13,8 @@ import {Notification} from "../../model/notification";
 import {SearchResult} from "../../model/search-result";
 import {BoardService} from "../../service/board/board.service";
 import {RedirectService} from "../../service/redirect/redirect.service";
-import * as Stomp from '@stomp/stompjs';
-import * as SockJS from 'sockjs-client';
+import {ChangePassword} from "../../model/change-password";
+import {NgForm} from "@angular/forms";
 
 
 @Component({
@@ -23,6 +23,8 @@ import * as SockJS from 'sockjs-client';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
+  changePassword: ChangePassword = {};
   currentUser: UserToken = {};
   loggedInUser!: User;
   id!: any;
@@ -34,8 +36,8 @@ export class NavbarComponent implements OnInit {
   page = 1;
   count = 0;
   pageSize = 10;
-  private stompClient:any;
   disabled = true;
+
   constructor(public navbarService: NavbarService,
               private toast: ToastService,
               private authenticateService: AuthenticateService,
@@ -45,7 +47,7 @@ export class NavbarComponent implements OnInit {
               private toastService: ToastService,
               public notificationService: NotificationService,
               private boardService: BoardService,
-              private redirectService:RedirectService
+              private redirectService: RedirectService
   ) {
     this.authenticateService.currentUserSubject.subscribe(data => {
       this.currentUser = data;
@@ -57,29 +59,7 @@ export class NavbarComponent implements OnInit {
     this.navbarService.getCurrentUser()
     this.getUserById()
   }
-  setConnected(connected: boolean) {
-    this.disabled = !connected;
-  }
 
-  connect(){
-    const socket = new SockJS('http://localhost:8080/endpoint');
-    this.stompClient = Stomp.Stomp.over(socket);
-    const _this = this;
-    this.stompClient.connect({}, function (frame:any) {
-      _this.setConnected(true);
-      console.log('Connected: ' + frame);
-      _this.stompClient.subscribe('/test',()=>{
-        _this.findAllNotificationByUserId();
-      })
-    });
-  }
-
-  sendName() {
-    this.stompClient.send(
-      '/gkz/send',
-      {},
-    );
-  }
 
   getUserById() {
     if (this.authenticateService.getCurrentUserValue() != null) {
@@ -89,8 +69,7 @@ export class NavbarComponent implements OnInit {
         if (this.loggedInUser.image == null) {
           this.loggedInUser.image = "https://vnn-imgs-a1.vgcloud.vn/image1.ictnews.vn/_Files/2020/03/17/trend-avatar-1.jpg";
         }
-        this.imgSrc = this.navbarService.loggedInUser.image;
-        this.connect()
+        this.imgSrc = this.navbarService.loggedInUser?.image;
       })
       this.findAllNotificationByUserId()
     }
@@ -123,6 +102,7 @@ export class NavbarComponent implements OnInit {
           fileRef.getDownloadURL().subscribe(url => {
             this.imgSrc = url;
             this.loggedInUser.image = url;
+            console.log(url);
             this.userService.updateById(this.id, this.loggedInUser).subscribe(() => {
                 this.toastService.showMessage("Sửa thành công", 'is-success');
                 this.navbarService.getCurrentUser();
@@ -172,7 +152,7 @@ export class NavbarComponent implements OnInit {
         this.notificationService.notification = data;
         for (let notification of data) {
           if (!notification.status) {
-            this.notificationService.unreadNotice++
+            // this.notificationService.unreadNotice++
           }
         }
       })
@@ -202,7 +182,7 @@ export class NavbarComponent implements OnInit {
     } else {
       if (this.currentUser != null) {
         this.boardService.findAllAvailableToSearcher(this.currentUser.id, this.searchString, params).subscribe(data => {
-          let searchResults:SearchResult[] = [];
+          let searchResults: SearchResult[] = [];
           for (let board of data.boards) {
             for (let column of board.columns) {
               for (let card of column.cards) {
@@ -215,17 +195,17 @@ export class NavbarComponent implements OnInit {
                     card: card,
                     preview: []
                   }
-                  let exist:boolean = false
-                  if(searchResults.length > 0){
-                    for(let search of searchResults){
-                      if (searchResult.card.id == search.card.id){
+                  let exist: boolean = false
+                  if (searchResults.length > 0) {
+                    for (let search of searchResults) {
+                      if (searchResult.card.id == search.card.id) {
                         exist = true
                       }
-                      if(exist){
+                      if (exist) {
                         break
                       }
                     }
-                    if(!exist){
+                    if (!exist) {
                       searchResults.push(searchResult);
                     }
                   } else {
@@ -269,4 +249,55 @@ export class NavbarComponent implements OnInit {
     let afterKeyword: string = content.substring(index + searchString.length, content.length);
     return [beforeKeyword, keyword, afterKeyword]
   }
+
+  openModalPassword() {
+    // @ts-ignore
+    document.getElementById("modal-password").classList.add('is-active')
+    this.getUserById()
+  }
+
+  closeModalPassword() {
+    // @ts-ignore
+    document.getElementById('modal-password').classList.remove('is-active')
+  }
+
+  changePass(formChangePass: NgForm) {
+    if (!this.checkRePassword()) {
+      this.changePassword = formChangePass.value;
+      this.userService.changePassword(this.changePassword).subscribe(
+        () => {
+          formChangePass.reset();
+          this.toastService.showMessage("Cập nhập thành công", "is-success");
+          this.logout();
+          this.closeModalPassword();
+          return;
+        }, () => {
+          this.toastService.showMessage("Cập nhập thất bại", "is-warning");
+          formChangePass.reset();
+        });
+    } else {
+      formChangePass.reset();
+      this.toastService.showMessage("Mật khẩu không khớp", "is-warning");
+    }
+  }
+
+  checkRePassword(): boolean {
+    let rePassword = document.getElementById('confirmPassword') as HTMLInputElement;
+    return rePassword.value == '';
+  }
+
+  checkConfirmPassWord() {
+    let password = document.getElementById('newPassword') as HTMLInputElement;
+    let rePassword = document.getElementById('confirmPassword') as HTMLInputElement;
+    let result = '';
+    if (password.value !== rePassword.value) {
+      result = 'Mật khẩu không khớp';
+    } else {
+      result = '';
+    }
+    // @ts-ignore
+    document.getElementById('confirm-password-error').innerHTML = result;
+  }
+
+
 }

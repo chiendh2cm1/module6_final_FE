@@ -19,6 +19,7 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireModule} from "@angular/fire/compat";
 // import {AngularA}
 import {environment} from "../environments/environment";
+// import {RecoverPasswordComponent} from "./recover-password/recover-password.component";
 
 
 @NgModule({

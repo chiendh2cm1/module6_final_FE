@@ -13,6 +13,7 @@ import {MemberWorkspaceService} from "../../../service/member-workspace/member-w
 import {MemberService} from "../../../service/member/member.service";
 import {NotificationService} from "../../../service/notification/notification.service";
 import {Notification} from "../../../model/notification";
+import {Member} from "../../../model/member";
 
 @Component({
   selector: 'app-workspacemembers',
@@ -24,7 +25,7 @@ export class WorkspaceMembersComponent implements OnInit {
   workspace!: Workspace;
   workspaces: Workspace[] = [];
   allowEdit: Boolean = false;
-  isAdmin:Boolean = false;
+  isAdmin: Boolean = false;
   user: User = {};
   userSearchResult: User[] = [];
   currentWorkspaceId!: number;
@@ -34,11 +35,12 @@ export class WorkspaceMembersComponent implements OnInit {
   isOwner: Boolean = false;
   workspaceOwner!: User;
   memberInWorkspace: MemberWorkspace[] = [];
-  newWorkspace: Workspace = {boards: [], id: 0, members: [], owner: undefined, title: "", type: "", privacy: ""};
+  newWorkspace: Workspace = {boards: [], id: 0, members: [], owner: "", title: "", type: "", privacy: ""};
 
   page = 1;
   count = 0;
-  pageSize = 20;
+  pageSize = 2;
+
   constructor(private workspaceService: WorkspaceService,
               private userService: UserService,
               private activatedRoute: ActivatedRoute,
@@ -82,7 +84,7 @@ export class WorkspaceMembersComponent implements OnInit {
       if ((this.loggedInUser.id == member.user?.id && member.role == "Quản trị")) {
         this.allowEdit = true
         this.isAdmin = true;
-      } else if ((this.loggedInUser.id == member.user?.id && member.role == "Chỉnh sửa")){
+      } else if ((this.loggedInUser.id == member.user?.id && member.role == "Chỉnh sửa")) {
         this.allowEdit = true
       }
     }
@@ -124,6 +126,7 @@ export class WorkspaceMembersComponent implements OnInit {
     this.pendingAddMember.push(user)
     this.userSearchResult = []
   }
+
   removePendingUser(index: any) {
     this.pendingAddMember.splice(index, 1)
   }
@@ -139,18 +142,21 @@ export class WorkspaceMembersComponent implements OnInit {
   }
 
   removeMembers(index: any, member: MemberWorkspace) {
-    let removeMember: MemberWorkspace[] = this.workspace.members.splice(index, 1);
+    let removeMember: MemberWorkspace[];
+    removeMember = this.workspace.members.splice(index, 1);
     this.workspaceService.updateWorkspace(this.workspace.id, this.workspace).subscribe();
     for (let board of this.workspace.boards) {
       for (let member of removeMember) {
         this.memberService.deleteMemberBoardWorkspace(board.id, member.user?.id).subscribe()
       }
     }
+    ;
     this.workspaceMemberService.deleteWorkspaceMembers(removeMember).subscribe(() => {
-    })
+    });
     this.createNotificationRemovedFromWorkSpace(member);
     if (this.loggedInUser.id == member.user?.id) {
       this.router.navigateByUrl('')
+      return;
     }
   }
 
@@ -158,6 +164,7 @@ export class WorkspaceMembersComponent implements OnInit {
     member.role = role;
     this.workspaceMemberService.updateWorkspaceMember(member.id, member).subscribe()
   }
+
   showCreateWorkspaceModal() {
     document.getElementById('create-workspace')!.classList.add('is-active');
   }
@@ -205,12 +212,15 @@ export class WorkspaceMembersComponent implements OnInit {
       }
       this.workspaceMemberService.addWorkspaceMember(newMember).subscribe(data => {
         this.workspace.members.push(data)
-        this.workspaceService.updateWorkspace(this.workspace.id, this.workspace).subscribe()
-      })
-      this.createNotificationInvitedToWorkspace(newMember)
-      this.toastService.showMessage("Mời thành công", "is-success");
-      this.pendingMember = {};
-      this.hideSingleInvite()
+        this.workspaceService.updateWorkspace(this.workspace.id, this.workspace).subscribe();
+        this.createNotificationInvitedToWorkspace(newMember)
+        this.toastService.showMessage("Mời thành công", "is-success");
+        this.hideSingleInvite()
+        this.pendingMember = {};
+      }, error => {
+        this.toastService.showMessage("Không tìm thấy tên người dùng", "is-error");
+        return;
+      });
     }
   }
 
@@ -225,7 +235,7 @@ export class WorkspaceMembersComponent implements OnInit {
       status: false,
       url: "/trello/workspaces/" + this.workspace.id,
       receiver: receivers,
-      user:this.loggedInUser
+      user: this.loggedInUser
     }
     this.notificationService.saveNotification(notification)
   }
@@ -241,7 +251,7 @@ export class WorkspaceMembersComponent implements OnInit {
       status: false,
       url: "/trello/workspaces/" + this.workspace.id,
       receiver: receivers,
-      user:this.loggedInUser
+      user: this.loggedInUser
     }
     this.notificationService.saveNotification(notification)
   }
@@ -255,31 +265,31 @@ export class WorkspaceMembersComponent implements OnInit {
       status: false,
       url: "",
       receiver: receivers,
-      user:this.loggedInUser
+      user: this.loggedInUser
     }
     this.notificationService.saveNotification(notification)
   }
 
-  getRequestParam(page: number, pageSize:number){
-    let params:any = {};
-    if(page){
-      params[`page`]=page-1;
+  getRequestParam(page: number, pageSize: number) {
+    let params: any = {};
+    if (page) {
+      params[`page`] = page - 1;
     }
-    if(pageSize){
-      params[`size`]=pageSize;
+    if (pageSize) {
+      params[`size`] = pageSize;
     }
     return params
   }
 
-  getMemberInWorkspace(){
+  getMemberInWorkspace() {
     const params = this.getRequestParam(this.page, this.pageSize);
-    this.workspaceMemberService.findByWorkspace(this.currentWorkspaceId,params).subscribe(data=>{
+    this.workspaceMemberService.findByWorkspace(this.currentWorkspaceId, params).subscribe(data => {
       this.memberInWorkspace = data.members;
       this.count = data.totalItems;
     })
   }
 
-  handlePageChange(event:any){
+  handlePageChange(event: any) {
     this.page = event;
     this.getMemberInWorkspace()
   }
