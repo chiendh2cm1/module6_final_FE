@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {Notification} from "../../model/notification";
 import {UserToken} from "../../model/user-token";
 import {AuthenticateService} from "../authenticate.service";
+import {Board} from "../../model/board";
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class NotificationService {
 
   getTime(){
     let today = new Date();
-    let date = 'Ngày : ' + today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+    let date = 'Ngày : ' + today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     return  time + ' ' + date;
   }
@@ -39,7 +40,12 @@ export class NotificationService {
   saveNotification(notification: Notification) {
     this.createNotification(notification).subscribe( () => {
       // @ts-ignore
-      this.findAllByUser(this.currentUser.id).subscribe( notifications => this.notification = notifications )
+      this.findAllByUser(this.currentUser?.id).subscribe( notifications => this.notification = notifications )
     })
   }
+
+  deleteAll(notifications: Notification[]): Observable<Notification> {
+    return this.http.post<Notification>(`${environment.api_url}boards/delete`,notifications);
+  }
+
 }

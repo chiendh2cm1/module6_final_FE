@@ -38,8 +38,8 @@ export class HomeComponent implements OnInit {
     members: [],
     owner: undefined,
     title: "",
-    type: "",
-    privacy: ""};
+    type: "Công nghệ",
+    privacy: "Riêng tư"};
 
   constructor(private modalService: ModalService,
               private boardService: BoardService,

@@ -11,7 +11,8 @@ list-type-ulli, .socials {
 
 /* poppins-300 - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: normal;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: normal;
   font-weight: 300;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-300.eot");
   /* IE9 Compat Modes */
@@ -19,7 +20,8 @@ list-type-ulli, .socials {
   /* Legacy iOS */ }
 /* poppins-300italic - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: italic;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: italic;
   font-weight: 300;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-300italic.eot");
   /* IE9 Compat Modes */
@@ -27,7 +29,8 @@ list-type-ulli, .socials {
   /* Legacy iOS */ }
 /* poppins-regular - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: normal;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: normal;
   font-weight: 400;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-regular.eot");
   /* IE9 Compat Modes */
@@ -35,7 +38,8 @@ list-type-ulli, .socials {
   /* Legacy iOS */ }
 /* poppins-italic - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: italic;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: italic;
   font-weight: 400;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-italic.eot");
   /* IE9 Compat Modes */
@@ -43,7 +47,8 @@ list-type-ulli, .socials {
   /* Legacy iOS */ }
 /* poppins-500 - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: normal;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: normal;
   font-weight: 500;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-500.eot");
   /* IE9 Compat Modes */
@@ -51,7 +56,8 @@ list-type-ulli, .socials {
   /* Legacy iOS */ }
 /* poppins-500italic - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: italic;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: italic;
   font-weight: 500;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-500italic.eot");
   /* IE9 Compat Modes */
@@ -59,7 +65,8 @@ list-type-ulli, .socials {
   /* Legacy iOS */ }
 /* poppins-600 - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: normal;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: normal;
   font-weight: 600;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-600.eot");
   /* IE9 Compat Modes */
@@ -67,7 +74,8 @@ list-type-ulli, .socials {
   /* Legacy iOS */ }
 /* poppins-700 - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: normal;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: normal;
   font-weight: 700;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-700.eot");
   /* IE9 Compat Modes */
@@ -75,7 +83,8 @@ list-type-ulli, .socials {
   /* Legacy iOS */ }
 /* poppins-700italic - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: italic;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: italic;
   font-weight: 700;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-700italic.eot");
   /* IE9 Compat Modes */
@@ -83,7 +92,8 @@ list-type-ulli, .socials {
   /* Legacy iOS */ }
 /* poppins-800 - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: normal;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: normal;
   font-weight: 800;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-800.eot");
   /* IE9 Compat Modes */
@@ -91,7 +101,8 @@ list-type-ulli, .socials {
   /* Legacy iOS */ }
 /* poppins-800italic - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: italic;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: italic;
   font-weight: 800;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-800italic.eot");
   /* IE9 Compat Modes */
@@ -99,7 +110,8 @@ list-type-ulli, .socials {
   /* Legacy iOS */ }
 /* poppins-900 - latin */
 @font-face {
-  font-family: 'Be Vietnam Pro', sans-serif;  font-style: normal;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-style: normal;
   font-weight: 900;
   src: url("src/assets/fonts/poppins/poppins-v5-latin-900.eot");
   /* IE9 Compat Modes */
@@ -170,7 +182,7 @@ h2 {
   padding: 0;
   font-weight: bold;
   color: #222;
-  font-family: Poppins;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 36px; }
 
 .main {
@@ -311,7 +323,7 @@ input {
   border: none;
   border-bottom: 1px solid #999;
   padding: 6px 30px;
-  font-family: Poppins;
+  font-family: 'Be Vietnam Pro', sans-serif;
   box-sizing: border-box; }
 input::-webkit-input-placeholder {
   color: #999; }
@@ -378,7 +390,7 @@ input[type=checkbox]:not(old):checked + label > span:before {
   font-size: 11px;
   line-height: 1.2;
   text-align: center;
-  font-family: 'Material-Design-Iconic-Font';
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-weight: bold; }
 
 .agree-term {
@@ -417,7 +429,7 @@ label.valid {
   height: 20px;
   background: transparent; }
 label.valid:after {
-  font-family: 'Material-Design-Iconic-Font';
+  font-family: 'Be Vietnam Pro', sans-serif;
   content: '\f269';
   width: 100%;
   height: 100%;
