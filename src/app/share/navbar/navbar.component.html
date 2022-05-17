@@ -92,7 +92,7 @@
             Tên người dùng: {{loggedInUser?.username}}
           </div>
           <a class="dropdown-item" (click)="openModalUpdate()">
-            Thay đổi thông tin
+            Thay đổi
           </a>
           <hr class="dropdown-divider">
           <a class="dropdown-item" (click)="openModalPassword()">
@@ -149,71 +149,67 @@
   </div>
 </div>
 
-<div class="modal modal-update-user" id="modal-password">
-  <div class="modal-background" (click)="closeModalPassword()"></div>
-  <div class="modal-card modal-card-user" id="updatePass">
+<div class="modal modal-update-user" id="modal-password" >
+  <div class="modal" (click)="closeModalPassword()"></div>
+  <div class="modal-card modal-card-user"  id="updatePass">
     <div class="login-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Đổi mật khẩu</p>
+        <button class="delete" aria-label="close" (click)="closeModalUpdate()"></button>
+      </header>
       <form class="changePassword-form" #formChangePass='ngForm' (ngSubmit)="changePass(formChangePass)">
-        <div>
-          <label style="color: #151515">Tên Đăng nhập: <span style="color: red"></span></label>
-          <input type="text"
-                 name="username"
-                 id="username"
-                 required
-                 minlength="6"
-                 maxlength="20"
-                 ngModel
-                 class="form-control"
-                 style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px">
-        </div>
-        <div>
-          <label style="color: #151515">Mật khẩu cũ: <span style="color: red"></span></label>
-          <input type="text"
-                 name="password"
-                 id="password"
-                 required
-                 minlength="6"
-                 maxlength="20"
-                 ngModel
-                 class="form-control"
-                 style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px">
-        </div>
-        <div style="margin-top: 13px">
-          <label style="color: #151515">Mật khẩu mới: <span style="color: red"></span></label>
-          <input type="password"
-                 name="newPassword"
-                 id="newPassword"
-                 required
-                 minlength="6"
-                 maxlength="20"
-                 ngModel
-                 (input)="checkRePassword()"
-                 class="form-control"
-                 style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px">
-        </div>
-        <div style="margin-top: 13px">
-          <label style="color: #151515">Nhập lại mật khẩu: <span style="color: red"></span> </label>
-          <input type="password"
-                 name="confirmPassword"
-                 id="confirmPassword"
-                 required
-                 minlength="6"
-                 maxlength="20"
-                 ngModel
-                 (input)="checkConfirmPassWord()"
-                 class="form-control"
-                 style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px">
-          <p id="confirm-password-error" style="color: red"></p>
-        </div>
-        <div style="margin-top: 25px">
-          <button class="button is-success is-light button-update">Cập nhập</button>
-          <button class="button is-danger is-light button-cancel" (click)="closeModalPassword()" type="button">Hủy
-          </button>
+        <div class="content">
+          <table>
+            <tr>
+              <td>Tên người dùng: </td>
+              <td>{{loggedInUser?.username}}</td>
+            </tr>
+            <tr>
+              <td><label style="color: #151515">Mật khẩu cũ: <span style="color: red"></span></label></td>
+              <td><input type="password"
+                         name="oldPassword"
+                         id="oldPassword"
+                         required
+                         minlength="6"
+                         maxlength="20"
+                         ngModel
+                         class="form-control"
+                         style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px"></td>
+            </tr>
+            <tr>
+              <td><label style="color: #151515">Mật khẩu mới: <span style="color: red"></span></label></td>
+              <td> <input type="password"
+                          name="newPassword"
+                          id="newPassword"
+                          required
+                          minlength="6"
+                          maxlength="20"
+                          ngModel
+                          (input)="checkRePassword()"
+                          class="form-control"
+                          style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px"></td>
+            </tr>
+            <tr>
+              <td><label style="color: #151515">Xác nhận mật khẩu: <span style="color: red"></span> </label></td>
+              <td><input type="password"
+                         name="confirmPassword"
+                         id="confirmPassword"
+                         required
+                         minlength="6"
+                         maxlength="20"
+                         ngModel
+                         (input)="checkConfirmPassWord()"
+                         class="form-control"
+                         style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px"></td>
+            </tr>
+            <p id="confirm-password-error" style="color: red"></p>
+          </table>
+          <div class="div-update">
+            <button class="button is-success is-light button-update">Cập nhập</button>
+            <button class="button is-danger is-light button-cancel" (click)="closeModalPassword()" type="button">Hủy</button>
+          </div>
         </div>
       </form>
-      </header>
     </div>
   </div>
 </div>
