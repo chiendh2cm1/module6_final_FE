@@ -149,20 +149,27 @@
   </div>
 </div>
 
-<div class="modal modal-update-user" id="modal-password" >
+<div class="modal modal-update-user" id="modal-password">
   <div class="modal" (click)="closeModalPassword()"></div>
   <div class="modal-card modal-card-user"  id="updatePass">
     <div class="login-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Đổi mật khẩu</p>
-        <button class="delete" aria-label="close" (click)="closeModalUpdate()"></button>
+        <button class="delete" aria-label="close" (click)="closeModalPassword()"></button>
       </header>
       <form class="changePassword-form" #formChangePass='ngForm' (ngSubmit)="changePass(formChangePass)">
         <div class="content">
-          <table>
             <tr>
-              <td>Tên người dùng: </td>
-              <td>{{loggedInUser?.username}}</td>
+              <td><label style="color: #151515">Tên Đăng nhập: <span style="color: red"></span></label></td>
+              <input type="text"
+                     name="username"
+                     id="username"
+                     required
+                     minlength="6"
+                     maxlength="20"
+                     ngModel
+                     class="form-control"
+                     style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px">
             </tr>
             <tr>
               <td><label style="color: #151515">Mật khẩu cũ: <span style="color: red"></span></label></td>
@@ -203,7 +210,6 @@
                          style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px"></td>
             </tr>
             <p id="confirm-password-error" style="color: red"></p>
-          </table>
           <div class="div-update">
             <button class="button is-success is-light button-update">Cập nhập</button>
             <button class="button is-danger is-light button-cancel" (click)="closeModalPassword()" type="button">Hủy</button>
