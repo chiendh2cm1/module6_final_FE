@@ -268,9 +268,7 @@ export class NavbarComponent implements OnInit {
         () => {
           formChangePass.reset();
           this.toastService.showMessage("Cập nhập thành công", "is-success");
-          this.logout();
           this.closeModalPassword();
-          return;
         }, () => {
           this.toastService.showMessage("Cập nhập thất bại", "is-warning");
           formChangePass.reset();

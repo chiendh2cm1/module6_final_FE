@@ -643,3 +643,61 @@ button:focus {
   background: #6d7fcc;
   color: white;
 }
+
+#updatePass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F7F7F7;
+  width: 30vw;
+  height: 60vh;
+
+  .login-card {
+    background: #fff;
+    width: 30vw;
+    height: 100vh;
+    box-shadow: 0 0 7vh 0 rgba(0, 0, 0, 0.11);
+
+    .card-title {
+      background-color: darken($primary, 5%);
+      padding-top: 5vh;
+
+      h1 {
+        color: #fff;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+    }
+
+    .content {
+      height: 345px;
+      padding: 3rem 2.5rem 5rem;
+    }
+
+
+    a {
+      font-size: 0.8rem;
+    }
+
+    .options {
+      color: $grey-light;
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: block;
+      transition: color .5s, border-color .5s;
+
+      &:hover, &:focus {
+        color: darken($primary, 10%);
+        border-color: darken($primary, 10%);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+  }
+}
