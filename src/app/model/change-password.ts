@@ -1,4 +1,5 @@
 export interface ChangePassword {
-  oldPassword?: string;
+  username?: string;
+  password?: string;
   newPassword?: string;
 }
