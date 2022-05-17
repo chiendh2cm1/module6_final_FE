@@ -26,6 +26,10 @@
               <p style="color: crimson">
                 Không để trống !</p>
             </div>
+            <div *ngIf="this.registerForm.get('username')?.errors?.maxlength" class="col alert alert-danger">
+              <p style="color: crimson">
+                Tài khoản phải ít hơn 10 ký tự!</p>
+            </div>
           </div>
         </div>
         <div class="form-group">
