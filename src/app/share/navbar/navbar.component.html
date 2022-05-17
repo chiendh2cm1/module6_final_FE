@@ -92,7 +92,7 @@
             Tên người dùng: {{loggedInUser?.username}}
           </div>
           <a class="dropdown-item" (click)="openModalUpdate()">
-            Thay đổi
+            Thay đổi thông tin
           </a>
           <hr class="dropdown-divider">
           <a class="dropdown-item" (click)="openModalPassword()">
@@ -157,10 +157,22 @@
         <p class="modal-card-title">Đổi mật khẩu</p>
       <form class="changePassword-form" #formChangePass='ngForm' (ngSubmit)="changePass(formChangePass)">
         <div>
+          <label style="color: #151515">Tên Đăng nhập: <span style="color: red"></span></label>
+          <input type="text"
+                 name="username"
+                 id="username"
+                 required
+                 minlength="6"
+                 maxlength="20"
+                 ngModel
+                 class="form-control"
+                 style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px">
+        </div>
+        <div>
           <label style="color: #151515">Mật khẩu cũ: <span style="color: red"></span></label>
-          <input type="password"
-                 name="oldPassword"
-                 id="oldPassword"
+          <input type="text"
+                 name="password"
+                 id="password"
                  required
                  minlength="6"
                  maxlength="20"
@@ -182,7 +194,7 @@
                  style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px">
         </div>
         <div style="margin-top: 13px">
-          <label style="color: #151515">Xác nhận mật khẩu: <span style="color: red"></span> </label>
+          <label style="color: #151515">Nhập lại mật khẩu: <span style="color: red"></span> </label>
           <input type="password"
                  name="confirmPassword"
                  id="confirmPassword"

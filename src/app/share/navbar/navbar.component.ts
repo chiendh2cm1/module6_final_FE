@@ -265,10 +265,12 @@ export class NavbarComponent implements OnInit {
     if (!this.checkRePassword()) {
       this.changePassword = formChangePass.value;
       this.userService.changePassword(this.changePassword).subscribe(
-        (user) => {
-          this.loggedInUser = user;
+        () => {
           formChangePass.reset();
           this.toastService.showMessage("Cập nhập thành công", "is-success");
+          this.logout();
+          this.closeModalPassword();
+          return;
         }, () => {
           this.toastService.showMessage("Cập nhập thất bại", "is-warning");
           formChangePass.reset();
