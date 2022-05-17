@@ -21,8 +21,8 @@ export class MemberWorkspaceService {
   updateWorkspaceMember(id:any, member:MemberWorkspace):Observable<MemberWorkspace>{
     return this.httpClient.put<MemberWorkspace>(`${API_URL}member-workspace/${id}`,member)
   }
-  addWorkspaceMember(member: MemberWorkspace):Observable<MemberWorkspace>{
-    return this.httpClient.post<MemberWorkspace>(`${API_URL}member-workspace/`,member);
+  addWorkspaceMember(member: MemberWorkspace,senderId:number,workspaceID:number):Observable<MemberWorkspace>{
+    return this.httpClient.post<MemberWorkspace>(`${API_URL}member-workspace/${senderId}/${workspaceID}`,member);
   }
 
   deleteWorkspaceMembers(members: MemberWorkspace[]):Observable<MemberWorkspace>{

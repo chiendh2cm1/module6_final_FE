@@ -5,7 +5,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
-// import {RecoverPasswordComponent} from './recover-password/recover-password.component';
 import {ReactiveFormsModule, FormGroup} from "@angular/forms";
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AngularMaterialModule} from "./angular-material.module";
@@ -19,6 +18,7 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireModule} from "@angular/fire/compat";
 // import {AngularA}
 import {environment} from "../environments/environment";
+import {RecoverPasswordComponent} from "./recover-password/recover-password.component";
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import {environment} from "../environments/environment";
     AppComponent,
     LoginComponent,
     SignUpComponent,
-    // RecoverPasswordComponent,
+    RecoverPasswordComponent,
   ],
   imports: [
     BrowserModule,
