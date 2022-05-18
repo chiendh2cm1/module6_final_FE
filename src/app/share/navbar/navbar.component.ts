@@ -264,14 +264,14 @@ export class NavbarComponent implements OnInit {
   changePass(formChangePass: NgForm) {
     if (!this.checkRePassword()) {
       this.changePassword = formChangePass.value;
-      this.userService.changePassword(this.changePassword).subscribe(
+      this.userService.changePassword(this.id, this.changePassword).subscribe(
         () => {
           formChangePass.reset();
           this.toastService.showMessage("Cập nhập thành công", "is-success");
           this.closeModalPassword();
-        }, () => {
-          this.toastService.showMessage("Cập nhập thất bại", "is-warning");
+        },error => {
           formChangePass.reset();
+          this.toastService.showMessage("Đăng nhập thất bại", "is-warning");
         });
     } else {
       formChangePass.reset();
