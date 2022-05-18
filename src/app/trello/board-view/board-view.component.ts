@@ -31,6 +31,8 @@ import {ActivityLog} from "../../model/activity-log";
 import {NotificationService} from "../../service/notification/notification.service";
 import {ActivityLogService} from "../../service/activityLog/activity-log.service";
 import {Notification} from "../../model/notification";
+
+declare var CKEDITOR: any;
 @Component({
   selector: 'app-board-view',
   templateUrl: './board-view.component.html',
@@ -134,7 +136,9 @@ export class BoardViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCurrentBoardByURL()
+    this.getCurrentBoardByURL();
+    CKEDITOR.replace('editor1');
+    CKEDITOR.replace('editor2');
   }
 
   //CARD
@@ -166,6 +170,7 @@ export class BoardViewComponent implements OnInit {
   showCreateCardModal(column: Column) {
     this.selectedColumn = column;
     document.getElementById('createCardModal')!.classList.add('is-active')
+    CKEDITOR.instances('editor2').setData("");
   }
 
 
@@ -173,7 +178,7 @@ export class BoardViewComponent implements OnInit {
     if (this.createCardForm.valid) {
       let newCard: Card = {
         title: this.createCardForm.get('title')?.value,
-        content: this.createCardForm.get('content')?.value,
+        content: CKEDITOR.instances.getData(),
         position: this.selectedColumn.cards.length
       }
       this.resetCreateCardForm();
@@ -227,6 +232,7 @@ export class BoardViewComponent implements OnInit {
     this.redirectService.showModal(card)
     this.getSelectedCardAttachment();
     document.getElementById('editCardModal')!.classList.add('is-active')
+    CKEDITOR.instances('editor2').setData(this.selectedCard.content);
   }
 
   editCard() {
@@ -235,7 +241,7 @@ export class BoardViewComponent implements OnInit {
       return
     }
     this.selectedCard.title = this.createCardForm.get('title')?.value;
-    this.selectedCard.content = this.createCardForm.get('content')?.value;
+    this.selectedCard.content = CKEDITOR.instances.getData();
     this.resetCreateCardForm();
     this.cardService.updateCard(this.selectedCard.id, this.selectedCard).subscribe(() => {
       this.closeEditCardModal()
@@ -424,6 +430,7 @@ export class BoardViewComponent implements OnInit {
         }
       }
     }
+
     for (let tag of this.currentBoard.tags!) {
       if (tag.id == id) {
         let deleteIndex = this.currentBoard.tags!.indexOf(tag);
@@ -744,8 +751,8 @@ export class BoardViewComponent implements OnInit {
     for (let i = 0; i < this.currentBoard.columns.length; i++) {
       if (this.currentBoard.columns[i].id == this.selectedColumnID) {
         this.selectedIndex = this.currentBoard.columns.indexOf(this.currentBoard.columns[i])
-        // // this.createNoticeInBoard(`xóa danh sách ${this.currentBoard.columns[i].title}`)
-        // this.createNotification(` xóa danh sách ${this.currentBoard.columns[i].title}`)
+        this.createNoticeInBoard(`xóa danh sách ${this.currentBoard.columns[i].title}`)
+        this.createNotification(` xóa danh sách ${this.currentBoard.columns[i].title}`)
         this.currentBoard.columns.splice(this.selectedIndex, 1);
         this.columnService.deleteAColumn(this.selectedColumnID).subscribe(() => {
           this.saveChange()
