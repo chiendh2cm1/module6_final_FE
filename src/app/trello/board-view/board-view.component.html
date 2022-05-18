@@ -275,8 +275,10 @@
                       <div class="column column-card-body left">
                         <label class="label">Mô tả:</label>
                         <p [innerHTML]="selectedCard.content"></p>
-                        <label class="label">Sửa nội dung:</label>
-                        <textarea style="font-size: large" rows="8" id="editor2"></textarea>
+                        <div>
+                          <label class="label">Sửa nội dung:</label>
+                          <textarea style="font-size: large" rows="8" id="editor2"></textarea>
+                        </div >
                         <div class="model-card-body-content" style="margin-top: 15px">
                           <article class="media">
                             <figure class="media-left">
@@ -423,7 +425,7 @@
               </section>
               <footer class="modal-card-foot">
                 <button class="button is-info add-new-card" (click)="editCard()" *ngIf="canEdit">Sửa</button>
-                <button class="button is-light" (click)="closeEditCardModal()">Hủy</button>
+                <button class="button is-light" (click)="closeEditCardModal()" style="background: #c69500">Hủy</button>
                 <button class="button is-danger" (click)="showDeleteCardModal()" *ngIf="canEdit">Xóa</button>
               </footer>
             </form>

@@ -386,7 +386,7 @@ button:focus {
   content: "";
   border-width: 20px 27px;
   border-style: solid;
-  border-color: transparent transparent rgb(109, 127, 204) transparent;
+  border-color: transparent transparent rgb(4, 9, 31) transparent;
   position: absolute;
   right: 4px;
   top: -29px;
@@ -415,12 +415,12 @@ button:focus {
 }
 
 .mark-read {
-  background-color: rgb(109, 127, 204);
+  background-color: rgb(8, 16, 52);
 }
 
 .header__notify-header {
   height: 40px;
-  background-color: rgb(109, 127, 204);
+  background-color: rgb(8, 15, 45);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -441,7 +441,7 @@ button:focus {
   max-height: 400px;
   flex-grow: 1;
   overflow-y: auto;
-  background-color: rgb(109, 127, 204);
+  background-color: rgb(12, 21, 63);
 }
 
 ::-webkit-scrollbar-track {
@@ -453,7 +453,7 @@ button:focus {
 }
 
 .header__notify-item:hover {
-  background-color: rgb(109, 127, 204);
+  background-color: rgb(9, 19, 58);
 }
 
 .header__notify-item--viewed {
@@ -492,7 +492,7 @@ button:focus {
 
 .header__notify-footer {
   display: flex;
-  background-color: rgb(109, 127, 204);
+  background-color: rgb(9, 15, 42);
 }
 
 .header__notify-footer-btn {
@@ -513,7 +513,7 @@ button:focus {
   font-size: 12px;
   line-height: 12px;
   border-radius: 10px;
-  border: 1px solid rgb(109, 127, 204);
+  border: 1px solid rgb(14, 24, 66);
 }
 
 .search-result-primary {
@@ -558,7 +558,7 @@ button:focus {
 }
 
 .my-pagination ::ng-deep .ngx-pagination .pagination-previous {
-  background: #6d7fcc;
+  background: #080c38;
   color: white;
   width: 100px;
   margin-right: 5px;
@@ -566,14 +566,14 @@ button:focus {
 }
 
 .my-pagination ::ng-deep .ngx-pagination .pagination-next {
-  background: #6d7fcc;
+  background: #131c42;
   color: white;
   width: 100px;
   margin-top: -5px;
 }
 
 .my-pagination ::ng-deep .ngx-pagination .current {
-  background: #6d7fcc;
+  background: #0e163a;
   color: white;
 }
 

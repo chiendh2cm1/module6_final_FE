@@ -144,7 +144,8 @@ export class NavbarBoardHeaderComponent implements OnInit {
   updateBoardTitle() {
     if (this.currentBoard.id != null) {
       this.boardService.updateBoard(this.currentBoard.id, this.currentBoard).subscribe(data => {
-        this.currentBoard = data
+        this.currentBoard = data;
+        this.hideEditPrivacyModal2();
       })
     }
   }
@@ -311,5 +312,12 @@ export class NavbarBoardHeaderComponent implements OnInit {
       // @ts-ignore
       element.classList.add('is-hidden');
     }
+  }
+
+  showEditPrivacyModal2(){
+    document.getElementById('edit-board-privacy')!.classList.add('is-active');
+  }
+  hideEditPrivacyModal2(){
+    document.getElementById('edit-board-privacy')!.classList.remove('is-active');
   }
 }

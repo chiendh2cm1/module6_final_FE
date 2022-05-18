@@ -20,7 +20,7 @@ export class NotificationService {
 
   getTime(){
     let today = new Date();
-    let date = 'Ngày : ' + today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+    let date = 'Ngày ' + today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     return  time + ' ' + date;
   }

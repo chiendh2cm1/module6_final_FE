@@ -170,7 +170,7 @@ export class BoardViewComponent implements OnInit {
   showCreateCardModal(column: Column) {
     this.selectedColumn = column;
     document.getElementById('createCardModal')!.classList.add('is-active')
-    CKEDITOR.instances('editor2').setData("");
+    CKEDITOR.instances['editor1'].setData("");
   }
 
 
@@ -178,7 +178,7 @@ export class BoardViewComponent implements OnInit {
     if (this.createCardForm.valid) {
       let newCard: Card = {
         title: this.createCardForm.get('title')?.value,
-        content: CKEDITOR.instances.getData(),
+        content: CKEDITOR.instances['editor1'].getData(),
         position: this.selectedColumn.cards.length
       }
       this.resetCreateCardForm();
@@ -232,7 +232,7 @@ export class BoardViewComponent implements OnInit {
     this.redirectService.showModal(card)
     this.getSelectedCardAttachment();
     document.getElementById('editCardModal')!.classList.add('is-active')
-    CKEDITOR.instances('editor2').setData(this.selectedCard.content);
+    CKEDITOR.instances['editor2'].setData(this.selectedCard.content);
   }
 
   editCard() {
@@ -241,7 +241,7 @@ export class BoardViewComponent implements OnInit {
       return
     }
     this.selectedCard.title = this.createCardForm.get('title')?.value;
-    this.selectedCard.content = CKEDITOR.instances.getData();
+    this.selectedCard.content = CKEDITOR.instances['editor2'].getData();
     this.resetCreateCardForm();
     this.cardService.updateCard(this.selectedCard.id, this.selectedCard).subscribe(() => {
       this.closeEditCardModal()
@@ -445,7 +445,7 @@ export class BoardViewComponent implements OnInit {
   //ATTACHMENT
 
   showPreview(event: any) {
-    this.toastService.showMessage("Đang tải file xin vui lòng chờ", "is-warning")
+    this.toastService.showMessage("Đang tải", "is-warning")
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = () => this.fileSrc = event.target.result;
