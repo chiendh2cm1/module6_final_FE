@@ -10,14 +10,18 @@
               <a [routerLink]="['/boards']">Bảng</a>
             </div>
           </li>
-          <li class="list-group-item">
-            <p class="menu-label">Nhóm<span (click)="showCreateWorkspaceModal()">
+          <li>
+            <div class="dropdown-toggle">
+              <p>Nhóm <span (click)="showCreateWorkspaceModal()">
               <i class="fas fa-plus-circle is-hoverable"></i></span></p>
+            </div>
           </li>
           <li class="list-group-item" *ngFor="let workspace of workspaces, index as i">
             <a (click)="showWorkspaceButton(i)">{{workspace.title}}</a>
-            <span (click)="showWorkspaceButton(i)"><i style="position: absolute; margin-top: -35px; margin-left: 206px" id="arrow-down-{{i}}" class="fas fa-angle-down"></i></span>
-            <span (click)="showWorkspaceButton(i)"><i style="position: absolute; margin-top: -35px; margin-left: 206px" id="arrow-up-{{i}}" class="fas fa-angle-up is-hidden"></i></span>
+            <span (click)="showWorkspaceButton(i)"><i style="position: absolute; margin-top: -35px; margin-left: 206px"
+                                                      id="arrow-down-{{i}}" class="fas fa-angle-down"></i></span>
+            <span (click)="showWorkspaceButton(i)"><i style="position: absolute; margin-top: -35px; margin-left: 206px"
+                                                      id="arrow-up-{{i}}" class="fas fa-angle-up is-hidden"></i></span>
             <ul id="workspace-{{i}}" class="is-hidden">
               <li><a style="font-size: 10px" routerLink="/workspaces/{{workspace.id}}/home">Bảng</a></li>
               <li><a routerLink="/workspaces/{{workspace.id}}/members">Thành viên</a></li>

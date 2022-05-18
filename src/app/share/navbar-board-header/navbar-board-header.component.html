@@ -56,26 +56,27 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <div style="position: relative">
-            <div id="visibility-dropdown" class="columns has-background-white is-hidden">
-              <div class="column" style="width: max-content">
-                <select *ngIf="canEdit" class="input" [(ngModel)]="currentBoard.type" required #workspaceType="ngModel"
-                        (change)="updateBoardTitle()">
-                  <option value="Công khai">Công khai</option>
-                  <option *ngIf="isInWorkspace" value="Nhóm">Nhóm</option>
-                  <option value="Riêng tư">Riêng tư</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <button *ngIf="canEdit" class="button is-primary" (click)="toggleElement('visibility-dropdown')">
+          <!--          <div style="position: relative">-->
+          <!--            <div id="visibility-dropdown" class="columns has-background-white is-hidden">-->
+          <!--              <div class="column" style="width: max-content">-->
+          <!--                <select *ngIf="canEdit" class="input" [(ngModel)]="currentBoard.type" required #workspaceType="ngModel"-->
+          <!--                        (change)="updateBoardTitle()">-->
+          <!--                  <option value="Công khai">Công khai</option>-->
+          <!--                  <option *ngIf="isInWorkspace" value="Nhóm">Nhóm</option>-->
+          <!--                  <option value="Riêng tư">Riêng tư</option>-->
+          <!--                </select>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <button *ngIf="canEdit" class="button is-primary" (click)="showEditPrivacyModal2()">
             {{currentBoard.type}}
           </button>
           <div style="position: relative">
             <div id="filter-btn-dropdown" class="columns has-background-white is-hidden">
-              <div class="column is-one-fifth" style="width: 20%;">
-                <button class="button members-button" (click)="filterBoard()" style="background: #6dabe4">Tìm</button>
-<!--                <button class="button members-button" (click)="clearFilterBoard()">Xóa</button>-->
+              <div class="column is-one-fifth" style="width: 25%;">
+                <button class="button members-button" (click)="filterBoard()" style="background: #6dabe4"><i
+                  class="fa fa-search"></i></button>
+                <!--                <button class="button members-button" (click)="clearFilterBoard()">Xóa</button>-->
               </div>
               <div class="column" style="width: max-content">
                 <ul class="checkbox">
@@ -86,7 +87,7 @@
                 </ul>
               </div>
               <div>
-                Thành viên
+                <i class="fa fa-user"></i>
                 <ul class="checkbox">
                   <li *ngFor="let member of members">
                     <input class="form-check-label" type="checkbox" [value]="member.userId"
@@ -95,8 +96,8 @@
                   </li>
                 </ul>
               </div>
-              <div style=" padding-left: 10px">
-                Nhãn
+              <div style=" padding-left: 40px">
+                <i class="fas fa-bookmark"></i>
                 <ul class="checkbox">
                   <li *ngFor="let tag of this.currentBoard.tags" style="width: 100px">
                     <input class="form-check-label" type="checkbox" [value]="tag.id"
@@ -107,69 +108,70 @@
               </div>
             </div>
           </div>
-                    <button class="button is-primary" (click)="toggleElement('filter-btn-dropdown')">
-                      <i class="fas fa-filter"></i>
-                      Tìm Kiếm
-                    </button>
+          <button class="button is-primary" (click)="toggleElement('filter-btn-dropdown')">
+            <i class="fas fa-filter"></i>
+            Tìm Kiếm
+          </button>
 
           <div class="icon-item" style="margin-right: 10px">
             <div class="dropdown is-hoverable ">
               <div class="dropdown-trigger">
-                <button *ngIf="canEdit" class="button is-primary" (click)="toggleDeleteBoardModal()"><i class="far fa-trash-alt"></i> Xóa bảng
+                <button *ngIf="canEdit" class="button is-primary" (click)="toggleDeleteBoardModal()"><i
+                  class="far fa-trash-alt"></i> Xóa bảng
                 </button>
               </div>
             </div>
           </div>
           <button *ngIf="canEdit && isInWorkspace" class="button is-primary"
                   (click)="toggleUserSearchBar()">
-            <i class="fas fa-user-plus"></i>Mời
+            <i class="fas fa-user-plus"></i>Thêm thẻ TV
           </button>
           <div class="icon-item">
-            <div class="dropdown is-hoverable is-right">
-              <div class="dropdown-trigger">
-                                <button class="button is-primary">
-                                  <i class="fas fa-list"></i>
-                                  Hoạt động
-                                </button>
-              </div>
-                            <div class="dropdown-menu" id="dropdown-menu5" role="menu">
-                              <div class="dropdown-content" style="padding: 0">
-                                <div class="header__navbar-item header__navbar-item--has-notify">
-                                  <div class="header__notify">
-                                    <header class="header__notify-header">
-                                      <h3>Hoạt động</h3>
-                                    </header>
-                                    <ul class="header__notify-list">
-                                      <li class="header__notify-item" *ngFor="let activity of activityLogService.activities"
-                                          [class.mark-read]="activity.status">
-                                        <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="activity.card"
-                                           (click)="redirectService.showModal(activity.card)">
-                                          <img
-                                            [src]="activity.user!.image!"
-                                            alt=""
-                                            class="header__notify-img">
-                                          <div class="header__notify-info">
-                                            <span class="header__notify-name">{{activity.title}}</span>
-                                            <span class="header__notify-description">{{activity.content}}</span>
-                                          </div>
-                                        </a>
-                                        <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="!activity.card">
-                                          <img
-                                            [src]="activity.user!.image!"
-                                            alt=""
-                                            class="header__notify-img">
-                                          <div class="header__notify-info">
-                                            <span class="header__notify-name">{{activity.title}}</span>
-                                            <span class="header__notify-description">{{activity.content}}</span>
-                                          </div>
-                                        </a>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-            </div>
+            <!--            <div class="dropdown is-hoverable is-right">-->
+            <!--              <div class="dropdown-trigger">-->
+            <!--                                <button class="button is-primary">-->
+            <!--                                  <i class="fas fa-list"></i>-->
+            <!--                                  Hoạt động-->
+            <!--                                </button>-->
+            <!--              </div>-->
+            <!--                            <div class="dropdown-menu" id="dropdown-menu5" role="menu">-->
+            <!--                              <div class="dropdown-content" style="padding: 0">-->
+            <!--                                <div class="header__navbar-item header__navbar-item&#45;&#45;has-notify">-->
+            <!--                                  <div class="header__notify">-->
+            <!--                                    <header class="header__notify-header">-->
+            <!--                                      <h3>Hoạt động</h3>-->
+            <!--                                    </header>-->
+            <!--                                    <ul class="header__notify-list">-->
+            <!--                                      <li class="header__notify-item" *ngFor="let activity of activityLogService.activities"-->
+            <!--                                          [class.mark-read]="activity.status">-->
+            <!--                                        <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="activity.card"-->
+            <!--                                           (click)="redirectService.showModal(activity.card)">-->
+            <!--                                          <img-->
+            <!--                                            [src]="activity.user!.image!"-->
+            <!--                                            alt=""-->
+            <!--                                            class="header__notify-img">-->
+            <!--                                          <div class="header__notify-info">-->
+            <!--                                            <span class="header__notify-name">{{activity.title}}</span>-->
+            <!--                                            <span class="header__notify-description">{{activity.content}}</span>-->
+            <!--                                          </div>-->
+            <!--                                        </a>-->
+            <!--                                        <a class="header__notify-link" routerLink="{{activity.url}}" *ngIf="!activity.card">-->
+            <!--                                          <img-->
+            <!--                                            [src]="activity.user!.image!"-->
+            <!--                                            alt=""-->
+            <!--                                            class="header__notify-img">-->
+            <!--                                          <div class="header__notify-info">-->
+            <!--                                            <span class="header__notify-name">{{activity.title}}</span>-->
+            <!--                                            <span class="header__notify-description">{{activity.content}}</span>-->
+            <!--                                          </div>-->
+            <!--                                        </a>-->
+            <!--                                      </li>-->
+            <!--                                    </ul>-->
+            <!--                                  </div>-->
+            <!--                                </div>-->
+            <!--                              </div>-->
+            <!--                            </div>-->
+            <!--            </div>-->
           </div>
           <div class="search-bar">
             <div *ngIf="searchBarIsShown" class="search-bar-input">
@@ -232,7 +234,7 @@
 
 <div class="modal" id="delete-board-modal">
   <div class="modal-background"></div>
-  <div class="modal-card">
+  <div class="modal-card" style="margin-top: -200px">
     <header class="modal-card-head">
       <p class="modal-card-title">Thông báo</p>
       <button class="delete" aria-label="close" (click)="toggleDeleteBoardModal()"></button>
@@ -250,5 +252,32 @@
         Quay lại
       </button>
     </footer>
+  </div>
+</div>
+<div class="modal" id="edit-board-privacy">
+  <div class="modal-background">
+    <div class="modal-card" style="margin-top: 100px">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Thay đổi kiểu của bảng</p>
+        <button class="delete" aria-label="close" (click)="hideEditPrivacyModal2()"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="control">
+          <select class="input" [(ngModel)]="currentBoard.type" required #workspaceType="ngModel">
+            <option value="Riêng tư">Riêng tư</option>
+            <option *ngIf="isInWorkspace" value="Nhóm">Nhóm</option>
+            <option value="Công khai">Công khai</option>
+          </select>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <div class=" is-right">
+          <button class="button is-dark is-right"
+                  (click)="updateBoardTitle()">Thay đổi
+          </button>
+        </div>
+        <button class="button is-light" (click)="hideEditPrivacyModal2()">Hủy</button>
+      </footer>
+    </div>
   </div>
 </div>

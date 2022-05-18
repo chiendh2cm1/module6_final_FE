@@ -46,7 +46,7 @@
     <div class="dropdown is-hoverable is-right">
       <div class="dropdown-trigger">
         <a class="icon-link"><i class="fas fa-bell"></i></a>
-        <span class="header__cart-notice">{{notificationService.unreadNotice}}</span>
+<!--        <span class="header__cart-notice">{{notificationService.unreadNotice}}</span>-->
       </div>
       <div class="dropdown-menu" id="dropdown-menu5" role="menu">
         <div class="dropdown-content" style="padding: 0">
@@ -54,8 +54,8 @@
             <div class="header__notify">
               <header class="header__notify-header">
                 <h3>Thông báo</h3>
-                <a (click)="markAllAsRead()"
-                   style="color: white; font-size: 14px; margin-right: 16px; border-bottom: 1px solid">Xem tất cả</a>
+<!--                <a (click)="markAllAsRead()"-->
+<!--                   style="color: white; font-size: 14px; margin-right: 16px; border-bottom: 1px solid">Đánh dấu là đã xem</a>-->
               </header>
               <ul class="header__notify-list">
                 <li class="header__notify-item" *ngFor="let notification of notificationService.notification"
