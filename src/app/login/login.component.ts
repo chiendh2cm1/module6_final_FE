@@ -13,10 +13,12 @@ import {ToastService} from "../service/toast/toast.service";
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({
       userName: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required])
+      password: new FormControl('', [Validators.required]),
+      confirmNewPassword: new FormControl(''),
     }
   )
   show: Boolean = false;
+
   constructor(private authenticationService: AuthenticateService,
               private router: Router,
               private navbarService: NavbarService,
@@ -32,9 +34,9 @@ export class LoginComponent implements OnInit {
       .subscribe(() => {
         this.navbarService.getCurrentUser();
         this.router.navigate(['']);
-        this.toastService.showMessage('Đăng nhập thành công',"is-success")
+        this.toastService.showMessage('Đăng nhập thành công', "is-success")
       }, error => {
-        this.toastService.showMessage('Sai tài khoản hoặc mật khẩu',"is-warning")
+        this.toastService.showMessage('Sai tài khoản hoặc mật khẩu', "is-warning")
       })
   }
 

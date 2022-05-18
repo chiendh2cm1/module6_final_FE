@@ -99,7 +99,7 @@ export class WorkspaceHomeComponent implements OnInit {
     this.boardService.addBoard(this.newBoard).subscribe(data => {
       this.toastService.showMessage("Bảng đã được tạo", "is-success");
       this.workspaceAddBoard(data)
-      this.createNotificationBoard(`đã thêm ${data.title} vào nhóm ${this.workspace.title}`, data.id);
+      // this.createNotificationBoard(`đã thêm ${data.title} vào nhóm ${this.workspace.title}`, data.id);
       this.resetInput();
       this.hideCreateBoard();
     })

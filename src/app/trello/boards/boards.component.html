@@ -59,7 +59,7 @@
       <label class="label">Tiêu đề</label>
       <input class="input" type="text" required [(ngModel)]="newBoard.title" #boardTitle="ngModel">
       <div *ngIf="boardTitle.invalid && boardTitle.touched" class="alert">
-        <div *ngIf="boardTitle.errors?.required">Tiêu đề cần được nhập.</div>
+        <div *ngIf="boardTitle.errors?.required" style="color: red;">Tiêu đề cần được nhập.</div>
       </div>
       <label class="label">Loại</label>
       <div class="control">
