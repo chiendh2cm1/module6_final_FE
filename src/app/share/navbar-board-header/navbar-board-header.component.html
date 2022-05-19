@@ -56,21 +56,23 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <div style="position: relative">
-            <div id="visibility-dropdown" class="columns has-background-white is-hidden">
-              <div class="column" style="width: max-content">
-                <select *ngIf="canEdit" class="input" [(ngModel)]="currentBoard.type" required #workspaceType="ngModel"
-                        (change)="updateBoardTitle()">
-                  <option value="Công khai">Công khai</option>
-                  <option *ngIf="isInWorkspace" value="Nhóm">Nhóm</option>
-                  <option value="Riêng tư">Riêng tư</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <button *ngIf="canEdit" class="button is-primary" (click)="toggleElement('visibility-dropdown')">
-            {{currentBoard.type}}
-          </button>
+<!--          <div style="position: relative">-->
+<!--            <div id="visibility-dropdown" class="columns has-background-white is-hidden">-->
+<!--              <div class="column" style="width: max-content">-->
+<!--                <select *ngIf="canEdit" class="input" [(ngModel)]="currentBoard.type" required #workspaceType="ngModel"-->
+<!--                        (change)="updateBoardTitle()">-->
+<!--                  -->
+<!--                </select>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+          <select *ngIf="canEdit" class="button is-primary" (click)="toggleElement('visibility-dropdown')"  [(ngModel)]="currentBoard.type" required #workspaceType="ngModel"
+                  (change)="updateBoardTitle()">
+            <option value="{{currentBoard.type}}" selected disabled hidden>{{currentBoard.type}}</option>
+            <option value="Công khai">Công khai</option>
+            <option *ngIf="isInWorkspace" value="Nhóm">Nhóm</option>
+            <option value="Riêng tư">Riêng tư</option>
+          </select>
           <div style="position: relative">
             <div id="filter-btn-dropdown" class="columns has-background-white is-hidden">
               <div class="column is-one-fifth" style="width: 22%;">
