@@ -10,21 +10,28 @@
               <a [routerLink]="['/boards']">Bảng</a>
             </div>
           </li>
-          <li class="list-group-item">
-            <p class="menu-label">Nhóm<span (click)="showCreateWorkspaceModal()">
-              <i class="fas fa-plus-circle is-hoverable"></i></span></p>
-          </li>
+        </ul>
+      </li>
+      <li class="active">
+        <div class="list-group-item">
+        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+          Nhóm     <span (click)="showCreateWorkspaceModal()" ><i id="iconHover"  class="fas fa-plus-circle is-Governable" ></i></span>
+        </a>
+        </div>
+        <ul class="collapse list-unstyled">
+
           <li class="list-group-item" *ngFor="let workspace of workspaces, index as i">
             <a (click)="showWorkspaceButton(i)">{{workspace.title}}</a>
             <span (click)="showWorkspaceButton(i)"><i style="position: absolute; margin-top: -35px; margin-left: 206px" id="arrow-down-{{i}}" class="fas fa-angle-down"></i></span>
             <span (click)="showWorkspaceButton(i)"><i style="position: absolute; margin-top: -35px; margin-left: 206px" id="arrow-up-{{i}}" class="fas fa-angle-up is-hidden"></i></span>
-            <ul id="workspace-{{i}}" class="is-hidden">
-              <li><a style="font-size: 10px" routerLink="/workspaces/{{workspace.id}}/home">Bảng</a></li>
-              <li><a routerLink="/workspaces/{{workspace.id}}/members">Thành viên</a></li>
-              <li><a routerLink="/workspaces/{{workspace.id}}/setting">Cài đặt</a></li>
+            <ul id="workspace-{{i}}" class="board-item-title"  class="is-hidden" >
+              <li class="list-board-item" style="padding-left:20px"><a style="font-size: 10px" routerLink="/workspaces/{{workspace.id}}/home">Bảng</a></li>
+              <li class="list-board-item" style="padding-left:20px"><a routerLink="/workspaces/{{workspace.id}}/members">Thành viên</a></li>
+              <li class="list-board-item" style="padding-left:20px"><a routerLink="/workspaces/{{workspace.id}}/setting">Cài đặt</a></li>
             </ul>
           </li>
         </ul>
+
       </li>
     </ul>
 

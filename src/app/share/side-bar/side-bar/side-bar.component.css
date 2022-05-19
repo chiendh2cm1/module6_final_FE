@@ -163,3 +163,7 @@ a.article:hover {
     display: none;
   }
 }
+#iconHover:hover{
+  background-color: gray;
+}
+
