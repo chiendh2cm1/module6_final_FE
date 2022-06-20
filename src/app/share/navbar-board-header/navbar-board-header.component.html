@@ -73,7 +73,7 @@
           </button>
           <div style="position: relative">
             <div id="filter-btn-dropdown" class="columns has-background-white is-hidden">
-              <div class="column is-one-fifth" style="width: 25%;">
+              <div class="column is-one-fifth" style="width: 25%">
                 <button class="button members-button" (click)="filterBoard()" style="background: #6dabe4"><i
                   class="fa fa-search"></i></button>
                 <!--                <button class="button members-button" (click)="clearFilterBoard()">Xóa</button>-->
@@ -90,19 +90,23 @@
                 <i class="fa fa-user"></i>
                 <ul class="checkbox">
                   <li *ngFor="let member of members">
+                    <span class="tag is-light" style="background: white">
                     <input class="form-check-label" type="checkbox" [value]="member.userId"
                            class="member-filter-option filter-option">
-                    <span class="tag is-light">{{member.username}}</span>
+                      <p>@{{member.username}}</p></span>
+                    <br/>
                   </li>
                 </ul>
               </div>
-              <div style=" padding-left: 40px">
+              <div style=" padding-left: 10px">
                 <i class="fas fa-bookmark"></i>
                 <ul class="checkbox">
-                  <li *ngFor="let tag of this.currentBoard.tags" style="width: 100px">
+                  <li *ngFor="let tag of this.currentBoard.tags">
+                    <span class="tag is-light" style="background: white">
                     <input class="form-check-label" type="checkbox" [value]="tag.id"
                            class="label-filter-option filter-option">
-                    <span class="tag is-light">{{tag.name}}</span>
+                    {{tag.name}}</span>
+                    <br/>
                   </li>
                 </ul>
               </div>

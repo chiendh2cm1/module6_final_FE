@@ -1,7 +1,7 @@
 <section class="main-content columns is-fullheight">
   <div class="container column is-10">
     <div style="justify-content: center;display:flex; color:white;">
-      <h1 style="font-size: xxx-large; font-weight: bold">{{workspace?.title}}</h1>
+      <h1 style="font-size: xxx-large; font-weight: bold">{{workspace.title}}</h1>
     </div>
     <div style="justify-content: center;display:flex">
       <button *ngIf="isOwner||isAdmin" class="button is-light" (click)="showEditModal()">Thay đổi thông tin nhóm</button>
@@ -12,13 +12,13 @@
         <p style="color:white;">Quyền truy cập:</p>
         <br>
         <div style="justify-content: space-between;display:flex;">
-          <div *ngIf="workspace?.privacy == 'Private'">
+          <div *ngIf="workspace.privacy == 'Private'">
             <p style="color:white;font-weight: bold"><i class="fas fa-lock" style="color: red"></i> Riêng tư <span
-              style="font-weight: normal"> - Nhóm riêng</span></p>
+              style="font-weight: normal"> - Đây là một nhóm riêng tư</span></p>
           </div>
-          <div *ngIf="workspace?.privacy == 'Public'">
+          <div *ngIf="workspace.privacy == 'Public'">
             <p style="color:white;font-weight: bold"><i class="fas fa-globe" style="color: green"></i> Công khai <span
-              style="font-weight: normal"> - Nhóm công khai</span></p>
+              style="font-weight: normal"> - Đây là một nhóm công khai</span></p>
           </div>
           <button *ngIf="isOwner||isAdmin" class="button is-light" style="height: 25px;width: 70px" (click)="showEditPrivacyModal()">Thay đổi
           </button>
@@ -29,7 +29,7 @@
     <div style="justify-content: space-between;display:flex;">
       <div style="color: white">
         <p>Các thông tin khác:</p><br>
-        <p>Loại nhóm: {{workspace?.type}}</p>
+        <p>Loại nhóm: {{workspace.type}}</p>
       </div>
     </div>
     <br>
@@ -90,7 +90,7 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Thay đổi quyền truy cập</p>
-        <button class="delete" aria-label="close" (click)="hideEditPrivacyModal()" ></button>
+        <button class="delete" aria-label="close" (click)="hideEditPrivacyModal()"></button>
       </header>
       <section class="modal-card-body">
         <label class="label">Quyền hạn</label>
@@ -104,7 +104,7 @@
       <footer class="modal-card-foot">
         <div class=" is-right">
           <button [disabled]="workspacePrivacy.invalid" class="button is-dark is-right"
-          (click)="updateWorkspace()" style="background: deepskyblue">Thay đổi
+                  (click)="updateWorkspace()">Thay đổi
           </button>
         </div>
         <button class="button is-light" (click)="hideEditPrivacyModal()">Hủy</button>
@@ -116,7 +116,7 @@
   <div class="modal-background">
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Xóa nhóm</p>
+        <p class="modal-card-title">Xác nhận xóa nhóm</p>
         <button class="delete" aria-label="close" (click)="hideConfirmDeleteModal()"></button>
       </header>
       <section class="modal-card-body">

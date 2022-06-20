@@ -92,6 +92,7 @@ export class NavbarComponent implements OnInit {
   }
 
   updateUserInfo() {
+    this.toastService.showMessage("Đang tải", "is-warning")
     this.isSubmitted = true;
     if (this.selectedImage != null) {
       // @ts-ignore
@@ -126,6 +127,7 @@ export class NavbarComponent implements OnInit {
   }
 
   showPreview(event: any) {
+    this.toastService.showMessage("Đang tải", "is-warning")
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (e: any) => this.imgSrc = event.target.result;
@@ -238,9 +240,9 @@ export class NavbarComponent implements OnInit {
     this.redirectService.showModal(searchResult.card);
   }
 
-  handlePageChange(event: any) {
-    this.page = event;
-  }
+  // handlePageChange(event: any) {
+  //   this.page = event;
+  // }
 
   createPreview(content: string, searchString: string): string[] {
     let index = content.toLowerCase().indexOf(searchString.toLowerCase());
@@ -269,7 +271,7 @@ export class NavbarComponent implements OnInit {
           formChangePass.reset();
           this.toastService.showMessage("Cập nhập thành công", "is-success");
           this.closeModalPassword();
-        },error => {
+        }, error => {
           formChangePass.reset();
           this.toastService.showMessage("Đăng nhập thất bại", "is-warning");
         });

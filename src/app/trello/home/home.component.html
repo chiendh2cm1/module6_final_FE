@@ -45,7 +45,7 @@
         <div class="section-board">
           <div *ngFor="let localWorkspace of workspacesPublic">
             <div class="card" routerLink="/workspaces/{{localWorkspace.id}}/home"
-                 *ngIf="localWorkspace.privacy == 'Công khai'">
+                 *ngIf="localWorkspace.privacy == 'Public'">
               <div class="card-header"><p class="card-header-title">{{localWorkspace.title}}</p></div>
               <div class="card-content">
                 <span style="font-size: small"><b>Chủ sở hữu: </b>{{localWorkspace.owner.username}}</span><br>
