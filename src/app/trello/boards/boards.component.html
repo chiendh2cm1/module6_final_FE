@@ -1,9 +1,9 @@
-<div class="wrapper" style="background: deepskyblue">
+<div class="wrapper">
   <app-side-bar [workspaces]="workspaces"></app-side-bar>
   <div class="container column is-10" #top style="padding: 10px 13px 13px 106px;">
     <!--    Board-->
     <div class="title-board">
-      <h1><i class="fa fa-table"></i>    Bảng của bạn:</h1>
+      <h1><i class="fa fa-table"></i> Bảng của bạn:</h1>
     </div>
     <div class="section-board">
       <div class="card">
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="title-board" #target>
-      <h1><i class="fa fa-users"></i>    Bảng công khai: </h1>
+      <h1><i class="fa fa-users"></i> Bảng công khai: </h1>
     </div>
     <div class="section-board">
       <div class="card" *ngFor="let board of publicBoards" routerLink="/board/{{board.id}}">
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="title-board" #target>
-      <h1><i class="fa fa-user"></i>    Bảng cá nhân</h1>
+      <h1><i class="fa fa-user"></i> Bảng cá nhân:</h1>
     </div>
     <div class="section-board">
       <div class="card" *ngFor="let board of privateBoards" routerLink="/board/{{board.id}}">
@@ -107,7 +107,7 @@
             <option value="Đời sống">Đời sống</option>
           </select>
         </div>
-        <label class="label">Quyền hạn</label>
+        <label class="label">Kiểu: </label>
         <div class="control">
           <select class="input" [(ngModel)]="workspace.privacy" required #workspacePrivacy="ngModel">
             <option value="Riêng tư">Riêng tư</option>
@@ -127,7 +127,9 @@
     </section>
     <footer class="modal-card-foot">
       <div class="alert">
-        <button [disabled]="workspaceTitle.invalid || workspaceType.invalid || workspacePrivacy.invalid" class="button is-dark" (click)="createWorkspace()">Tạo</button>
+        <button [disabled]="workspaceTitle.invalid || workspaceType.invalid || workspacePrivacy.invalid"
+                class="button is-dark" (click)="createWorkspace()">Tạo
+        </button>
       </div>
       <button class="button is-light" (click)="hideCreateWorkspaceModal()">Hủy</button>
     </footer>

@@ -1,8 +1,9 @@
-<div class="nav" style="background: deepskyblue">
+<div class="nav">
   <span class="icon-item">
       <a routerLink="/trello" class="icon-link"><i class="fas fa-home"></i></a>
   </span>
   <div class="nav-brand-start">
+<!--    <p style="margin: auto; color: aliceblue; width: 30px">Chào mừng đến với trello</p>-->
   </div>
   <div id="search-section" class="" *ngIf="currentUser != null">
     <div style="position: relative" id="search-results">
@@ -32,11 +33,11 @@
             </li>
           </ul>
         </a>
-        <!--        <pagination-controls class="my-pagination"-->
-        <!--                             previousLabel="Trước"-->
-        <!--                             nextLabel="Sau"-->
-        <!--                             [responsive]="true"-->
-        <!--                             (pageChange)="handlePageChange($event)"></pagination-controls>-->
+<!--                <pagination-controls class="my-pagination"-->
+<!--                                     previousLabel="Trước"-->
+<!--                                     nextLabel="Sau"-->
+<!--                                     [responsive]="true"-->
+<!--                                     (pageChange)="handlePageChange($event)"></pagination-controls>-->
       </div>
     </div>
     <input id="search-input" class="input" type="text" placeholder="Tìm thẻ" style="width: 200px"
@@ -195,7 +196,7 @@
                 <div style="color: red" [hidden]="newPassword.valid || !newPassword.touched">
                 <div style="color: red" *ngIf="newPassword.errors?.required">Không để trống</div>
                 <div style="color: red" *ngIf="newPassword.errors?.minlength">Phải nhiều hơn 6 ký tự</div>
-                <div style="color: red" *ngIf="newPassword.errors?.minlength">Phải ít hơn 32 ký tự</div>
+<!--                <div style="color: red" *ngIf="newPassword.errors?.minlength">Phải ít hơn 32 ký tự</div>-->
                 </div>
               </td>
             </tr>

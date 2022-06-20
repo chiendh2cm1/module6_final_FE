@@ -39,7 +39,7 @@ export class WorkspaceMembersComponent implements OnInit {
 
   page = 1;
   count = 0;
-  pageSize = 2;
+  pageSize = 10;
 
   constructor(private workspaceService: WorkspaceService,
               private userService: UserService,
@@ -261,7 +261,7 @@ export class WorkspaceMembersComponent implements OnInit {
     receivers.push(member.user!)
     let notification: Notification = {
       title: this.workspace.title,
-      content: this.loggedInUser.username + ` đã đá bạn ra khỏi nhóm ${this.workspace.title} vào lúc ` + this.notificationService.getTime(),
+      content: this.loggedInUser.username + ` đã kích bạn ra khỏi nhóm ${this.workspace.title} vào lúc ` + this.notificationService.getTime(),
       status: false,
       url: "",
       receiver: receivers,

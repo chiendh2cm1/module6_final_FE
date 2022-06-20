@@ -152,7 +152,7 @@
                 <div class="is-hidden" id="createTags">
                   <label class="label">Các nhãn:</label>
                   <ul>
-                    <li *ngFor="let tag of this.currentBoard.tags"
+                    <li class="tag" *ngFor="let tag of this.currentBoard.tags"
                         (mouseover)="showDeleteTags(tag.id!)"
                         (mouseout)="hideDeleteTags(tag.id!)">
                       <span class="tag is-light" [ngClass]="tag.color" (click)="addTagToPending(tag)">
@@ -179,16 +179,30 @@
                       <select formControlName="color" style="width: 285px">
                         <option value="is-primary"
                                 style="color: lightgreen; background-color: rgb(235, 255, 252)">
+                          Xanh
+                          lá
+                          nhạt
                         </option>
                         <option value="is-success" style="color: darkgreen; background-color: rgb(239, 250, 245)">
+                          Xanh
+                          lá
+                          đậm
                         </option>
                         <option value="is-link" style="color: darkblue; background-color: rgb(239, 241, 250)">
+                          Xanh
+                          dương
+                          đậm
                         </option>
                         <option value="is-info" style="color: lightblue; background-color: rgb(239, 245, 251)">
+                          Xanh
+                          dương
+                          nhạt
                         </option>
                         <option value="is-warning" style="color: yellow; background-color: rgb(255, 250, 235)">
+                          Vàng
                         </option>
                         <option value="is-danger" style="color: red; background-color: rgb(254, 236, 240)">
+                          Đỏ
                         </option>
                       </select>
                     </div>
@@ -278,7 +292,7 @@
                         <div>
                           <label class="label">Sửa nội dung:</label>
                           <textarea style="font-size: large" rows="8" id="editor2"></textarea>
-                        </div >
+                        </div>
                         <div class="model-card-body-content" style="margin-top: 15px">
                           <article class="media">
                             <figure class="media-left">
@@ -345,9 +359,10 @@
                           <button class="button members-button" (click)="toggleMemberForm()">Thành viên</button>
                           <div id="member-form" class="is-hidden">
                             <span style="font-size: small">Thêm thành viên:</span>
+                            <br>
                             <ul>
                               <li *ngFor="let member of this.members">
-                  <span class="tag" (click)="addUserToCard(member)">
+                  <span (click)="addUserToCard(member)">
                     <span style="font-size: small">@{{member.username}}</span>
                     <span style="font-size: small" *ngIf="member.nickname">({{member.nickname}})</span>
                   </span>
@@ -356,6 +371,7 @@
                           </div>
                         </div>
                         <div>
+                          <br>
                           <button class="button members-button" (click)="switchEditTagsForm()">Nhãn</button>
                           <br>
                           <div class="is-hidden" id="editTags">
@@ -387,19 +403,31 @@
                                 <select formControlName="color" style="width: 285px">
                                   <option value="is-primary"
                                           style="color: lightgreen; background-color: rgb(235, 255, 252)">
+                                    Xanh
+                                    lá
+                                    nhạt
                                   </option>
                                   <option value="is-success"
                                           style="color: darkgreen; background-color: rgb(239, 250, 245)">
+                                    Xanh
+                                    lá
+                                    đậm
                                   </option>
                                   <option value="is-link" style="color: darkblue; background-color: rgb(239, 241, 250)">
+                                    Xanh
+                                    dương
+                                    đậm
                                   </option>
                                   <option value="is-info"
                                           style="color: lightblue; background-color: rgb(239, 245, 251)">
+                                    Xanh
+                                    dương
+                                    nhạt
                                   </option>
                                   <option value="is-warning"
-                                          style="color: yellow; background-color: rgb(255, 250, 235)">
+                                          style="color: yellow; background-color: rgb(255, 250, 235)">Vàng
                                   </option>
-                                  <option value="is-danger" style="color: red; background-color: rgb(254, 236, 240)">
+                                  <option value="is-danger" style="color: red; background-color: rgb(254, 236, 240)">Đỏ
                                   </option>
                                 </select>
                               </div>
@@ -408,6 +436,7 @@
                             </form>
                           </div>
                         </div>
+                        <br>
                         <div class="content">
                           <form #uploadFileCard="ngForm" (ngSubmit)="showPreview($event)">
                             <div class="update-info">
@@ -425,7 +454,8 @@
               </section>
               <footer class="modal-card-foot">
                 <button class="button is-info add-new-card" (click)="editCard()" *ngIf="canEdit">Sửa</button>
-                <button class="button is-light" (click)="closeEditCardModal()" style="background: #c69500">Hủy</button>
+                <button class="button is-light" (click)="closeEditCardModal()" style="background: #c69500">Thoát
+                </button>
                 <button class="button is-danger" (click)="showDeleteCardModal()" *ngIf="canEdit">Xóa</button>
               </footer>
             </form>

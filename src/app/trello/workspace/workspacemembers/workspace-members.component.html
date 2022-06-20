@@ -32,7 +32,7 @@
         </button>
       </div>
     </div>
-    <div class="user-container" *ngFor="let member of workspace.members | paginate:{
+    <div class="user-container" *ngFor="let member of workspace.members| paginate:{
     itemsPerPage:pageSize,
     currentPage:page,
     totalItems:count
@@ -59,7 +59,7 @@
       </div>
     </div>
     <pagination-controls class="my-pagination"
-      previousLabel="Trước"
+                         previousLabel="Trước"
                          nextLabel="Sau"
                          [responsive]="true"
                          (pageChange)="handlePageChange($event)">
