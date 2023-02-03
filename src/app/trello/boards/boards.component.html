@@ -1,5 +1,7 @@
 <div class="wrapper">
   <app-side-bar [workspaces]="workspaces"></app-side-bar>
+  <app-modal></app-modal>
+  <app-modalworkspace></app-modalworkspace>
   <div class="container column is-10" #top style="padding: 10px 13px 13px 106px;">
     <!--    Board-->
     <div class="title-board">
@@ -48,90 +50,4 @@
     </div>
   </div>
 </div>
-<div class="modal" id="create-board">
-  <div class="modal-background" (click)="hideCreateBoard()"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Tạo một bảng</p>
-      <button class="delete" aria-label="close" (click)="hideCreateBoard()"></button>
-    </header>
-    <section class="modal-card-body">
-      <label class="label">Tiêu đề</label>
-      <input class="input" type="text" required [(ngModel)]="newBoard.title" #boardTitle="ngModel">
-      <div *ngIf="boardTitle.invalid && boardTitle.touched" class="alert">
-        <div *ngIf="boardTitle.errors?.required" style="color: red;">Tiêu đề cần được nhập.</div>
-      </div>
-      <label class="label">Loại</label>
-      <div class="control">
-        <select class="input" [(ngModel)]="newBoard.type">
-          <option value="Riêng tư">Riêng tư</option>
-          <option value="Công khai">Công khai</option>
-        </select>
-      </div>
-      <br>
-      <div class="control">
-        <label class="label">Người tạo: <span
-          class="is-info user-button is-light">{{loggedInUser.username}}</span></label>
-      </div>
-    </section>
-    <footer class="modal-card-foot">
-      <div *ngIf="boardTitle.invalid" class=" is-right">
-        <button class="button is-dark is-light is-right" disabled>Tạo</button>
-      </div>
-      <div *ngIf="!boardTitle.invalid" class=" is-right">
-        <button class="button is-dark is-light is-right" (click)="createNewBoard()">Tạo</button>
-      </div>
-      <button class="button is-light is-right" (click)="hideCreateBoard()">Hủy</button>
-    </footer>
-  </div>
-</div>
-<div class="modal" id="create-workspace">
-  <div class="modal-background" (click)="hideCreateWorkspaceModal()"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Tạo một nhóm mới</p>
-      <button class="delete" aria-label="close" (click)="hideCreateWorkspaceModal()"></button>
-    </header>
-    <section class="modal-card-body">
-      <div class="field" style="position: relative">
-        <label class="label">Title</label>
-        <div class="control">
-          <input class="input" type="text" required [(ngModel)]="workspace.title" #workspaceTitle="ngModel">
-        </div>
-        <label class="label">Phân loại nhóm:</label>
-        <div class="control">
-          <select class="input" [(ngModel)]="workspace.type" required #workspaceType="ngModel">
-            <option value="Công nghệ">Công nghệ</option>
-            <option value="Kinh doanh">Kinh doanh</option>
-            <option value="Học tập">Học tập</option>
-            <option value="Đời sống">Đời sống</option>
-          </select>
-        </div>
-        <label class="label">Kiểu: </label>
-        <div class="control">
-          <select class="input" [(ngModel)]="workspace.privacy" required #workspacePrivacy="ngModel">
-            <option value="Riêng tư">Riêng tư</option>
-            <option value="Công khai">Công khai</option>
-          </select>
-        </div>
-        <div *ngIf="workspaceTitle.invalid && workspaceTitle.touched" class="alert">
-          <div *ngIf="workspaceTitle.errors?.required" style="color: red">
-            Hãy nhập tiêu đề
-          </div>
-        </div>
-      </div>
-      <div class="control">
-        <label class="label">Người tạo: <span
-          class="is-info user-button is-light">{{loggedInUser.username}}</span></label>
-      </div>
-    </section>
-    <footer class="modal-card-foot">
-      <div class="alert">
-        <button [disabled]="workspaceTitle.invalid || workspaceType.invalid || workspacePrivacy.invalid"
-                class="button is-dark" (click)="createWorkspace()">Tạo
-        </button>
-      </div>
-      <button class="button is-light" (click)="hideCreateWorkspaceModal()">Hủy</button>
-    </footer>
-  </div>
-</div>
+

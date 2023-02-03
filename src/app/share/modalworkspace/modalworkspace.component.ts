@@ -1,21 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {ModalService} from "../../service/modal/modal.service";
+import { Component, OnInit } from '@angular/core';
 import {Board} from "../../model/board";
+import {UserToken} from "../../model/user-token";
+import {Workspace} from "../../model/workspace";
+import {ModalService} from "../../service/modal/modal.service";
 import {BoardService} from "../../service/board/board.service";
 import {AuthenticateService} from "../../service/authenticate.service";
-import {UserToken} from "../../model/user-token";
 import {ToastService} from "../../service/toast/toast.service";
-import {Column} from "../../model/column";
 import {ColumnService} from "../../service/column/column.service";
-import {Workspace} from "../../model/workspace";
 import {WorkspaceService} from "../../service/workspace/workspace.service";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-modalworkspace',
+  templateUrl: './modalworkspace.component.html',
+  styleUrls: ['./modalworkspace.component.css']
 })
-export class HomeComponent implements OnInit {
+export class ModalworkspaceComponent implements OnInit {
   boards: Board[] = [];
   loggedInUser!: UserToken;
   sharedBoards: Board[] = [];
@@ -35,8 +34,7 @@ export class HomeComponent implements OnInit {
               private authenticateService: AuthenticateService,
               private toastService: ToastService,
               private columnService: ColumnService,
-              private workspaceService: WorkspaceService) {
-  }
+              private workspaceService: WorkspaceService) { }
 
   ngOnInit(): void {
     this.loggedInUser = this.authenticateService.getCurrentUserValue()
@@ -44,17 +42,21 @@ export class HomeComponent implements OnInit {
     this.getAllWorkspace();
     this.getSharedBoards()
   }
-
   getBoards() {
     this.boardService.getOwnedBoard(this.loggedInUser.id!).subscribe(data => {
       this.boards = data;
     })
   }
 
-   getSharedBoards() {
+  getSharedBoards() {
     this.boardService.findAllSharedBoardsByUserId(this.loggedInUser.id).subscribe(
       data => this.sharedBoards = data);
   }
+  hideCreateWorkspaceModal() {
+    this.resetWorkspaceInput()
+    document.getElementById('create-workspace')!.classList.remove('is-active');
+  }
+
   getAllWorkspace() {
     this.workspaceService.findAll().subscribe(data => {
       this.workspacesPublic = data;
@@ -63,7 +65,17 @@ export class HomeComponent implements OnInit {
       this.workspaces = data;
     })
   }
-  displayAddBoardModal() {
-    document.getElementById('create-board')!.classList.add('is-active');
+  createWorkspace() {
+    this.workspace.owner = this.loggedInUser;
+    this.workspaceService.createWorkspace(this.workspace).subscribe(()=>{
+      this.getAllWorkspace();
+      this.toastService.showMessage("Tạo nhóm thành công", 'is-success');
+      this.hideCreateWorkspaceModal();
+    })
   }
+
+  resetWorkspaceInput() {
+    this.workspace = {boards: [], id: 0, members: [], owner: undefined, title: "", type: "", privacy: ""};
+  }
+
 }

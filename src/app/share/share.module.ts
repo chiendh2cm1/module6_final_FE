@@ -11,6 +11,7 @@ import {MatListModule} from "@angular/material/list";
 import { FooterComponent } from './footer/footer.component';
 import {AngularMaterialModule} from "../angular-material.module";
 import {NgxPaginationModule} from "ngx-pagination";
+import { ModalworkspaceComponent } from './modalworkspace/modalworkspace.component';
 
 @NgModule({
   declarations: [
@@ -18,15 +19,17 @@ import {NgxPaginationModule} from "ngx-pagination";
     NavbarBoardHeaderComponent,
     ModalComponent,
     SideBarComponent,
-    FooterComponent
+    FooterComponent,
+    ModalworkspaceComponent
   ],
-    exports: [
-        NavbarComponent,
-        NavbarBoardHeaderComponent,
-        ModalComponent,
-        SideBarComponent,
-        FooterComponent
-    ],
+  exports: [
+    NavbarComponent,
+    NavbarBoardHeaderComponent,
+    ModalComponent,
+    SideBarComponent,
+    FooterComponent,
+    ModalworkspaceComponent
+  ],
     imports: [
         CommonModule,
         FormsModule,
