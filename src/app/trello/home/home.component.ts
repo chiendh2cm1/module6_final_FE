@@ -18,21 +18,17 @@ import {WorkspaceService} from "../../service/workspace/workspace.service";
 export class HomeComponent implements OnInit {
   boards: Board[] = [];
   loggedInUser!: UserToken;
-  yourBoards: Board[] = [];
   sharedBoards: Board[] = [];
-  newBoard: Board = {
-    title: '',
-    owner: {
-      id: -1,
-    },
-    columns: [],
-    type: '',
-  };
-
-  createdBoard?: Board
   workspaces: Workspace[] = [];
   workspacesPublic:Workspace[] = [];
-  workspace: Workspace = {boards: [], id: 0, members: [], owner: undefined, title: "", type: "", privacy: ""};
+  workspace: Workspace = {
+    boards: [],
+    id: 0,
+    members: [],
+    owner: undefined,
+    title: "",
+    type: "Công nghệ",
+    privacy: "Riêng tư"};
 
   constructor(private modalService: ModalService,
               private boardService: BoardService,
@@ -59,66 +55,6 @@ export class HomeComponent implements OnInit {
     this.boardService.findAllSharedBoardsByUserId(this.loggedInUser.id).subscribe(
       data => this.sharedBoards = data);
   }
-
-
-  createNewBoard() {
-    this.newBoard.owner = this.loggedInUser;
-    this.boardService.addBoard(this.newBoard).subscribe(async data => {
-      this.createdBoard = data
-      await this.premadeColumnInBoard("Công việc", 0, this.createdBoard!);
-      await this.premadeColumnInBoard("Sẽ làm", 1, this.createdBoard!);
-      await this.premadeColumnInBoard("Đang làm", 2, this.createdBoard!);
-      await this.premadeColumnInBoard("Đã xong", 3, this.createdBoard!);
-      await this.toastService.showMessage("Bảng đã được tạo", "is-success");
-      await this.getBoards()
-      await this.resetInput();
-      await this.hideCreateBoard()
-    })
-  }
-
-  updateCreatedBoard() {
-    this.boardService.updateBoard(this.createdBoard?.id!, this.createdBoard!).subscribe(() => {
-      this.getBoards()
-    })
-  }
-
-  resetInput() {
-    this.newBoard = {
-      title: '',
-      owner: {
-        id: -1,
-      },
-      columns: [],
-      type: ''
-    };
-  }
-
-  premadeColumnInBoard(title: string, position: number, board: Board) {
-    let column: Column = {
-      cards: [],
-      position: position,
-      title: title
-    }
-    this.columnService.createAColumn(column).subscribe(data => {
-      board.columns.push(data);
-      this.updateCreatedBoard();
-    })
-  }
-
-  hideCreateBoard() {
-    this.resetInput();
-    document.getElementById('create-board')!.classList.remove('is-active');
-  }
-
-  showCreateWorkspaceModal() {
-    document.getElementById('create-workspace')!.classList.add('is-active');
-  }
-
-  hideCreateWorkspaceModal() {
-    this.resetWorkspaceInput()
-    document.getElementById('create-workspace')!.classList.remove('is-active');
-  }
-
   getAllWorkspace() {
     this.workspaceService.findAll().subscribe(data => {
       this.workspacesPublic = data;
@@ -127,18 +63,7 @@ export class HomeComponent implements OnInit {
       this.workspaces = data;
     })
   }
-
-  createWorkspace() {
-    this.workspace.owner = this.loggedInUser;
-    this.workspaceService.createWorkspace(this.workspace).subscribe(()=>{
-      this.getAllWorkspace();
-      this.toastService.showMessage("Nhóm đã được tạo", 'is-success');
-      this.hideCreateWorkspaceModal();
-    })
+  displayAddBoardModal() {
+    document.getElementById('create-board')!.classList.add('is-active');
   }
-
-  resetWorkspaceInput() {
-    this.workspace = {boards: [], id: 0, members: [], owner: undefined, title: "", type: "", privacy: ""};
-  }
-
 }

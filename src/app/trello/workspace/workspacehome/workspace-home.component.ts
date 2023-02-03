@@ -24,17 +24,7 @@ export class WorkspaceHomeComponent implements OnInit {
   allowEdit: Boolean = false;
   loggedInUser!: UserToken;
   currentWorkspaceId!: number;
-  newBoard: Board = {
-    title: '',
-    owner: {
-      id: -1,
-    },
-    columns: [],
-    type: '',
-  };
   currentUser!:User;
-  newWorkspace: Workspace = {boards: [], id: 0, members: [], owner: undefined, title: "", type: "", privacy: ""};
-
   constructor(private workspaceService: WorkspaceService,
               private userService: UserService,
               private activatedRoute: ActivatedRoute,
@@ -88,62 +78,6 @@ export class WorkspaceHomeComponent implements OnInit {
 
   displayAddBoardModal() {
     document.getElementById('create-board')!.classList.add('is-active');
-  }
-
-  hideCreateBoard() {
-    document.getElementById('create-board')!.classList.remove('is-active');
-  }
-
-  createNewBoard() {
-    this.newBoard.owner = this.loggedInUser;
-    this.boardService.addBoard(this.newBoard).subscribe(data => {
-      this.toastService.showMessage("Bảng đã được tạo", "is-success");
-      this.workspaceAddBoard(data)
-      this.createNotificationBoard(`đã thêm ${data.title} vào nhóm ${this.workspace.title}`, data.id);
-      this.resetInput();
-      this.hideCreateBoard();
-    })
-  }
-
-  workspaceAddBoard(board: Board) {
-    this.workspace.boards.push(board);
-    this.workspaceService.updateWorkspace(this.workspace.id, this.workspace).subscribe(() => {
-      this.getCurrentWorkspace(this.currentWorkspaceId)
-    })
-  }
-
-  resetInput() {
-    this.newBoard = {
-      title: '',
-      owner: {
-        id: -1,
-      },
-      columns: [],
-      type: ''
-    };
-  }
-
-  showCreateWorkspaceModal() {
-    document.getElementById('create-workspace')!.classList.add('is-active');
-  }
-
-  hideCreateWorkspaceModal() {
-    this.resetWorkspaceInput()
-    document.getElementById('create-workspace')!.classList.remove('is-active');
-  }
-
-
-  createWorkspace() {
-    this.newWorkspace.owner = this.loggedInUser;
-    this.workspaceService.createWorkspace(this.newWorkspace).subscribe(() => {
-      this.getAllWorkspace();
-      this.toastService.showMessage("Nhóm đã được tạo", 'is-success');
-      this.hideCreateWorkspaceModal();
-    })
-  }
-
-  resetWorkspaceInput() {
-    this.newWorkspace = {boards: [], id: 0, members: [], owner: undefined, title: "", type: "", privacy: ""};
   }
 
   createNotificationBoard(notification: string, boardId: any) {

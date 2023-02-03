@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Lato:400,800,900');
 @import url(https://fonts.googleapis.com/css?family=Courgette);
 @import "../node_modules/bulma/bulma.sass";
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 html, body {
   height: 100%;
 }
@@ -15,5 +16,5 @@ html, body {
 }
 
 html{
-  background-image: linear-gradient(to left, #fff1eb 0%, #6d7fcc 100%);
+  background-image: url("src/assets/images/85-original.png-1000h.png");
 }

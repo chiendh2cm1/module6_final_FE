@@ -3,9 +3,7 @@
       <a routerLink="/trello" class="icon-link"><i class="fas fa-home"></i></a>
   </span>
   <div class="nav-brand-start">
-    <div class="nav-item-start">
-      <h1 style="position: fixed"><i class="fab fa-trello logo-icon"></i>Nhom 3</h1>
-    </div>
+<!--    <p style="margin: auto; color: aliceblue; width: 30px">Chào mừng đến với trello</p>-->
   </div>
   <div id="search-section" class="" *ngIf="currentUser != null">
     <div style="position: relative" id="search-results">
@@ -20,12 +18,13 @@
     }" class="dropdown-item" (click)="clearSearch(searchResult)">
           <ul>
             <li>
-              <span class="search-result-primary">{{searchResult.card.title}}</span>
-              <span> in </span><span class="search-result-secondary">{{searchResult.column.title}}</span>
+              <span class="search-result-primary">Thẻ: {{searchResult.card.title}}</span>
+              <span> tại cột </span>
+              <span class="search-result-secondary">{{searchResult.column.title}}</span>
             </li>
             <li>
-              <span> on </span><span class="search-result-secondary">{{searchResult.board.title}}</span>
-              <span> by @</span><span class="search-result-secondary">{{searchResult.board.owner.username}}</span>
+              <span> trong bảng </span><span class="search-result-secondary">{{searchResult.board.title}}</span>
+              <!--              <span> Tạo bởi </span><span class="search-result-secondary">{{searchResult.board.owner.username}}</span>-->
             </li>
             <li>
               <span class="search-result-preview-secondary">"{{searchResult.preview[0]}}</span>
@@ -34,11 +33,11 @@
             </li>
           </ul>
         </a>
-        <pagination-controls class="my-pagination"
-                             previousLabel="Trước"
-                             nextLabel="Sau"
-                             [responsive]="true"
-                             (pageChange)="handlePageChange($event)"></pagination-controls>
+<!--                <pagination-controls class="my-pagination"-->
+<!--                                     previousLabel="Trước"-->
+<!--                                     nextLabel="Sau"-->
+<!--                                     [responsive]="true"-->
+<!--                                     (pageChange)="handlePageChange($event)"></pagination-controls>-->
       </div>
     </div>
     <input id="search-input" class="input" type="text" placeholder="Tìm thẻ" style="width: 200px"
@@ -48,7 +47,7 @@
     <div class="dropdown is-hoverable is-right">
       <div class="dropdown-trigger">
         <a class="icon-link"><i class="fas fa-bell"></i></a>
-        <span class="header__cart-notice">{{notificationService.unreadNotice}}</span>
+<!--        <span class="header__cart-notice">{{notificationService.unreadNotice}}</span>-->
       </div>
       <div class="dropdown-menu" id="dropdown-menu5" role="menu">
         <div class="dropdown-content" style="padding: 0">
@@ -56,9 +55,8 @@
             <div class="header__notify">
               <header class="header__notify-header">
                 <h3>Thông báo</h3>
-                <a (click)="markAllAsRead()"
-                   style="color: white; font-size: 14px; margin-right: 16px; border-bottom: 1px solid">Đánh dấu tất cả
-                  là đã đọc</a>
+<!--                <a (click)="markAllAsRead()"-->
+<!--                   style="color: white; font-size: 14px; margin-right: 16px; border-bottom: 1px solid">Đánh dấu là đã xem</a>-->
               </header>
               <ul class="header__notify-list">
                 <li class="header__notify-item" *ngFor="let notification of notificationService.notification"
@@ -81,25 +79,25 @@
   </div>
   <div class="icon-item" *ngIf="currentUser">
     <div class="dropdown is-hoverable is-right">
-<!--      <div class="nav-item-start">-->
-<!--        <p>{{loggedInUser.username}}</p>-->
-<!--      </div>-->
+      <!--      <div class="nav-item-start">-->
+      <!--        <p>{{loggedInUser.username}}</p>-->
+      <!--      </div>-->
       <div class="dropdown-trigger">
         <a class="icon-link" aria-haspopup="true" aria-controls="dropdown-menu4">
-          <img [src]="loggedInUser.image" class="img-circle"/>
+          <img [src]="loggedInUser?.image" class="img-circle"/>
         </a>
       </div>
       <div class="dropdown-menu" id="dropdown-menu" role="menu">
         <div class="dropdown-content">
           <div href="#" class="dropdown-item">
-            <div class="user">
-              <div class="username">
-                Người dùng: {{loggedInUser.username}}
-              </div>
-            </div>
+            Tên người dùng: {{loggedInUser?.username}}
           </div>
           <a class="dropdown-item" (click)="openModalUpdate()">
-            Thay đổi thông tin
+            Thay đổi
+          </a>
+          <hr class="dropdown-divider">
+          <a class="dropdown-item" (click)="openModalPassword()">
+            Thay đổi mật khẩu
           </a>
           <hr class="dropdown-divider">
           <a class="dropdown-item" (click)="logout()">
@@ -130,17 +128,16 @@
                 <input class="file-input" type="file" #preview (change)="showPreview($event)">
                 <span class="file-cta">
                   <span class="file-icon">
-                    <i class="fas fa-upload"></i>
                   </span>
                   <span class="file-label">
-                    Chọn file
+                    Chọn ảnh đại diện
                   </span>
                 </span>
               </label>
             </div>
             <!--            user name-->
             <input type="text" class="input input-user-name" name="nickname" #nickname="ngModel" required
-                   *ngIf="loggedInUser !=null" [(ngModel)]="loggedInUser.nickname" placeholder="Biệt danh">
+                   *ngIf="loggedInUser !=null" [(ngModel)]="loggedInUser.nickname" placeholder="Tên">
           </div>
           <div class="div-update">
             <button class="button is-success is-light button-update">Cập nhập</button>
@@ -152,3 +149,86 @@
     </div>
   </div>
 </div>
+
+<div class="modal modal-update-user" id="modal-password">
+  <div class="modal" (click)="closeModalPassword()"></div>
+  <div class="modal-card modal-card-user"  id="updatePass">
+    <div class="login-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Đổi mật khẩu</p>
+        <button class="delete" aria-label="close" (click)="closeModalPassword()"></button>
+      </header>
+      <form class="changePassword-form" #formChangePass='ngForm' (ngSubmit)="changePass(formChangePass)">
+        <div class="content">
+          <table>
+            <tr>
+              <td>
+                <label style="color: #151515">Mật khẩu cũ:</label>
+              </td>
+              <td>
+                <input type="password"
+                       name="oldPassword"
+                       id="password"
+                       required
+                       minlength="6"
+                       maxlength="20"
+                       [(ngModel)]="changePassword.oldPassword"
+                       class="form-control"
+                       style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label style="color: #151515">Mật khẩu mới:</label>
+              </td>
+              <td>
+                <input type="password"
+                       name="newPassword"
+                       id="newPassword"
+                       required
+                       minlength="6"
+                       maxlength="32"
+                       #newPassword='ngModel'
+                       [(ngModel)]="changePassword.newPassword"
+                       (input)="checkRePassword()"
+                       class="form-control"
+                       style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px">
+                <div style="color: red" [hidden]="newPassword.valid || !newPassword.touched">
+                <div style="color: red" *ngIf="newPassword.errors?.required">Không để trống</div>
+                <div style="color: red" *ngIf="newPassword.errors?.minlength">Phải nhiều hơn 6 ký tự</div>
+<!--                <div style="color: red" *ngIf="newPassword.errors?.minlength">Phải ít hơn 32 ký tự</div>-->
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label style="color: #151515">Nhập lại mật khẩu:</label>
+              </td>
+              <td>
+                <input type="password"
+                       name="confirmNewPassword"
+                       id="confirmPassword"
+                       required
+                       minlength="6"
+                       maxlength="20"
+                       [(ngModel)]="changePassword.confirmNewPassword"
+                       (input)="checkConfirmPassWord()"
+                       class="form-control"
+                       style="background-color:  #FAFBFC;height: 42px;border: 2px solid #DFE1E6;color: #151515 !important; border-radius: 5px">
+                <p id="confirm-password-error" style="color: red"></p>
+              </td>
+            </tr>
+          </table>
+          <div class="div-update">
+            <button class="button is-success is-light button-update" type="submit">Cập nhập</button>
+            <button class="button is-danger is-light button-cancel" (click)="closeModalPassword()" type="button">Hủy
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+

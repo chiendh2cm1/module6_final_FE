@@ -31,9 +31,8 @@ import {ActivityLog} from "../../model/activity-log";
 import {NotificationService} from "../../service/notification/notification.service";
 import {ActivityLogService} from "../../service/activityLog/activity-log.service";
 import {Notification} from "../../model/notification";
-import * as SockJS from "sockjs-client";
-import * as Stomp from "@stomp/stompjs";
 
+declare var CKEDITOR: any;
 @Component({
   selector: 'app-board-view',
   templateUrl: './board-view.component.html',
@@ -137,7 +136,9 @@ export class BoardViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCurrentBoardByURL()
+    this.getCurrentBoardByURL();
+    CKEDITOR.replace('editor1');
+    CKEDITOR.replace('editor2');
   }
 
   //CARD
@@ -169,6 +170,7 @@ export class BoardViewComponent implements OnInit {
   showCreateCardModal(column: Column) {
     this.selectedColumn = column;
     document.getElementById('createCardModal')!.classList.add('is-active')
+    CKEDITOR.instances['editor1'].setData("");
   }
 
 
@@ -176,7 +178,7 @@ export class BoardViewComponent implements OnInit {
     if (this.createCardForm.valid) {
       let newCard: Card = {
         title: this.createCardForm.get('title')?.value,
-        content: this.createCardForm.get('content')?.value,
+        content: CKEDITOR.instances['editor1'].getData(),
         position: this.selectedColumn.cards.length
       }
       this.resetCreateCardForm();
@@ -222,6 +224,7 @@ export class BoardViewComponent implements OnInit {
   }
 
   showEditCardModal(card: Card, column: Column) {
+    this.getCurrentBoard()
     this.selectedCard = card;
     this.selectedColumn = column;
     this.createCardForm.get('title')?.setValue(card.title);
@@ -229,24 +232,24 @@ export class BoardViewComponent implements OnInit {
     this.redirectService.showModal(card)
     this.getSelectedCardAttachment();
     document.getElementById('editCardModal')!.classList.add('is-active')
+    CKEDITOR.instances['editor2'].setData(this.selectedCard.content);
   }
 
   editCard() {
     if(!this.canEdit){
       this.getCurrentBoard()
-      this.closeEditCardModal()
       return
     }
     this.selectedCard.title = this.createCardForm.get('title')?.value;
-    this.selectedCard.content = this.createCardForm.get('content')?.value;
+    this.selectedCard.content = CKEDITOR.instances['editor2'].getData();
     this.resetCreateCardForm();
     this.cardService.updateCard(this.selectedCard.id, this.selectedCard).subscribe(() => {
-      this.getCurrentBoard()
       this.closeEditCardModal()
     })
   }
 
   closeEditCardModal() {
+    this.getCurrentBoard()
     this.redirectService.hideCardModal();
     this.resetCreateCardForm();
     if (this.isTagsIsShown) {
@@ -427,6 +430,7 @@ export class BoardViewComponent implements OnInit {
         }
       }
     }
+
     for (let tag of this.currentBoard.tags!) {
       if (tag.id == id) {
         let deleteIndex = this.currentBoard.tags!.indexOf(tag);
@@ -441,7 +445,7 @@ export class BoardViewComponent implements OnInit {
   //ATTACHMENT
 
   showPreview(event: any) {
-    this.toastService.showMessage("Đang tải file xin vui lòng chờ", "is-warning")
+    this.toastService.showMessage("Đang tải", "is-warning")
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = () => this.fileSrc = event.target.result;
@@ -563,7 +567,6 @@ export class BoardViewComponent implements OnInit {
     this.loggedInUser = this.authenticationService.getCurrentUserValue();
     this.userService.getUserById(this.loggedInUser.id!).subscribe(data => {
       this.currentUser = data
-      this.connect()
     })
     this.activatedRoute.paramMap.subscribe((param: ParamMap) => {
       this.currentBoardId = parseInt(param.get('id')!)
@@ -608,7 +611,7 @@ export class BoardViewComponent implements OnInit {
       if (this.currentBoard.type == "Riêng tư") {
         return;
       }
-      if (this.currentWorkspace.owner.id == this.loggedInUser.id) {
+      if (this.currentWorkspace?.owner.id == this.loggedInUser.id) {
         this.canEdit = true;
         return;
       }
@@ -924,7 +927,7 @@ export class BoardViewComponent implements OnInit {
     this.updateSelectedCard();
     let isValid = true;
     // @ts-ignore
-    for (let existingUser of this.redirectService.card.users) {
+    for (let existingUser of this.redirectService?.card.users) {
       if (existingUser.id == member.userId) {
         isValid = false;
         return;
@@ -1065,20 +1068,9 @@ export class BoardViewComponent implements OnInit {
     this.disabled = !connected;
   }
 
-  connect(){
-    const socket = new SockJS('http://localhost:8080/endpoint');
-    this.stompClient = Stomp.Stomp.over(socket);
-    const _this = this;
-    this.stompClient.connect({}, function (frame:any) {
-      _this.setConnected(true);
-      console.log('Connected: ' + frame);
-      _this.stompClient.subscribe('/test',()=>{
-      })
-    });
-  }
 
   sendName() {
-    this.stompClient.send(
+    this.stompClient?.send(
       '/app/send',
       {},
     );

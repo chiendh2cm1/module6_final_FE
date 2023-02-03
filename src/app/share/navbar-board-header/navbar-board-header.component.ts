@@ -59,14 +59,14 @@ export class NavbarBoardHeaderComponent implements OnInit {
   addMember(result: User) {
     let member: Member = {
       board: this.currentBoard,
-      canEdit: false,
+      canEdit: true,
       user: result
     }
     this.memberService.addNewMember(member).subscribe(() => {
       this.resetSearch();
       this.getMembers();
     });
-    this.createNoticeInBoard(`thêm ${member.user.username} vào bảng`)
+    this.createNoticeInBoard(`thêm ${member.user.username} vào bảng`);
     document.getElementById('addMember')!.classList.add('is-active');
   }
 
@@ -144,7 +144,8 @@ export class NavbarBoardHeaderComponent implements OnInit {
   updateBoardTitle() {
     if (this.currentBoard.id != null) {
       this.boardService.updateBoard(this.currentBoard.id, this.currentBoard).subscribe(data => {
-        this.currentBoard = data
+        this.currentBoard = data;
+        this.hideEditPrivacyModal2();
       })
     }
   }
@@ -311,5 +312,12 @@ export class NavbarBoardHeaderComponent implements OnInit {
       // @ts-ignore
       element.classList.add('is-hidden');
     }
+  }
+
+  showEditPrivacyModal2(){
+    document.getElementById('edit-board-privacy')!.classList.add('is-active');
+  }
+  hideEditPrivacyModal2(){
+    document.getElementById('edit-board-privacy')!.classList.remove('is-active');
   }
 }

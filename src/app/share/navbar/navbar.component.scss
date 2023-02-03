@@ -2,6 +2,15 @@
   list-style: none;
   color: white;
 }
+table
+{
+  border-collapse:collapse;
+}
+table td
+{
+  border:none;
+  outline:none;
+}
 
 .img-circle {
   margin-top: 4px;
@@ -99,8 +108,10 @@ h2:hover{
 .nav-brand-start {
   display: flex;
   height: 40px;
+  width: 300px;
   margin-left: 43%;
   margin-right: 34%;
+
 }
 
 .nav-brand-end {
@@ -226,6 +237,7 @@ h1.app-name {
 }
 
 .div-update {
+  justify-content: center;
   display: flex;
   margin-top:  50px;
 }
@@ -257,7 +269,7 @@ $grey-lighter: hsl(0, 0%, 86%);
 
     .card-title {
       background-color: darken($primary, 5%);
-      padding: 2rem;
+      padding: 0rem;
 
       h1 {
         color: #fff;
@@ -326,6 +338,63 @@ $grey-lighter: hsl(0, 0%, 86%);
   }
 }
 
+#updatePass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F7F7F7;
+  width: 30vw;
+  height: 60vh;
+
+  .login-card {
+    background: #fff;
+    width: 30vw;
+    height: 100vh;
+    box-shadow: 0 0 7vh 0 rgba(0, 0, 0, 0.11);
+
+    .card-title {
+      background-color: darken($primary, 5%);
+      padding-top: 5vh;
+
+      h1 {
+        color: #fff;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+    }
+
+    .content {
+      height: 345px;
+      padding: 3rem 2.5rem 5rem;
+    }
+
+
+    a {
+      font-size: 0.8rem;
+    }
+
+    .options {
+      color: $grey-light;
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: block;
+      transition: color .5s, border-color .5s;
+
+      &:hover, &:focus {
+        color: darken($primary, 10%);
+        border-color: darken($primary, 10%);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+  }
+}
 label {
   cursor: pointer;
 }
@@ -386,7 +455,7 @@ button:focus {
   content: "";
   border-width: 20px 27px;
   border-style: solid;
-  border-color: transparent transparent rgb(109, 127, 204) transparent;
+  border-color: transparent transparent rgb(4, 9, 31) transparent;
   position: absolute;
   right: 4px;
   top: -29px;
@@ -415,12 +484,12 @@ button:focus {
 }
 
 .mark-read {
-  background-color: rgb(109, 127, 204);
+  background-color: rgb(8, 16, 52);
 }
 
 .header__notify-header {
   height: 40px;
-  background-color: rgb(109, 127, 204);
+  background-color: rgb(8, 15, 45);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -441,7 +510,7 @@ button:focus {
   max-height: 400px;
   flex-grow: 1;
   overflow-y: auto;
-  background-color: rgb(109, 127, 204);
+  background-color: rgb(12, 21, 63);
 }
 
 ::-webkit-scrollbar-track {
@@ -453,7 +522,7 @@ button:focus {
 }
 
 .header__notify-item:hover {
-  background-color: rgb(109, 127, 204);
+  background-color: rgb(9, 19, 58);
 }
 
 .header__notify-item--viewed {
@@ -492,7 +561,7 @@ button:focus {
 
 .header__notify-footer {
   display: flex;
-  background-color: rgb(109, 127, 204);
+  background-color: rgb(9, 15, 42);
 }
 
 .header__notify-footer-btn {
@@ -513,7 +582,7 @@ button:focus {
   font-size: 12px;
   line-height: 12px;
   border-radius: 10px;
-  border: 1px solid rgb(109, 127, 204);
+  border: 1px solid rgb(14, 24, 66);
 }
 
 .search-result-primary {
@@ -558,7 +627,7 @@ button:focus {
 }
 
 .my-pagination ::ng-deep .ngx-pagination .pagination-previous {
-  background: #6d7fcc;
+  background: #080c38;
   color: white;
   width: 100px;
   margin-right: 5px;
@@ -566,13 +635,71 @@ button:focus {
 }
 
 .my-pagination ::ng-deep .ngx-pagination .pagination-next {
-  background: #6d7fcc;
+  background: #131c42;
   color: white;
   width: 100px;
   margin-top: -5px;
 }
 
 .my-pagination ::ng-deep .ngx-pagination .current {
-  background: #6d7fcc;
+  background: #0e163a;
   color: white;
+}
+
+#updatePass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F7F7F7;
+  width: 30vw;
+  height: 60vh;
+
+  .login-card {
+    background: #fff;
+    width: 30vw;
+    height: 100vh;
+    box-shadow: 0 0 7vh 0 rgba(0, 0, 0, 0.11);
+
+    .card-title {
+      background-color: darken($primary, 5%);
+      padding-top: 5vh;
+
+      h1 {
+        color: #fff;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+    }
+
+    .content {
+      height: 345px;
+      padding: 3rem 2.5rem 5rem;
+    }
+
+
+    a {
+      font-size: 0.8rem;
+    }
+
+    .options {
+      color: $grey-light;
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: block;
+      transition: color .5s, border-color .5s;
+
+      &:hover, &:focus {
+        color: darken($primary, 10%);
+        border-color: darken($primary, 10%);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+  }
 }
