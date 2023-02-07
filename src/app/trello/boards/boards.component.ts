@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Board} from "../../model/board";
 import {ModalService} from "../../service/modal/modal.service";
 import {BoardService} from "../../service/board/board.service";
@@ -9,6 +9,7 @@ import {Column} from "../../model/column";
 import {ColumnService} from "../../service/column/column.service";
 import {Workspace} from "../../model/workspace";
 import {WorkspaceService} from "../../service/workspace/workspace.service";
+import {DetailedMember} from "../../model/detailed-member";
 
 @Component({
   selector: 'app-boards',
@@ -34,8 +35,6 @@ export class BoardsComponent implements OnInit {
   ngOnInit(): void {
     this.loggedInUser = this.authenticateService.getCurrentUserValue()
     this.getBoards()
-    this.getPublicBoard()
-    this.getPrivateBoard()
     this.getAllWorkspace();
   }
 
@@ -45,16 +44,12 @@ export class BoardsComponent implements OnInit {
     })
   }
 
-  getPrivateBoard() {
-    this.boardService.getBoardByTypeAndUser('Riêng tư', this.loggedInUser.id!).subscribe(data => {
-      this.privateBoards = data
-    })
+  getPrivateBoard(event: Board[]) {
+    this.privateBoards = event;
   }
 
-  getPublicBoard() {
-    this.boardService.getBoardByType('Công khai').subscribe(data => {
-      this.publicBoards = data
-    })
+  getPublicBoard(event: Board[]) {
+    this.publicBoards = event;
   }
 
   displayAddBoardModal() {

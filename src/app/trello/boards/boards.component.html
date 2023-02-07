@@ -1,7 +1,10 @@
 <div class="wrapper">
-  <app-side-bar [workspaces]="workspaces"></app-side-bar>
-  <app-modal></app-modal>
-  <app-modalworkspace></app-modalworkspace>
+  <app-side-bar></app-side-bar>
+  <app-modal
+    [workspace]="workspace"
+    (privateBoards)="getPrivateBoard($event)"
+    (publicBoards)="getPublicBoard($event)"
+  ></app-modal>
   <div class="container column is-10" #top style="padding: 10px 13px 13px 106px;">
     <!--    Board-->
     <div class="title-board">

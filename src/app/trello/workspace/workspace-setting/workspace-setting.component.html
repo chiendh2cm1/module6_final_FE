@@ -12,11 +12,11 @@
         <p style="color:white;">Quyền truy cập:</p>
         <br>
         <div style="justify-content: space-between;display:flex;">
-          <div *ngIf="workspace.privacy == 'Private'">
+          <div *ngIf="workspace.privacy == 'Riêng tư'">
             <p style="color:white;font-weight: bold"><i class="fas fa-lock" style="color: red"></i> Riêng tư <span
               style="font-weight: normal"> - Đây là một nhóm riêng tư</span></p>
           </div>
-          <div *ngIf="workspace.privacy == 'Public'">
+          <div *ngIf="workspace.privacy == 'Công khai'">
             <p style="color:white;font-weight: bold"><i class="fas fa-globe" style="color: green"></i> Công khai <span
               style="font-weight: normal"> - Đây là một nhóm công khai</span></p>
           </div>
@@ -96,8 +96,8 @@
         <label class="label">Quyền hạn</label>
         <div class="control">
           <select class="input" [(ngModel)]="workspace.privacy" required #workspacePrivacy="ngModel">
-            <option value="Private">Riêng tư</option>
-            <option value="Public">Công khai</option>
+            <option value="Riêng tư">Riêng tư</option>
+            <option value="Công khai">Công khai</option>
           </select>
         </div>
       </section>
