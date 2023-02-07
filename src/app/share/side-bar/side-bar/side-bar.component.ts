@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {AuthenticateService} from "../../../service/authenticate.service";
 import {Workspace} from "../../../model/workspace";
 import {UserToken} from "../../../model/user-token";
 import {WorkspaceService} from "../../../service/workspace/workspace.service";
+import {Board} from "../../../model/board";
 
 @Component({
   selector: 'app-side-bar',
@@ -11,28 +12,30 @@ import {WorkspaceService} from "../../../service/workspace/workspace.service";
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent implements OnInit {
-  @Input() workspaces: Workspace[] = [];
+  workspaces: Workspace[] = [];
+  @Output() workspacesPublic = new EventEmitter<Workspace[]>();
   loggedInUser!: UserToken;
 
-  constructor(private authenticateService: AuthenticateService,
-              private workspaceService: WorkspaceService) {
+  constructor(private authenticateService: AuthenticateService) {
   }
 
 
   ngOnInit(): void {
     this.loggedInUser = this.authenticateService.getCurrentUserValue()
-    // this.getAllWorkspace();
   }
 
-  // getAllWorkspace() {
-  //   this.workspaceService.findAllByOwnerId(this.loggedInUser.id).subscribe(data => {
-  //     this.workspaces = data;
-  //   })
-  // }
+  getWorkspaces(event: Workspace[]) {
+    this.workspaces = event;
+  }
+
+  getWorkspacePubic(event : Workspace[]) {
+    this.workspacesPublic.emit(event);
+  }
 
   showCreateWorkspaceModal() {
     document.getElementById('create-workspace')!.classList.add('is-active');
   }
+
   showWorkspaceButton(index:any){
     let toChange = document.getElementById(`workspace-${index}`);
     let arrowDown = document.getElementById(`arrow-down-${index}`);
